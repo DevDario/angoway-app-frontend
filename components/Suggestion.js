@@ -15,8 +15,6 @@ export const styles = StyleSheet.create({
         display:"flex",
         flexDirection:"row",
         gap:10,
-        borderColor:"#0C6DFF",
-        borderWidth:2,
         borderRadius:30,
         backgroundColor:"#C7D4FB",
         alignItems:"center",
