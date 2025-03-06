@@ -1,10 +1,10 @@
-import {View, Text} from "react-native"
+import {SafeAreaView, Text} from "react-native"
 
 
 export default function SchedulesPage(){
     return(
-        <View>
+        <SafeAreaView>
             <Text>Schedules Page</Text>
-        </View>
+        </SafeAreaView>
     )
 }

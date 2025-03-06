@@ -1,9 +1,9 @@
-import {View, Text} from "react-native"
+import {View, Text, SafeAreaView} from "react-native"
 
 export default function RoutesPage(){
     return(
-        <View>
+        <SafeAreaView>
             <Text>Routes Page</Text>
-        </View>
+        </SafeAreaView>
     )
 }
