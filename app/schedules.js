@@ -1,9 +1,10 @@
 import {View, Text} from "react-native"
 
-export default function Index(){
+
+export default function SchedulesPage(){
     return(
         <View>
-            <Text>Index Page</Text>
+            <Text>Schedules Page</Text>
         </View>
     )
 }

@@ -1,6 +1,6 @@
-import { View,Text } from "react-native";
+import {View, Text} from "react-native"
 
-export default function Routes(){
+export default function RoutesPage(){
     return(
         <View>
             <Text>Routes Page</Text>
