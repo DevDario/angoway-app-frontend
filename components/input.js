@@ -1,8 +1,8 @@
 import { StyleSheet, TextInput } from "react-native"
 
-export default function Input({placeholder, event,styles}){
+export default function Input({placeholder, event,styles,value}){
     return(
-        <TextInput style={[style.input,styles]} placeholder={placeholder} onChange={event} placeholderTextColor={"#3333"}/>
+        <TextInput style={[style.input,styles]} placeholder={placeholder} onChange={event} placeholderTextColor={"#3333"} value={value}/>
     )
 }
 
