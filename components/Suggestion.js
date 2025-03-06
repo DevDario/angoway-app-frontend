@@ -1,6 +1,6 @@
 import { Pressable,StyleSheet,Text } from "react-native";
 
-export default function Button({text,event,style}){
+export default function Suggestion({text,event,style}){
     return(
         <Pressable style={[styles.button,style]} onPress={event}>
             <Text style={styles.suggestionText}>{text}</Text>
