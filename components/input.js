@@ -11,10 +11,9 @@ export const style = StyleSheet.create({
         borderBottomWidth:2,
         borderBottomColor:"#0C6DFF",
         width:"80%",
-        fontSize:14,
+        fontSize:16,
         paddingBottom:13,
         color:"#212121",
         textAlign:"left",
-        fontWeight:500
     }
 })
