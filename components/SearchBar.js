@@ -3,13 +3,14 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import Input from "../components/input"
 
-export default function SearchBar({placeholder,style}){
+export default function SearchBar({placeholder,style,onChangeText}){
     return(
             <View style={[styles.searchContainer,style]}>
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
                 <Input 
                     placeholder={placeholder}
                     styles={styles.searchInput}
+                    onChangeText={onChangeText}
                 />
         </View>
     )
