@@ -10,10 +10,12 @@ export default [
   {
     languageOptions: {
       globals: Object.fromEntries(
-        Object.entries({ ...globals.browser, ...globals.node }).map(([key, value]) => [
-          key.trim(), // Trim any whitespace from keys
-          value,
-        ])
+        Object.entries({ ...globals.browser, ...globals.node }).map(
+          ([key, value]) => [
+            key.trim(), // Trim any whitespace from keys
+            value,
+          ],
+        ),
       ),
     },
   },
