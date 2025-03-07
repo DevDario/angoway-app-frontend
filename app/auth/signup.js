@@ -74,12 +74,12 @@ export const styles = StyleSheet.create({
         flex:1,
         marginTop:30,
         paddingBottom:30,
-        marginHorizontal:30
+        marginRight:10
     },
     header:{
         paddingTop:20,
         paddingBottom:50,
-        paddingLeft:40,
+        paddingLeft:30,
         alignSelf:"flex-start"
     },
     headerTitle:{
@@ -99,7 +99,7 @@ export const styles = StyleSheet.create({
     inputContainer:{
         width:"100%",
         gap:35,
-        paddingLeft:40,
+        paddingLeft:30,
         alignItems:"flex-start"
     },
     inputLabel:{
@@ -107,16 +107,16 @@ export const styles = StyleSheet.create({
         color:"#ACACAC"
     },
     inputLabelContainer:{
-        width:"100%",
+        width:"90%",
         gap:10,
         justifyContent:"flex-start",
         alignItems:"flex-start"
     },
     buttonContainer:{
-        width:"100%",
+        width:"90%",
         paddingTop:10,
         alignItems:"flex-end",
-        paddingRight:95
+        paddingRight:20
     },
     loginButton:{
         width:173

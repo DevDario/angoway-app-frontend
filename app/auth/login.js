@@ -1,10 +1,22 @@
 import { ScrollView,Text, StyleSheet,View } from "react-native";
 import Input from "../../components/input";
 import Button from "../../components/Button";
-import { Link } from "expo-router"
+import { Link, useRouter } from "expo-router"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 export default function Login(){
+    const router = useRouter()
+
+    function handleLogin(type){
+        {/* should be replaced with API auth endpoints */}
+        if(type == "normal"){
+            router.push("/routes")
+        }else if(type == "facebook"){
+            router.push("/routes")
+        }else if(type == "google"){
+            router.push("/routes")
+        }
+    }
 
     return(
         <ScrollView
@@ -34,27 +46,27 @@ export default function Login(){
             </View>
 
             <View style={styles.buttonContainer}>
-                        <Link href={"/routes"}>
-                            <Button text={"Entrar"}
-                                    style={styles.loginButton}/>
-                        </Link>
+                    <Button text={"Entrar"}
+                        style={styles.loginButton}
+                        onPress={()=>handleLogin("normal")}
+                    />
                 </View>
 
 
             <View style={styles.footerButtons}>
                 <Text>Ou</Text>
 
-                <Link href={"/routes"}>
                 <Button text={"Entrar com Facebook"}
                             icon={faFacebook}
                             style={styles.optionLoginButton}
+                            onPress={()=>handleLogin("facebook")}
                         />
-                </Link>
 
                 <Link href={"/routes"}>
                 <Button text={"Entrar com Google"}
                             icon={faGoogle}
                             style={styles.optionLoginButton}
+                            onPress={()=>handleLogin("google")}
                         />
                 </Link>
             </View>
@@ -70,12 +82,12 @@ export const styles = StyleSheet.create({
         flex:1,
         marginTop:30,
         paddingBottom:30,
-        marginHorizontal:30
+        marginRight:10
     },
     header:{
         paddingTop:20,
         paddingBottom:50,
-        paddingLeft:40,
+        paddingLeft:30,
         alignSelf:"flex-start"
     },
     headerTitle:{
@@ -95,7 +107,7 @@ export const styles = StyleSheet.create({
     inputContainer:{
         width:"100%",
         gap:35,
-        paddingLeft:40,
+        paddingLeft:30,
         alignItems:"flex-start"
     },
     inputLabel:{
@@ -103,13 +115,13 @@ export const styles = StyleSheet.create({
         color:"#ACACAC"
     },
     phoneInputContainer:{
-        width:"100%",
+        width:"90%",
         gap:10,
         justifyContent:"flex-start",
         alignItems:"flex-start"
     },
     passwordInputContainer:{
-        width:"100%",
+        width:"90%",
         gap:10,
         justifyContent:"flex-start",
         alignItems:"flex-start"
@@ -118,7 +130,7 @@ export const styles = StyleSheet.create({
         width:"100%",
         paddingTop:10,
         alignItems:"flex-end",
-        paddingRight:95
+        paddingRight:30
     },
     loginButton:{
         width:173
