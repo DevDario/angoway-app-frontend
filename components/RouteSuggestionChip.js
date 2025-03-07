@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View,Pressable } from "react-native";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 
-export default function RouteSuggestionChip({suggestion,onPress}){
+export default function RouteSuggestionChip({suggestion,onPress,style}){
     return(
-        <Pressable style={[styles.container]} onPress={onPress}>
+        <Pressable style={[styles.container,style]} onPress={onPress}>
             <View style={styles.iconBox}>
                 <FontAwesomeIcon icon={faLocationDot} size={18} color="#404040"/>
             </View>
