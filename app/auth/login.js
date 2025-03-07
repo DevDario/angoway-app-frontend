@@ -63,13 +63,11 @@ export default function Login(){
                             onPress={()=>handleLogin("facebook")}
                         />
 
-                <Link href={"/routes"}>
                 <Button text={"Entrar com Google"}
                             icon={faGoogle}
                             style={styles.optionLoginButton}
                             onPress={()=>handleLogin("google")}
                         />
-                </Link>
             </View>
 
             </View>
