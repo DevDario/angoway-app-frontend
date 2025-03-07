@@ -34,11 +34,11 @@ export const styles = StyleSheet.create({
         borderRadius:50,
         alignItems:"center",
         justifyContent:"flex-start",
-        paddingHorizontal:10
+        paddingHorizontal:13
     },
     circle:{
-        width:50,
-        height:50,
+        width:40,
+        height:40,
         backgroundColor:"#FFF",
         borderWidth:1,
         borderColor:"#DBE9FF",
@@ -70,10 +70,11 @@ export const styles = StyleSheet.create({
         flexDirection:"row",
         alignContent:"center",
         alignItems:"center",
-        gap:8,
-        paddingRight:10
+        gap:2,
+        paddingRight:2
     },
     time:{
+        fontSize:11,
         fontWeight:500
     }
 })
