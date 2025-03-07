@@ -27,7 +27,8 @@ export default function SchedulesPage(){
             <Text style={styles.logo} >Angoway<sup>®</sup> </Text>
         </View>
 
-            <SearchBar 
+        <View style={styles.content}>
+        <SearchBar 
                 placeholder={"Pesquise uma rota"}
                 style={styles.searchBar}
                 value={routeQuery}
@@ -45,8 +46,9 @@ export default function SchedulesPage(){
             </View>
 
             <View style={styles.mainContent}>
-                    <Text>{routeQuery}</Text>
+                    {/* create schedules card component */}
             </View>
+        </View>
         </SafeAreaView>
     )
 }
@@ -68,7 +70,12 @@ export const styles = StyleSheet.create({
         fontSize:20,
         fontWeight:700
     },
+    content:{
+        width:"100%",
+        alignItems:"center"
+    },
     searchBar:{
+        width:"100%",
         borderColor:"#0C6DFF",
     },
     suggestionsContainer:{
@@ -80,7 +87,7 @@ export const styles = StyleSheet.create({
     suggestions:{
         width:"100%",
         flexDirection:"row",
-        alignItems:"flex-start",
+        alignItems:"center",
         gap:10,
         flexWrap:"wrap",
         paddingTop:15
@@ -89,8 +96,5 @@ export const styles = StyleSheet.create({
         color:"#3333",
         fontSize:15,
         fontWeight:500
-    },
-    scrollView:{
-        height:140
     }
 })
