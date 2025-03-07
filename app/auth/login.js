@@ -1,4 +1,4 @@
-import { SafeAreaView,Text, StyleSheet,View, Alert, TouchableOpacity } from "react-native";
+import { ScrollView,Text, StyleSheet,View } from "react-native";
 import Input from "../../components/input";
 import Button from "../../components/Button";
 import { Link } from "expo-router"
@@ -7,7 +7,12 @@ import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 export default function Login(){
 
     return(
-        <SafeAreaView style={styles.container}>
+        <ScrollView
+                    style={[styles.container]}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                >
+
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Iniciar Sessão</Text>
                 <Text style={styles.headerDescription}>Ainda não tem uma conta ? <Link href={"/auth/signup"} style={styles.highlight}>Criar agora</Link> </Text>
@@ -56,15 +61,16 @@ export default function Login(){
 
             </View>
 
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
 export const styles = StyleSheet.create({
     container:{
         flex:1,
-        paddingTop:20,
-        alignItems:"center"
+        marginTop:30,
+        paddingBottom:30,
+        marginHorizontal:30
     },
     header:{
         paddingTop:20,
