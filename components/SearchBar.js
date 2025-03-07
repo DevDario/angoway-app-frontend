@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
         borderRadius:50,
     },
     searchInput:{
+        flex:1,
         paddingLeft:15,
         paddingTop:10,
         fontSize:15,
