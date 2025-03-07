@@ -1,11 +1,13 @@
-import {SafeAreaView, Text, StyleSheet,View} from "react-native"
+import { Text, StyleSheet,View, ScrollView } from "react-native"
 import SearchBar from "../../components/SearchBar"
 import Suggestion from "../../components/Suggestion"
+import ScheduleCard from "../../components/ScheduleCard"
 import { useState } from "react"
 
 export default function SchedulesPage(){
 
     const [routeQuery,setRouteQuery] = useState("")
+    const [selectedSuggestion,setSelectedSuggestion] = useState(null)
     
     {/* should be replaced with API response data */}
     const suggestions = [
@@ -16,15 +18,48 @@ export default function SchedulesPage(){
         {id:5,route:"1 Maio - Kilometro 26" ,lat:"-12345",long:"54321"}
     ]
 
+    {/* should be replaced with API response data */}
+    const routes = [
+        {
+            id:1,
+            route:"Patriota-Benfica",
+            ATA:45,
+            aproximatelyHour:"7:25",
+            Km:"30,6 Km",
+            status:"ativo",
+            start:"Patriota",
+            startDescription:"Paragem do Patriota(Partida)",
+            startTime:"6H30",
+            stops:[
+                {id:1,name:"Paragem do A"},{id:2,name:"Paragem do B"},
+                {id:2,name:"Paragem do C"}
+            ],
+            destiny:"Benfica",
+            destinyDescription:"Paragem do Girafa(Chegada)",
+            destinyTime:"7H25",
+        }
+    ]
+
     function handleRouteSearch(text){
         setRouteQuery(text)
     }
 
+    function handleSuggestionSelect(selectedItem){
+        setSelectedSuggestion(selectedItem)
+        setRouteQuery(selectedItem)
+    }
+
 
     return(
-        <SafeAreaView style={styles.container}>
+        <ScrollView
+            style={[styles.container]}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+        >
+
         <View style={styles.header}>
-            <Text style={styles.logo} >Angoway<sup>®</sup> </Text>
+            <Text style={styles.logo} >Angoway® </Text>
         </View>
 
         <View style={styles.content}>
@@ -39,24 +74,34 @@ export default function SchedulesPage(){
                 <View style={styles.suggestions}>
                     {
                         suggestions.map((s)=>(
-                            <Suggestion key={s.id} text={s.route} />
+                            <Suggestion key={s.id} text={s.route} 
+                                onPress={()=>handleSuggestionSelect(s.route)}
+                                isSelected={s.route === selectedSuggestion}
+                            />
                         ))
                     }
                 </View>
             </View>
 
             <View style={styles.mainContent}>
-                    {/* create schedules card component */}
+                <ScheduleCard routeDetails={routes[0]}/>
+                <ScheduleCard routeDetails={routes[0]}/>
+                <ScheduleCard routeDetails={routes[0]}/>
+                <ScheduleCard routeDetails={routes[0]}/>
+                <ScheduleCard routeDetails={routes[0]}/>
+                <ScheduleCard routeDetails={routes[0]}/>
             </View>
         </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
         
 export const styles = StyleSheet.create({
     container:{
         flex:1,
-        margin:30
+        marginTop:30,
+        paddingBottom:30,
+        paddingHorizontal:30
     },
     header:{
         width:"100%",
@@ -72,7 +117,8 @@ export const styles = StyleSheet.create({
     },
     content:{
         width:"100%",
-        alignItems:"center"
+        alignItems:"center",
+        paddingBottom:40
     },
     searchBar:{
         width:"100%",
@@ -85,16 +131,21 @@ export const styles = StyleSheet.create({
         paddingTop:15
     },
     suggestions:{
-        width:"100%",
         flexDirection:"row",
-        alignItems:"center",
-        gap:10,
-        flexWrap:"wrap",
-        paddingTop:15
+        alignItems:"flex-start",
+        gap:5,
+        paddingTop:15,
+        flexWrap:"wrap"
     },
     suggestionsLabel:{
         color:"#3333",
         fontSize:15,
         fontWeight:500
+    },
+    mainContent:{
+        width:"100%",
+        alignItems:"center",
+        flexDirection:"column",
+        gap:35
     }
 })
