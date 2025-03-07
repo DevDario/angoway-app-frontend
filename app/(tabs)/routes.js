@@ -36,6 +36,7 @@ export default function RoutesPage(){
             style={[styles.container]}
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
         >
 
         <View style={styles.header}>

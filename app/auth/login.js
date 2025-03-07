@@ -23,6 +23,7 @@ export default function Login(){
                     style={[styles.container]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
                 >
 
             <View style={styles.header}>

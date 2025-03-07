@@ -10,6 +10,7 @@ export default function Signup(){
                     style={[styles.container]}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
                 >
                     <View style={styles.header}>
                         <Text style={styles.headerTitle}>Criar Conta</Text>
