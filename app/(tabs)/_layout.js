@@ -1,3 +1,4 @@
+import React from "react"
 import { Tabs } from "expo-router"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faClock, faCompass,faMap,faUser } from "@fortawesome/free-regular-svg-icons"

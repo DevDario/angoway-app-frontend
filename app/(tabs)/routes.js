@@ -1,12 +1,11 @@
+import React from "react"
 import {View, Text, ScrollView, StyleSheet, Alert,FlatList} from "react-native"
 import SearchBar from "../../components/SearchBar"
 import { useState } from "react"
 import RouteSuggestionChip from "../../components/RouteSuggestionChip"
 import Button from "../../components/Button"
-import { useRouter } from "expo-router"
 
 export default function RoutesPage(){
-    const router = useRouter()
     const [searchBarValue,setSearchBarValue] = useState("")
 
     function handleRouteSearch(){

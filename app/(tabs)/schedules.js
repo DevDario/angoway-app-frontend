@@ -1,3 +1,4 @@
+import React from "react"
 import { Text, StyleSheet,View, ScrollView } from "react-native"
 import SearchBar from "../../components/SearchBar"
 import Suggestion from "../../components/Suggestion"
