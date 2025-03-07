@@ -1,22 +1,24 @@
-import {SafeAreaView, Text, StyleSheet,View} from "react-native"
+import {ScrollView, Text, StyleSheet,View} from "react-native"
 import SearchBar from "../../components/SearchBar"
 
 export default function Index(){
     return(
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
             <SearchBar 
                 placeholder={"onde vamos hoje?"}
             />
             <View style={styles.map}>
 
             </View>
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
 export const styles = StyleSheet.create({
     container:{
         flex:1,
-        margin:30
+        marginTop:30,
+        paddingBottom:30,
+        marginHorizontal:30
     }
 })
