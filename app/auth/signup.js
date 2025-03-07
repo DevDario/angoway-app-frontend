@@ -1,10 +1,24 @@
 import { ScrollView,Text, StyleSheet,View } from "react-native";
 import Input from "../../components/input";
 import Button from "../../components/Button";
-import { Link } from "expo-router"
+import { Link, useRouter } from "expo-router"
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
 export default function Signup(){
+
+    const router = useRouter()
+
+    function handleLogin(type){
+        {/* should be replaced with API auth endpoints */}
+        if(type == "normal"){
+            router.push("/routes")
+        }else if(type == "facebook"){
+            router.push("/routes")
+        }else if(type == "google"){
+            router.push("/routes")
+        }
+    }
+
     return(
         <ScrollView
                     style={[styles.container]}
@@ -39,29 +53,27 @@ export default function Signup(){
                     </View>
 
                     <View style={styles.buttonContainer}>
-                                <Link href={"/routes"}>
-                                    <Button text={"Entrar"}
-                                            style={styles.loginButton}/>
-                                </Link>
+                        <Button text={"Criar"}
+                            style={styles.loginButton}
+                            onPress={()=>handleLogin("normal")}
+                        />
                         </View>
         
         
                     <View style={styles.footerButtons}>
                         <Text>Ou</Text>
         
-                        <Link href={"/routes"}>
-                        <Button text={"Entrar com Facebook"}
-                                    icon={faFacebook}
-                                    style={styles.optionLoginButton}
-                                />
-                        </Link>
-        
-                        <Link href={"/routes"}>
-                        <Button text={"Entrar com Google"}
-                                    icon={faGoogle}
-                                    style={styles.optionLoginButton}
-                                />
-                        </Link>
+                        <Button text={"Criar com Facebook"}
+                            icon={faFacebook}
+                            style={styles.optionLoginButton}
+                            onPress={()=>handleLogin("facebook")}
+                        />
+                        
+                        <Button text={"Criar com Google"}
+                            icon={faGoogle}
+                            style={styles.optionLoginButton}
+                            onPress={()=>handleLogin("google")}
+                        />
                     </View>
 
                     </View>
