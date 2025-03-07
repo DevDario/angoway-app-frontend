@@ -10,39 +10,39 @@ export default function TabsLayout(){
                 headerShown:false,
                 tabBarStyle:{
                     backgroundColor:"#fcfcfb",
-                    height:60,
-                    paddingTop:12
+                    height:80,
+                    paddingTop:18,
                 },
                 tabBarShowLabel:false,
                 tabBarActiveTintColor:"#0C6DFF",
-                tabBarInactiveTintColor:"1ab65c",
+                tabBarInactiveTintColor:"#505050",
             }}
         >
             <Tabs.Screen name="routes"
                 options={{
                     tabBarIcon: ({color}) => (
-                      <FontAwesomeIcon icon={faCompass} color={color}/>  
+                      <FontAwesomeIcon icon={faCompass} color={color} size={20}/>  
                     )
                 }}
             />
             <Tabs.Screen name="schedules"
                 options={{
                     tabBarIcon: ({color}) => (
-                        <FontAwesomeIcon icon={faClock} color={color}/>
+                        <FontAwesomeIcon icon={faClock} color={color} size={20}/>
                     )
                 }}
             />
             <Tabs.Screen name="index"
                 options={{
                     tabBarIcon: ({color}) => (
-                        <FontAwesomeIcon icon={faMap} color={color}/>
+                        <FontAwesomeIcon icon={faMap} color={color} size={20}/>
                     )
                 }}
             />
             <Tabs.Screen name="profile"
                 options={{
                     tabBarIcon: ({color}) => (
-                        <FontAwesomeIcon icon={faUser} color={color}/>
+                        <FontAwesomeIcon icon={faUser} color={color} size={20}/>
                     )
                 }}
             />
