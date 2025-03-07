@@ -4,9 +4,10 @@
     "slug": "angoway-app-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/angoway-logo.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "scheme": "angoway",
     "splash": {
       "image": "./assets/splash-screen.png",
       "resizeMode": "contain",
