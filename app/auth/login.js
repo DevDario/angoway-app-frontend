@@ -13,6 +13,7 @@ export default function Login(){
                 <Text style={styles.headerDescription}>Ainda não tem uma conta ? <Link href={"/auth/signup"} style={styles.highlight}>Criar agora</Link> </Text>
             </View>
 
+            <View style={styles.content}>
 
             <View style={styles.inputContainer}>
                 <View style={styles.phoneInputContainer}>
@@ -25,15 +26,14 @@ export default function Login(){
                     <Input placeholder={""}
                     />
                 </View>
+            </View>
 
-                <View style={styles.buttonContainer}>
+            <View style={styles.buttonContainer}>
                         <Link href={"/routes"}>
                             <Button text={"Entrar"}
                                     style={styles.loginButton}/>
                         </Link>
                 </View>
-
-            </View>
 
 
             <View style={styles.footerButtons}>
@@ -54,15 +54,23 @@ export default function Login(){
                 </Link>
             </View>
 
+            </View>
+
         </SafeAreaView>
     )
 }
 
 export const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        paddingTop:20,
+        alignItems:"center"
+    },
     header:{
         paddingTop:20,
         paddingBottom:50,
-        paddingLeft:40
+        paddingLeft:40,
+        alignSelf:"flex-start"
     },
     headerTitle:{
         fontSize:25,
@@ -73,33 +81,38 @@ export const styles = StyleSheet.create({
         fontWeight:"200",
         paddingTop:15
     },
-    container:{
-        flex:1,
-        paddingTop:20,
+    content:{
+        width:"100%",
+        alignItems:"center",
+        gap:30
     },
     inputContainer:{
         width:"100%",
-        gap:50,
-        paddingLeft:40
+        gap:35,
+        paddingLeft:40,
+        alignItems:"flex-start"
     },
     inputLabel:{
         fontSize:15,
         color:"#ACACAC"
     },
     phoneInputContainer:{
-        gap:18,
+        width:"100%",
+        gap:10,
         justifyContent:"flex-start",
         alignItems:"flex-start"
     },
     passwordInputContainer:{
-        gap:18,
+        width:"100%",
+        gap:10,
         justifyContent:"flex-start",
         alignItems:"flex-start"
     },
     buttonContainer:{
+        width:"100%",
         paddingTop:10,
         alignItems:"flex-end",
-        paddingRight:90
+        paddingRight:95
     },
     loginButton:{
         width:173
