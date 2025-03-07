@@ -1,6 +1,8 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
+import pluginPrettier from "eslint-plugin-prettier";
+import configPrettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -17,4 +19,11 @@ export default [
   },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
+  pluginPrettier.configs.recommended, // Enables Prettier rules
+  configPrettier, // Disables conflicting ESLint rules
+  {
+    rules: {
+      "prettier/prettier": "error", // Enforce Prettier formatting
+    },
+  },
 ];
