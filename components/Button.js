@@ -1,7 +1,9 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { TouchableOpacity,StyleSheet,Text } from "react-native";
+import PropTypes from "prop-types";
 
-export default function Button({text,onPress,icon,style}){
+export default function Button({text="click",onPress,icon,style}){
     return(
         <TouchableOpacity style={[styles.button,style]} onPress={onPress}>
 
@@ -11,6 +13,13 @@ export default function Button({text,onPress,icon,style}){
             <Text>{text}</Text>
         </TouchableOpacity>
     )
+}
+
+Button.propTypes = {
+    text: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    icon: PropTypes.object,
+    style: PropTypes.object
 }
 
 export const styles = StyleSheet.create({

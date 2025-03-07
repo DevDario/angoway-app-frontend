@@ -1,4 +1,6 @@
+import React from "react";
 import { StyleSheet,Text, TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
 
 export default function Suggestion({text,onPress,style,isSelected}){
     return(
@@ -15,6 +17,13 @@ export default function Suggestion({text,onPress,style,isSelected}){
                 ]}>{text}</Text>
         </TouchableOpacity>
     )
+}
+
+Suggestion.propTypes = {
+    text: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    style: PropTypes.object,
+    isSelected: PropTypes.bool
 }
 
 export const styles = StyleSheet.create({

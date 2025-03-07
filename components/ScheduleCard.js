@@ -1,8 +1,10 @@
+import React from "react";
 import { StyleSheet, View,Text } from "react-native";
 import BubbleInfo from "../components/BubbleInfo"
 import RouteChip from "../components/RouteChip"
 import CardSmallChip from "../components/CardSmallChip"
 import { faBusSimple } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
 export default function ScheduleCard({routeDetails}){
     return(
@@ -69,6 +71,11 @@ export default function ScheduleCard({routeDetails}){
         </View>
         </View>
     )
+}
+
+
+ScheduleCard.propTypes = {
+    routeDetails: PropTypes.object.isRequired
 }
 
 export const styles = StyleSheet.create({

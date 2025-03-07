@@ -1,7 +1,9 @@
+import React from "react"
 import {StyleSheet,View} from "react-native"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import Input from "../components/input"
+import PropTypes from "prop-types"
 
 export default function SearchBar({placeholder,style,onChangeText,value}){
     return(
@@ -16,6 +18,15 @@ export default function SearchBar({placeholder,style,onChangeText,value}){
         </View>
     )
 }
+
+
+SearchBar.propTypes = {
+    placeholder: PropTypes.string.isRequired,
+    style: PropTypes.object,
+    onChangeText: PropTypes.func.isRequired,
+    value: PropTypes.string.isRequired
+}
+
 
 export const styles = StyleSheet.create({
     searchContainer:{

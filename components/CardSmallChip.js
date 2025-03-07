@@ -1,5 +1,7 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
 
 export default function CardSmallChip({title,description,icon}){
     return(
@@ -17,6 +19,12 @@ export default function CardSmallChip({title,description,icon}){
             </View>
         </View>
     )
+}
+
+CardSmallChip.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    icon: PropTypes.object.isRequired
 }
 
 export const styles = StyleSheet.create({

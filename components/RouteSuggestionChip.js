@@ -1,6 +1,8 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View,Pressable } from "react-native";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
 export default function RouteSuggestionChip({suggestion,onPress,style}){
     return(
@@ -15,6 +17,12 @@ export default function RouteSuggestionChip({suggestion,onPress,style}){
             </View>
         </Pressable>
     )
+}
+
+RouteSuggestionChip.propTypes = {
+    suggestion: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    style: PropTypes.object
 }
 
 export const styles = StyleSheet.create({

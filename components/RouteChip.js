@@ -1,7 +1,9 @@
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View } from "react-native";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
+import PropTypes from "prop-types";
 
 export default function RouteChip({title,description,time}){
     return(
@@ -21,6 +23,12 @@ export default function RouteChip({title,description,time}){
             </View>
         </View>
     )
+}
+
+RouteChip.propTypes = {
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    time: PropTypes.string.isRequired
 }
 
 export const styles = StyleSheet.create({
