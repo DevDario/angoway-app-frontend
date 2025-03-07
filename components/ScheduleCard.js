@@ -74,10 +74,10 @@ export default function ScheduleCard({routeDetails}){
 export const styles = StyleSheet.create({
     container:{
         flex:1,
-        paddingTop:10,
+        paddingTop:30,
     },
     card:{
-        width:400,
+        width:360,
         height:"auto",
         borderRadius:13,
         backgroundColor:"#F4F6FC",
@@ -106,7 +106,7 @@ export const styles = StyleSheet.create({
     },
     info:{
         flexDirection:"column",
-        gap:5
+        gap:5,
     },
     routeText:{
         fontSize:19,
@@ -122,7 +122,7 @@ export const styles = StyleSheet.create({
     },  
     separator:{
         height:2,
-        width:30,
+        width:10,
         backgroundColor:"#0C6DFF",
         alignItems:"center",
         justifyContent:"center"
