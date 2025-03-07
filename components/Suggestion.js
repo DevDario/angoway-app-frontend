@@ -12,8 +12,6 @@ export const styles = StyleSheet.create({
     button:{
         width:170,
         height:53,
-        display:"flex",
-        flexDirection:"row",
         gap:10,
         borderRadius:30,
         backgroundColor:"#C7D4FB",
