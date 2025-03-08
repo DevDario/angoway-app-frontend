@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import SearchBar from "../../components/SearchBar";
+import { useState } from "react";
+import MapView from "react-native-maps";
 
 export default function Index() {
   const [searchBarValue, setSearchBarValue] = useState("");
@@ -11,17 +13,29 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-    <View style={styles.header}>
-      <SearchBar 
-        placeholder={"onde vamos hoje?"} 
-        style={styles.searchBar}
-        onChangeText={handleLocationSearch}
-        value={searchBarValue}
+      <MapView
+        style={styles.map}
+        initialRegion={{
+          latitude: -8.8956,
+          longitude: 13.2272,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        showsMyLocationButton={true}
+        showsUserLocation={true}
+        showsTraffic={true}
+        toolbarEnabled={true}
+        zoomEnabled={true}
+        zoomControlEnabled={true}
       />
-    </View>
-    <View style={styles.content}>
-
-    </View>
+      <View style={styles.header}>
+        <SearchBar 
+          placeholder={"onde vamos hoje?"} 
+          style={styles.searchBar}
+          onChangeText={handleLocationSearch}
+          value={searchBarValue}
+        />
+      </View>
     </View>
   );
 }
@@ -31,12 +45,16 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    width:"100%",
+    position: "absolute",
+    top: 30,
+    width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
   },
   searchBar: {
     width: "90%",
+  },
+  map: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
