@@ -4,21 +4,33 @@ import Input from "../../components/input";
 import Button from "../../components/Button";
 import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { useState } from "react";
 
 export default function Signup() {
   const router = useRouter();
+  const [email,setEmail] = useState("");
+  const [phoneNumber,setPhoneNumber] = useState("");
+  const [password,setPassword] = useState("");
 
   function handleLogin(type) {
     {
       /* should be replaced with API auth endpoints */
     }
-    if (type == "normal") {
-      router.push("/routes");
-    } else if (type == "facebook") {
-      router.push("/routes");
-    } else if (type == "google") {
+    if (type == "normal" || type == "facebook" || type == "google") {
       router.push("/routes");
     }
+  }
+
+  function handleEmail(email){
+    setEmail(email)
+  }
+
+  function handlePhoneNumber(number){ 
+    setPhoneNumber(number)
+  }
+
+  function handlePassword(password){
+    setPassword(password)
   }
 
   return (
@@ -42,17 +54,29 @@ export default function Signup() {
         <View style={styles.inputContainer}>
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Seu Email</Text>
-            <Input placeholder={""} />
+            <Input 
+              placeholder={"Digite o seu E-mail"}
+              value={email}
+              onChangeText={handleEmail}
+             />
           </View>
 
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Seu Número</Text>
-            <Input placeholder={"+244"} />
+            <Input 
+              placeholder={"+244"} 
+              value={phoneNumber}
+              onChangeText={handlePhoneNumber}
+            />
           </View>
 
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <Input placeholder={""} />
+            <Input 
+              placeholder={"Sua Senha"} 
+              value={password}
+              onChangeText={handlePassword}
+              />
           </View>
         </View>
 
