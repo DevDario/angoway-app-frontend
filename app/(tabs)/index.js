@@ -1,21 +1,34 @@
 import React from "react";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import SearchBar from "../../components/SearchBar";
 
 export default function Index() {
   return (
-    <ScrollView style={styles.container}>
-      <SearchBar placeholder={"onde vamos hoje?"} />
-      <View style={styles.map}></View>
-    </ScrollView>
+    <View style={styles.container}>
+    <View style={styles.header}>
+      <SearchBar 
+        placeholder={"onde vamos hoje?"} 
+        style={styles.searchBar}
+      />
+    </View>
+    <View style={styles.content}>
+
+    </View>
+    </View>
   );
 }
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    width:"100%",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 30,
-    paddingBottom: 30,
-    marginHorizontal: 30,
+  },
+  searchBar: {
+    width: "90%",
   },
 });
