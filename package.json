@@ -20,15 +20,15 @@
     "@fortawesome/react-native-fontawesome": "^0.3.2",
     "@react-navigation/native": "^7.0.14",
     "expo": "~52.0.37",
+    "expo-location": "~18.0.7",
     "expo-router": "^4.0.17",
     "expo-status-bar": "~2.0.1",
     "prop-types": "^15.8.1",
     "react": "18.3.1",
     "react-native": "0.76.7",
-    "react-native-svg": "15.8.0",
-    "react-native-web": "~0.19.13",
     "react-native-maps": "1.18.0",
-    "expo-location": "~18.0.7"
+    "react-native-svg": "15.8.0",
+    "react-native-web": "~0.19.13"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -40,6 +40,7 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "expo-module-scripts": "^4.0.4",
     "prettier": "^3.5.3"
   },
   "private": true
