@@ -7,7 +7,7 @@ export default function Button({ text = "click", onPress, icon, style }) {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       {icon && <FontAwesomeIcon icon={icon} style={{ color: "#0C6DFF" }} />}
-      <Text>{text}</Text>
+      <Text style={[styles.text]}>{text}</Text>
     </TouchableOpacity>
   );
 }
@@ -34,4 +34,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
   },
+  text:{
+    fontWeight:600,
+  }
 });
