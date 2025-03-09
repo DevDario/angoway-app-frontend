@@ -7,7 +7,7 @@ export default function ProfileAvatar({ avatarUrl }) {
     return (
         <View style={styles.container}>
 
-            {avatarUrl !== "" ? (
+            {avatarUrl !== null ? (
                 <Image source={avatarUrl} width={70} height={70} />
             ) : (
                 <FontAwesomeIcon icon={faUser} size={30} color="#FFF" />
