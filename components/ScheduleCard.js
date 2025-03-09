@@ -67,7 +67,7 @@ export default function ScheduleCard({ routeDetails }) {
 }
 
 ScheduleCard.propTypes = {
-  routeDetails: PropTypes.array,
+  routeDetails: PropTypes.object,
 };
 
 export const styles = StyleSheet.create({
