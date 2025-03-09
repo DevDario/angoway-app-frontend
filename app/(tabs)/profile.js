@@ -33,7 +33,7 @@ export default function ProfilePage() {
 
       <View style={styles.detailsHeader}>
         <Text style={styles.username}>John Doe</Text>
-        <ProfileAvatar avatarUrl="../../assets/favicon-100x100.png" />
+        <ProfileAvatar avatarUrl={null} />
       </View>
 
       <View style={styles.credentialsContent}>
