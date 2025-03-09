@@ -5,10 +5,10 @@ import { useState } from "react";
 import MapView from "react-native-maps";
 
 export default function Index() {
-  const [searchBarValue, setSearchBarValue] = useState("");
+  const [locationQuery, setLocationQuery] = useState("");
 
-  function handleLocationSearch(query){
-    setSearchBarValue(query)
+  function handleLocationSearch(query) {
+    setLocationQuery(query);
   }
 
   return (
@@ -24,16 +24,15 @@ export default function Index() {
         showsMyLocationButton={true}
         showsUserLocation={true}
         showsTraffic={true}
-        toolbarEnabled={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
       />
       <View style={styles.header}>
-        <SearchBar 
-          placeholder={"onde vamos hoje?"} 
+        <SearchBar
+          placeholder={"onde vamos hoje?"}
           style={styles.searchBar}
           onChangeText={handleLocationSearch}
-          value={searchBarValue}
+          value={locationQuery}
         />
       </View>
     </View>
