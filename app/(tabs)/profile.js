@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
 import ReturnButton from "../../components/ReturnButton";
 import { useRouter } from "expo-router";
 import ProfileAvatar from "../../components/ProfileAvatar";
 import Input from "../../components/input";
 import Button from "../../components/Button"
+import BottomLineButton from "../../components/BottomLineButton";
 
 export default function ProfilePage() {
   const [phoneNumber, setPhoneNumber] = useState("")
@@ -21,7 +22,7 @@ export default function ProfilePage() {
   }
 
   function handleCredentialsUpdate() {
-    Alert.alert("Alterações Confirmadas","As suas alterações foram guardadas !")
+    Alert.alert("Alterações Confirmadas", "As suas alterações foram guardadas !")
   }
 
   return (
@@ -36,35 +37,70 @@ export default function ProfilePage() {
         <ProfileAvatar avatarUrl={null} />
       </View>
 
-      <View style={styles.credentialsContent}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}>
-            Telefone
-          </Text>
-          <Input
-            value={phoneNumber}
-            placeholder={"+244 933 333 333"}
-            onChangeText={handlePhoneNumber}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps={"handled"}
+        style={styles.scrollView}
+      >
+        <View style={styles.credentialsContent}>
+          <Text style={styles.sectionLabel}>Detalhes do Perfil</Text>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>
+              Telefone
+            </Text>
+            <Input
+              value={phoneNumber}
+              placeholder={"+244 933 333 333"}
+              onChangeText={handlePhoneNumber}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}>
+              Email
+            </Text>
+            <Input
+              value={email}
+              placeholder={"johndoe@gmail.com"}
+              onChangeText={handleEmail}
+            />
+          </View>
+
+          <Button
+            text="Salvar Alterações"
+            onPress={handleCredentialsUpdate}
+            style={styles.button}
           />
         </View>
 
-        <View style={styles.inputContainer}>
+        <View style={styles.settingsContent}>
           <Text style={styles.inputLabel}>
-            Email
+            Definições
           </Text>
-          <Input
-            value={email}
-            placeholder={"johndoe@gmail.com"}
-            onChangeText={handleEmail}
-          />
-        </View>
 
-        <Button 
-          text="Salvar Alterações"
-          onPress={handleCredentialsUpdate}
-          style={styles.button}
-        />
-      </View>
+          <BottomLineButton
+            text={"Alterar Senha"}
+            onPress={() => router.navigate("/")}
+          />
+
+          <BottomLineButton
+            text={"Configurações de Acessibilidade"}
+            onPress={() => router.navigate("/")}
+          />
+
+          <BottomLineButton
+            text={"Apoio"}
+            onPress={() => router.navigate("/")}
+          />
+
+          <BottomLineButton
+            text={"Sobre o Angoway"}
+            onPress={() => router.navigate("/")}
+          />
+
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -89,10 +125,13 @@ export const styles = StyleSheet.create({
   },
   detailsHeader: {
     width: "100%",
+    paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingVertical: 10
+  },
+  scrollView: {
+    marginBottom:30
   },
   username: {
     fontSize: 22,
@@ -100,8 +139,8 @@ export const styles = StyleSheet.create({
   },
   credentialsContent: {
     width: "100%",
-    alignContent:"flex-start",
-    gap:20,
+    alignContent: "flex-start",
+    gap: 20,
   },
   inputContainer: {
     flexDirection: "column",
@@ -109,11 +148,22 @@ export const styles = StyleSheet.create({
   },
   inputLabel: {
     color: "#212121",
-    fontWeight:700
+    fontWeight: 500
+  },
+  sectionLabel: {
+    color: "#444",
+    fontWeight: 400
   },
   button: {
-    width:"100%",
-    alignItems:"center",
+    width: "100%",
+    alignItems: "center",
     backgroundColor: "#0C6DFF",
-  }
+    marginTop: 20
+  },
+  settingsContent: {
+    width: "100%",
+    alignContent: "flex-start",
+    gap: 40,
+    paddingTop: 30
+  },
 })
