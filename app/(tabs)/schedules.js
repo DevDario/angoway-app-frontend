@@ -37,10 +37,48 @@ export default function SchedulesPage() {
       stops: [
         { id: 1, name: "Paragem do A" },
         { id: 2, name: "Paragem do B" },
-        { id: 2, name: "Paragem do C" },
+        { id: 3, name: "Paragem do C" },
       ],
       destiny: "Benfica",
       destinyDescription: "Paragem do Girafa(Chegada)",
+      destinyTime: "7H25",
+    },
+    {
+      id: 2,
+      route: "Kilamba-Benfica",
+      ATA: 12,
+      aproximatelyHour: "8:00",
+      Km: "14,2 Km",
+      status: "atrasado",
+      start: "Kilamba",
+      startDescription: "Paragem do Kilamba(Partida)",
+      startTime: "6H30",
+      stops: [
+        { id: 1, name: "Paragem do D" },
+        { id: 2, name: "Paragem do E" },
+        { id: 3, name: "Paragem do F" },
+      ],
+      destiny: "Benfica",
+      destinyDescription: "Paragem do Girafa(Chegada)",
+      destinyTime: "7H25",
+    },
+    {
+      id: 3,
+      route: "Benfica-Gamek",
+      ATA: 12,
+      aproximatelyHour: "8:00",
+      Km: "50,8 Km",
+      status: "cancelado",
+      start: "Benfica",
+      startDescription: "Paragem do Girafa(Partida)",
+      startTime: "6H30",
+      stops: [
+        { id: 1, name: "Paragem do G" },
+        { id: 2, name: "Paragem do H" },
+        { id: 3, name: "Paragem do I" },
+      ],
+      destiny: "Gamek",
+      destinyDescription: "Aeroporto(Chegada)",
       destinyTime: "7H25",
     },
   ];
@@ -87,12 +125,12 @@ export default function SchedulesPage() {
         </View>
 
         <View style={styles.mainContent}>
-          <ScheduleCard routeDetails={routes[0]} />
-          <ScheduleCard routeDetails={routes[0]} />
-          <ScheduleCard routeDetails={routes[0]} />
-          <ScheduleCard routeDetails={routes[0]} />
-          <ScheduleCard routeDetails={routes[0]} />
-          <ScheduleCard routeDetails={routes[0]} />
+          {routes.map((route)=>(
+              <ScheduleCard  
+                key={route.id}
+                routeDetails={route}
+              />
+            ))}
         </View>
       </View>
     </ScrollView>
