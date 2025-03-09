@@ -100,6 +100,25 @@ export default function ProfilePage() {
           />
 
         </View>
+
+        <View style={styles.operationsContent}>
+          <Text style={styles.inputLabel}>
+            Acções
+          </Text>
+
+          <BottomLineButton
+            text={"Terminar Sessão"}
+            onPress={() => router.navigate("/auth/login")}
+            style={styles.boldText}
+          />
+
+          <BottomLineButton
+            text={"Apagar Conta"}
+            onPress={() => router.navigate("/auth/signup")}
+            style={styles.boldText}
+          />
+        </View>
+
       </ScrollView>
     </View>
   );
@@ -131,7 +150,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   scrollView: {
-    marginBottom:30
+    marginBottom: 30
   },
   username: {
     fontSize: 22,
@@ -165,5 +184,14 @@ export const styles = StyleSheet.create({
     alignContent: "flex-start",
     gap: 40,
     paddingTop: 30
+  },
+  operationsContent: {
+    width: "100%",
+    alignContent: "flex-start",
+    gap: 40,
+    paddingTop: 30
+  },
+  boldText: {
+    fontWeight: 900
   },
 })
