@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import Login from "./auth/login";
+import React from "react";
+import Login from "./(stack)/auth/login";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import {
