@@ -149,6 +149,6 @@ export const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     flexDirection: "column",
-    gap: 35,
+    gap: 2,
   },
 });
