@@ -81,22 +81,22 @@ export default function ProfilePage() {
 
           <BottomLineButton
             text={"Alterar Senha"}
-            onPress={() => router.navigate("/")}
+            onPress={() => router.navigate("profile/ChangePassword")}
           />
 
           <BottomLineButton
             text={"Configurações de Acessibilidade"}
-            onPress={() => router.navigate("/")}
+            onPress={() => router.navigate("/profile/Accessibility")}
           />
 
           <BottomLineButton
             text={"Apoio"}
-            onPress={() => router.navigate("/")}
+            onPress={() => router.navigate("/profile/Support")}
           />
 
           <BottomLineButton
             text={"Sobre o Angoway"}
-            onPress={() => router.navigate("/")}
+            onPress={() => router.navigate("/profile/About")}
           />
 
         </View>
