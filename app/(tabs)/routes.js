@@ -32,11 +32,7 @@ export default function RoutesPage() {
     setSearchBarValue(selectedItem);
   }
 
-  const suggestions = [
-    { id: 1, route: "Igreja Pentecostal de Luanda", lat: "-12345", long: "54321", },
-    { id: 2, route: "Zap Cinemas, Kikagil", lat: "-12345", long: "54321" },
-    { id: 3, route: "Arena Fúria, Patriota", lat: "-12345", long: "54321" }
-  ];
+  const suggestions = require("../../mockdata.json").routeSuggestions
 
   return (
     <View style={[styles.container]}>

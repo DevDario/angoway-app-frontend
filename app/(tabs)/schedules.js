@@ -9,79 +9,12 @@ export default function SchedulesPage() {
   const [routeQuery, setRouteQuery] = useState("");
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
 
+  
   {
     /* should be replaced with API response data */
   }
-  const suggestions = [
-    { id: 1, route: "Patriota-Benfica", lat: "-12345", long: "54321" },
-    { id: 2, route: "Benfica-Golf2", lat: "-12345", long: "54321" },
-    { id: 3, route: "Zango-Kilamba", lat: "-12345", long: "54321" },
-    { id: 4, route: "Benfica-Kilamba", lat: "-12345", long: "54321" },
-    { id: 5, route: "1 Maio - Kilometro 26", lat: "-12345", long: "54321" },
-  ];
-
-  {
-    /* should be replaced with API response data */
-  }
-  const routes = [
-    {
-      id: 1,
-      route: "Patriota-Benfica",
-      ATA: 45,
-      aproximatelyHour: "7:25",
-      Km: "30,6 Km",
-      status: "ativo",
-      start: "Patriota",
-      startDescription: "Paragem do Patriota(Partida)",
-      startTime: "6H30",
-      stops: [
-        { id: 1, name: "Paragem do A" },
-        { id: 2, name: "Paragem do B" },
-        { id: 3, name: "Paragem do C" },
-      ],
-      destiny: "Benfica",
-      destinyDescription: "Paragem do Girafa(Chegada)",
-      destinyTime: "7H25",
-    },
-    {
-      id: 2,
-      route: "Kilamba-Benfica",
-      ATA: 12,
-      aproximatelyHour: "8:00",
-      Km: "14,2 Km",
-      status: "atrasado",
-      start: "Kilamba",
-      startDescription: "Paragem do Kilamba(Partida)",
-      startTime: "6H30",
-      stops: [
-        { id: 1, name: "Paragem do D" },
-        { id: 2, name: "Paragem do E" },
-        { id: 3, name: "Paragem do F" },
-      ],
-      destiny: "Benfica",
-      destinyDescription: "Paragem do Girafa(Chegada)",
-      destinyTime: "7H25",
-    },
-    {
-      id: 3,
-      route: "Benfica-Gamek",
-      ATA: 12,
-      aproximatelyHour: "8:00",
-      Km: "50,8 Km",
-      status: "cancelado",
-      start: "Benfica",
-      startDescription: "Paragem do Girafa(Partida)",
-      startTime: "6H30",
-      stops: [
-        { id: 1, name: "Paragem do G" },
-        { id: 2, name: "Paragem do H" },
-        { id: 3, name: "Paragem do I" },
-      ],
-      destiny: "Gamek",
-      destinyDescription: "Aeroporto(Chegada)",
-      destinyTime: "7H25",
-    },
-  ];
+  const suggestions = require("../../mockdata.json").schedulesSuggestions
+  const routes = require("../../mockdata.json").schedulesRoutes
 
   function handleRouteSearch(text) {
     setRouteQuery(text);
