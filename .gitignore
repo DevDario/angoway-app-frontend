@@ -45,3 +45,4 @@ mockdata.json
 *.njsproj
 *.sln
 *.sw?
+.env
