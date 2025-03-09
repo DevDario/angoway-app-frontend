@@ -1,35 +1,31 @@
 import React from "react";
 import { ScrollView, Text, StyleSheet, View } from "react-native";
-import Input from "../../components/input";
-import Button from "../../components/Button";
+import Input from "../../../components/input";
+import Button from "../../../components/Button";
 import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 
-export default function Signup() {
+export default function Login() {
   const router = useRouter();
-  const [email,setEmail] = useState("");
-  const [phoneNumber,setPhoneNumber] = useState("");
-  const [password,setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleLogin(type) {
     {
-      /* should be replaced with API auth endpoints */
+      /* should be replaced with API auth endpoint */
     }
+
     if (type == "normal" || type == "facebook" || type == "google") {
       router.push("/routes");
     }
   }
 
-  function handleEmail(email){
-    setEmail(email)
-  }
-
-  function handlePhoneNumber(number){ 
+  function handlePhoneNumber(number) {
     setPhoneNumber(number)
   }
 
-  function handlePassword(password){
+  function handlePassword(password) {
     setPassword(password)
   }
 
@@ -41,48 +37,39 @@ export default function Signup() {
       keyboardShouldPersistTaps="handled"
     >
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Criar Conta</Text>
+        <Text style={styles.headerTitle}>Iniciar Sessão</Text>
         <Text style={styles.headerDescription}>
-          Já tem uma conta ?{" "}
-          <Link href={"/auth/login"} style={styles.highlight}>
-            Inicie Sessão
+          Ainda não tem uma conta ?{" "}
+          <Link href={"/auth/signup"} style={styles.highlight}>
+            Criar agora
           </Link>{" "}
         </Text>
       </View>
 
       <View style={styles.content}>
         <View style={styles.inputContainer}>
-          <View style={styles.inputLabelContainer}>
-            <Text style={styles.inputLabel}>Seu Email</Text>
-            <Input 
-              placeholder={"Digite o seu E-mail"}
-              value={email}
-              onChangeText={handleEmail}
-             />
-          </View>
-
-          <View style={styles.inputLabelContainer}>
+          <View style={styles.phoneInputContainer}>
             <Text style={styles.inputLabel}>Seu Número</Text>
-            <Input 
-              placeholder={"+244"} 
+            <Input
+              placeholder={"+244"}
               value={phoneNumber}
               onChangeText={handlePhoneNumber}
             />
           </View>
 
-          <View style={styles.inputLabelContainer}>
+          <View style={styles.passwordInputContainer}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <Input 
-              placeholder={"Sua Senha"} 
+            <Input
+              placeholder={"Digite a sua senha"}
               value={password}
               onChangeText={handlePassword}
-              />
+            />
           </View>
         </View>
 
         <View style={styles.buttonContainer}>
           <Button
-            text={"Criar"}
+            text={"Entrar"}
             style={styles.loginButton}
             onPress={() => handleLogin("normal")}
           />
@@ -92,14 +79,14 @@ export default function Signup() {
           <Text>Ou</Text>
 
           <Button
-            text={"Criar com Facebook"}
+            text={"Entrar com Facebook"}
             icon={faFacebook}
             style={styles.optionLoginButton}
             onPress={() => handleLogin("facebook")}
           />
 
           <Button
-            text={"Criar com Google"}
+            text={"Entrar com Google"}
             icon={faGoogle}
             style={styles.optionLoginButton}
             onPress={() => handleLogin("google")}
@@ -147,17 +134,23 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     color: "#ACACAC",
   },
-  inputLabelContainer: {
+  phoneInputContainer: {
+    width: "90%",
+    gap: 10,
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  passwordInputContainer: {
     width: "90%",
     gap: 10,
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
   buttonContainer: {
-    width: "90%",
+    width: "100%",
     paddingTop: 10,
     alignItems: "flex-end",
-    paddingRight: 20,
+    paddingRight: 30,
   },
   loginButton: {
     width: 173,
