@@ -1,21 +1,21 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
 export default function RouteSuggestionChip({ suggestion, onPress, style }) {
   return (
-    <Pressable style={[styles.container, style]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <View style={styles.iconBox}>
-        <FontAwesomeIcon icon={faLocationDot} size={18} color="#404040" />
+        <FontAwesomeIcon icon={faLocationDot} size={15} color="#0C6DFF" />
       </View>
       <View style={styles.content}>
         <View style={styles.routeDetails}>
           <Text style={styles.detailsTitle}>{suggestion}</Text>
         </View>
       </View>
-    </Pressable>
+    </TouchableOpacity>
   );
 }
 
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   detailsTitle: {
     fontSize: 16,
     fontWeight: 500,
-    color: "#404040",
+    color: "#0C6DFF",
   },
   detailsDescription: {
     color: "#858585",
