@@ -143,7 +143,7 @@ export const styles = StyleSheet.create({
   suggestionsLabel: {
     color: "#3333",
     fontSize: 15,
-    fontWeight: 500,
+    fontWeight: 300,
   },
   mainContent: {
     width: "100%",
