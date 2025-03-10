@@ -1,4 +1,4 @@
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { View, Text, StyleSheet, Image } from "react-native";
 import ReturnButton from "../../../components/ReturnButton";
 import React from "react";
