@@ -28,7 +28,7 @@ export default function BubbleInfo({
       ]}
     >
       {icon && (
-        <FontAwesomeIcon icon={icon} style={{ color: statusDetails.color }} />
+        <FontAwesomeIcon icon={icon} style={{ color: statusDetails.color }} size={10}/>
       )}
       <Text style={[styles.text, { color: statusDetails.color }]}>{text}</Text>
     </View>
@@ -43,10 +43,11 @@ BubbleInfo.propTypes = {
 
 export const styles = StyleSheet.create({
   container: {
+    flexDirection:"row",
     alignItems: "center",
     alignContent: "center",
     justifyContent: "center",
-    gap: 9,
+    gap: 2,
     borderRadius: 30,
     width: 70,
     height: 30,
