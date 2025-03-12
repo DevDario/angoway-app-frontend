@@ -27,7 +27,8 @@ export default function RouteChip({ title, description, time, type = "time" }) {
         <>
           <View style={styles.circle}>
             <FontAwesomeIcon icon={faLocationCrosshairs} size={18} color="#212121" />
-          </View><View style={styles.content}>
+          </View>
+          <View style={styles.content}>
             <View style={styles.routeDetails}>
               <Text style={styles.detailsTitle}>{title}</Text>
               <Text style={styles.detailsDescription}>{description}</Text>
@@ -43,7 +44,7 @@ RouteChip.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   time: PropTypes.string,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string
 };
 
 export const styles = StyleSheet.create({
