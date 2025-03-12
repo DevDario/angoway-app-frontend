@@ -2,13 +2,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ReturnButton from '../../components/ReturnButton';
 import MapView from 'react-native-maps';
+import { router } from 'expo-router';
 
 export default function TrackingBus() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
                 <View style={styles.pageHeader}>
-                    <ReturnButton onPress={() => router.back()} />
+                    <ReturnButton onPress={() => router.navigate("/routes")} />
                     <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
                 </View>
 
