@@ -1,30 +1,40 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View } from "react-native";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLocationCrosshairs, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import PropTypes from "prop-types";
 
-export default function RouteChip({ title, description, time, icon = null }) {
+export default function RouteChip({ title, description, time, type = "time" }) {
   return (
     <View style={styles.container}>
-      <View style={styles.circle}>
-        {icon ? (
-          <FontAwesomeIcon icon={icon} color="#212121" size={18} />
-        ) : (
-          <FontAwesomeIcon icon={faLocationDot} size={18} color="#212121" />
-        )}
-      </View>
-      <View style={styles.content}>
-        <View style={styles.routeDetails}>
-          <Text style={styles.detailsTitle}>{title}</Text>
-          <Text style={styles.detailsDescription}>{description}</Text>
-        </View>
-        <View style={styles.timeDetails}>
-          <FontAwesomeIcon icon={faClock} size={13} color="#212121" />
-          <Text style={styles.time}>{time}</Text>
-        </View>
-      </View>
+      {type === "time" ? (
+        <>
+          <View style={styles.circle}>
+            <FontAwesomeIcon icon={faLocationDot} color="#212121" size={18} />
+          </View><View style={styles.content}>
+            <View style={styles.routeDetails}>
+              <Text style={styles.detailsTitle}>{title}</Text>
+              <Text style={styles.detailsDescription}>{description}</Text>
+            </View>
+            <View style={styles.timeDetails}>
+              <FontAwesomeIcon icon={faClock} size={13} color="#212121" />
+              <Text style={styles.time}>{time}</Text>
+            </View>
+          </View>
+        </>
+      ) : (
+        <>
+          <View style={styles.circle}>
+            <FontAwesomeIcon icon={faLocationCrosshairs} size={18} color="#212121" />
+          </View><View style={styles.content}>
+            <View style={styles.routeDetails}>
+              <Text style={styles.detailsTitle}>{title}</Text>
+              <Text style={styles.detailsDescription}>{description}</Text>
+            </View>
+          </View>
+        </>
+      )}
     </View>
   );
 }
@@ -32,8 +42,8 @@ export default function RouteChip({ title, description, time, icon = null }) {
 RouteChip.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
-  icon: PropTypes.object
+  time: PropTypes.string,
+  type: PropTypes.string.isRequired
 };
 
 export const styles = StyleSheet.create({
