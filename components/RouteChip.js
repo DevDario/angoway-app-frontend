@@ -10,7 +10,7 @@ export default function RouteChip({ title, description, time, icon = null }) {
     <View style={styles.container}>
       <View style={styles.circle}>
         {icon ? (
-          <FontAwesomeIcon icon={icon} color="#212121" size={10} />
+          <FontAwesomeIcon icon={icon} color="#212121" size={18} />
         ) : (
           <FontAwesomeIcon icon={faLocationDot} size={18} color="#212121" />
         )}
