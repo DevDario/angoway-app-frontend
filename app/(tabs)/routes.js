@@ -24,7 +24,7 @@ export default function RoutesPage() {
       );
       return;
     } else {
-      router.push("/")
+      router.push("/trackingBus")
     }
   }
 
