@@ -21,8 +21,16 @@ export default function TabsLayout() {
         tabBarShowLabel: false,
         tabBarActiveTintColor: "#0C6DFF",
         tabBarInactiveTintColor: "#505050",
+        animation: "shift",
+        tabBarHideOnKeyboard: true,
       }}
     >
+      <Tabs.Screen
+        name="trackingBus"
+        options={{
+          href: null,
+        }}
+      />
       <Tabs.Screen
         name="routes"
         options={{
