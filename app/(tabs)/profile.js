@@ -28,7 +28,7 @@ export default function ProfilePage() {
   return (
     <View style={styles.container}>
       <View style={styles.pageHeader}>
-        <ReturnButton onPress={() => router.back()} />
+        <ReturnButton onPress={() => router.navigate("/")} />
         <Text style={styles.pageHeaderText}>Seu Perfil</Text>
       </View>
 

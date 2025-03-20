@@ -40,7 +40,7 @@ export default function ChangePassword() {
     return (
         <View style={styles.container}>
             <View style={styles.pageHeader}>
-                <ReturnButton onPress={() => router.back()} />
+                <ReturnButton onPress={() => router.navigate("/profile")} />
                 <Text style={styles.pageHeaderText}>Alterar Senha</Text>
             </View>
 

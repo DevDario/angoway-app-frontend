@@ -10,7 +10,7 @@ export default function About() {
     return (
         <View style={styles.container}>
             <View style={styles.pageHeader}>
-                <ReturnButton onPress={() => router.back()} />
+                <ReturnButton onPress={() => router.navigate("/profile")} />
                 <Text style={styles.pageHeaderText}>Sobre</Text>
             </View>
 
@@ -45,7 +45,7 @@ export default function About() {
 
                 <Button
                     text="Voltar"
-                    onPress={() => router.back()}
+                    onPress={() => router.navigate("/profile")}
                     style={styles.button}
                 />
             </View>

@@ -10,7 +10,7 @@ export default function Support() {
     return (
         <View style={styles.container}>
             <View style={styles.pageHeader}>
-                <ReturnButton onPress={() => router.back()} />
+                <ReturnButton onPress={() => router.navigate("/profile")} />
                 <Text style={styles.pageHeaderText}>Suporte</Text>
             </View>
 
@@ -36,7 +36,7 @@ export default function Support() {
 
                 <Button
                     text="Voltar"
-                    onPress={() => router.back()}
+                    onPress={() => router.navigate("/profile")}
                     style={styles.button}
                 />
             </View>
