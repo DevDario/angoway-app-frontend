@@ -5,36 +5,27 @@ import { useState } from "react";
 import React from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/input";
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCircleInfo, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { updatePasswordSchema } from "../../../schemas/updatePasswordSchema";
 
 export default function ChangePassword() {
     const router = useRouter()
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
-    const [passwordError, setPasswordError] = useState("")
 
-
-    function handlePassword(password) {
-        setPassword(password)
-    }
-
-    function handleConfirmPassword(confirmPassword) {
-        setConfirmPassword(confirmPassword)
-    }
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(updatePasswordSchema),
+        mode: "onChange",
+        defaultValues: {
+            password: "",
+            confirmPassword: "",
+        },
+    })
 
     function handlePasswordUpdate() {
-        if ((password.length === 0 && confirmPassword.length === 0) || (confirmPassword !== password)) {
-            setPasswordError("Digite a nova senha nos campos")
-        } else if (password.length < 8 && confirmPassword.length < 8) {
-            setPasswordError("A senha deve conter pelo menos 8 carácteres")
-        } else {
-            Alert.alert("As suas alterações foram guardadas !")
-            setPassword("")
-            setConfirmPassword("")
-            setPasswordError("")
-            router.navigate("/profile")
-        }
+        Alert.alert("As suas alterações foram guardadas !")
+        router.navigate("/profile")
     }
 
     return (
@@ -49,10 +40,20 @@ export default function ChangePassword() {
                     <Text style={styles.inputLabel}>
                         Nova Senha
                     </Text>
-                    <Input
-                        value={password}
-                        placeholder={""}
-                        onChangeText={handlePassword}
+                    <Controller
+                        control={control}
+                        name="password"
+                        render={({ field: { onChange, value } }) => (
+                            <>
+                                <Input
+                                    placeholder={"Digite a nova senha"}
+                                    value={value}
+                                    onChangeText={onChange}
+                                    keyboardType={"default"}
+                                />
+                                {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+                            </>
+                        )}
                     />
                 </View>
 
@@ -60,43 +61,26 @@ export default function ChangePassword() {
                     <Text style={styles.inputLabel}>
                         Digite Novamente
                     </Text>
-                    <Input
-                        value={confirmPassword}
-                        placeholder={""}
-                        onChangeText={handleConfirmPassword}
+                    <Controller
+                        control={control}
+                        name="confirmPassword"
+                        render={({ field: { onChange, value } }) => (
+                            <>
+                                <Input
+                                    placeholder={"Digite a mesma senha"}
+                                    value={value}
+                                    onChangeText={onChange}
+                                    keyboardType={"default"}
+                                />
+                                {errors.confirmPassword && <Text style={styles.error}>{errors.confirmPassword.message}</Text>}
+                            </>
+                        )}
                     />
-                </View>
-
-                <View style={{ height: 20, paddingBottom: 30 }}>
-                    {passwordError ? (
-                        <View style={styles.infoContent}>
-                            <FontAwesomeIcon icon={faWarning} size={15} color="#e8111F" />
-                            <Text style={{
-                                fontWeight: 700,
-                                color: "#e8111F",
-                                fontSize: 13,
-                            }}>
-                                {passwordError}
-                            </Text>
-                        </View>
-                    ) : (
-                        <View style={styles.infoContent}>
-                            <FontAwesomeIcon icon={faCircleInfo} size={15} color="#858585" />
-                            <Text style={{
-                                fontWeight: 300,
-                                color: "#858585",
-                                fontSize: 13,
-                                fontStyle: "italic"
-                            }}>
-                                Crie sempre uma senha fácil de lembrar, mas  que seja segura
-                            </Text>
-                        </View>
-                    )}
                 </View>
 
                 <Button
                     text="Salvar Alterações"
-                    onPress={handlePasswordUpdate}
+                    onPress={handleSubmit(handlePasswordUpdate)}
                     style={styles.button}
                 />
             </View>
@@ -145,5 +129,9 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         gap: 10,
-    }
+    },
+    error: {
+        color: "#D9534F",
+        fontSize: 13
+    },
 })
