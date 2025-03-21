@@ -1,5 +1,4 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import ReturnButton from '../../components/ReturnButton';
 import MapView from 'react-native-maps';
 import { router } from 'expo-router';
@@ -14,8 +13,7 @@ export default function TrackingBus() {
     const route = require("../../mockdata.json").trackingRoutes[0]
 
     return (
-        <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
                 <View style={styles.pageHeader}>
                     <ReturnButton onPress={() => router.navigate("/routes")} />
                     <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
@@ -66,11 +64,9 @@ export default function TrackingBus() {
                     </View>
 
                 </ScrollView>
-
-            </SafeAreaView>
-        </SafeAreaProvider>
-    );
-};
+        </View>
+    )
+}
 
 export const styles = StyleSheet.create({
     container: {
