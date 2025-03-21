@@ -1,25 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
 import ReturnButton from "../../components/ReturnButton";
 import { useRouter } from "expo-router";
 import ProfileAvatar from "../../components/ProfileAvatar";
 import Input from "../../components/input";
 import Button from "../../components/Button"
+import { Controller, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { updateCredentialsSchema } from "../../schemas/updateCredentialsSchema";
 import BottomLineButton from "../../components/BottomLineButton";
 
 export default function ProfilePage() {
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [email, setEmail] = useState("")
   const router = useRouter()
 
-
-  function handleEmail(email) {
-    setEmail(email)
-  }
-
-  function handlePhoneNumber(phoneNumber) {
-    setPhoneNumber(phoneNumber)
-  }
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(updateCredentialsSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      phoneNumber: "",
+    },
+  })
 
   function handleCredentialsUpdate() {
     Alert.alert("Alterações Confirmadas", "As suas alterações foram guardadas !")
@@ -49,10 +50,21 @@ export default function ProfilePage() {
             <Text style={styles.inputLabel}>
               Telefone
             </Text>
-            <Input
-              value={phoneNumber}
-              placeholder={"+244 933 333 333"}
-              onChangeText={handlePhoneNumber}
+            <Controller
+              control={control}
+              name="phoneNumber"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Novo número"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"phone-pad"}
+                  />
+                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                </>
+              )}
+
             />
           </View>
 
@@ -60,16 +72,26 @@ export default function ProfilePage() {
             <Text style={styles.inputLabel}>
               Email
             </Text>
-            <Input
-              value={email}
-              placeholder={"johndoe@gmail.com"}
-              onChangeText={handleEmail}
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Novo email"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"email-address"}
+                  />
+                  {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+                </>
+              )}
             />
           </View>
 
           <Button
             text="Salvar Alterações"
-            onPress={handleCredentialsUpdate}
+            onPress={handleSubmit(handleCredentialsUpdate)}
             style={styles.button}
           />
         </View>
@@ -193,5 +215,9 @@ export const styles = StyleSheet.create({
   },
   boldText: {
     fontWeight: 900
+  },
+  error: {
+    color: "#D9534F",
+    fontSize: 13
   },
 })
