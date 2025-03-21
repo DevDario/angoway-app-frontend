@@ -1,15 +1,24 @@
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
 import { ScrollView, Text, StyleSheet, View } from "react-native";
 import Input from "../../../components/input";
 import Button from "../../../components/Button";
 import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { useState } from "react";
+import { loginSchema } from "../../../schemas/loginSchema"
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function Login() {
   const router = useRouter();
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
+
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(loginSchema),
+    mode: "onChange",
+    defaultValues: {
+      phoneNumber: "",
+      password: "",
+    }
+  })
 
   function handleLogin(type) {
     {
@@ -19,14 +28,6 @@ export default function Login() {
     if (type == "normal" || type == "facebook" || type == "google") {
       router.push("/routes");
     }
-  }
-
-  function handlePhoneNumber(number) {
-    setPhoneNumber(number)
-  }
-
-  function handlePassword(password) {
-    setPassword(password)
   }
 
   return (
@@ -50,19 +51,40 @@ export default function Login() {
         <View style={styles.inputContainer}>
           <View style={styles.phoneInputContainer}>
             <Text style={styles.inputLabel}>Seu Número</Text>
-            <Input
-              placeholder={"+244"}
-              value={phoneNumber}
-              onChangeText={handlePhoneNumber}
+            <Controller
+              control={control}
+              name="phoneNumber"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Digite o seu número"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"phone-pad"}
+                  />
+                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                </>
+              )}
+
             />
           </View>
 
           <View style={styles.passwordInputContainer}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <Input
-              placeholder={"Digite a sua senha"}
-              value={password}
-              onChangeText={handlePassword}
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder="Digite sua senha"
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"default"}
+                  />
+                  {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+                </>
+              )}
             />
           </View>
         </View>
@@ -71,7 +93,7 @@ export default function Login() {
           <Button
             text={"Entrar"}
             style={styles.loginButton}
-            onPress={() => handleLogin("normal")}
+            onPress={() => handleSubmit(handleLogin("normal"))}
           />
         </View>
 
@@ -82,14 +104,14 @@ export default function Login() {
             text={"Entrar com Facebook"}
             icon={faFacebook}
             style={styles.optionLoginButton}
-            onPress={() => handleLogin("facebook")}
+            onPress={() => handleSubmit(handleLogin("facebook"))}
           />
 
           <Button
             text={"Entrar com Google"}
             icon={faGoogle}
             style={styles.optionLoginButton}
-            onPress={() => handleLogin("google")}
+            onPress={() => handleSubmit(handleLogin("google"))}
           />
         </View>
       </View>
@@ -167,5 +189,9 @@ export const styles = StyleSheet.create({
   },
   optionLoginButton: {
     width: 300,
+  },
+  error: {
+    color: "#D9534F", // A softer red color
+    fontSize: 13
   },
 });
