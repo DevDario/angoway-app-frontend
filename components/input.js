@@ -2,13 +2,14 @@ import { StyleSheet, TextInput } from "react-native";
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function Input({ placeholder, onChangeText, styles, value }) {
+export default function Input({ placeholder, onChangeText, styles, value, keyboardType }) {
   return (
     <TextInput
       style={[style.input, styles]}
       placeholder={placeholder}
       onChangeText={onChangeText}
       placeholderTextColor={"#3333"}
+      keyboardType={keyboardType}
       value={value}
     />
   );
@@ -19,6 +20,7 @@ Input.propTypes = {
   onChangeText: PropTypes.func.isRequired,
   styles: PropTypes.object,
   value: PropTypes.string.isRequired,
+  keyboardType: PropTypes.string,
 };
 
 export const style = StyleSheet.create({
