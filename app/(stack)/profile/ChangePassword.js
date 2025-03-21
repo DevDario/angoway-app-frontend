@@ -122,7 +122,8 @@ export const styles = StyleSheet.create({
     button: {
         width: "100%",
         alignItems: "center",
-        backgroundColor: "#0C6DFF"
+        backgroundColor: "#0C6DFF",
+        marginTop:25,
     },
     infoContent: {
         flexDirection: "row",
