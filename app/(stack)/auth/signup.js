@@ -2,35 +2,32 @@ import React from "react";
 import { ScrollView, Text, StyleSheet, View } from "react-native";
 import Input from "../../../components/input";
 import Button from "../../../components/Button";
+import { useForm, Controller } from "react-hook-form";
 import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
-import { useState } from "react";
+import { signupSchema } from "../../../schemas/signupSchema"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export default function Signup() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
 
-  function handleLogin(type) {
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(signupSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+      phoneNumber: "",
+      password: "",
+    }
+  })
+
+  function handleSignup(type) {
     {
       /* should be replaced with API auth endpoints */
     }
     if (type == "normal" || type == "facebook" || type == "google") {
       router.push("/routes");
     }
-  }
-
-  function handleEmail(email) {
-    setEmail(email)
-  }
-
-  function handlePhoneNumber(number) {
-    setPhoneNumber(number)
-  }
-
-  function handlePassword(password) {
-    setPassword(password)
   }
 
   return (
@@ -54,28 +51,58 @@ export default function Signup() {
         <View style={styles.inputContainer}>
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Seu Email</Text>
-            <Input
-              placeholder={"Digite o seu E-mail"}
-              value={email}
-              onChangeText={handleEmail}
+            <Controller
+              control={control}
+              name="email"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Digite o seu email"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"email-address"}
+                  />
+                  {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
+                </>
+              )}
             />
           </View>
 
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Seu Número</Text>
-            <Input
-              placeholder={"+244"}
-              value={phoneNumber}
-              onChangeText={handlePhoneNumber}
+            <Controller
+              control={control}
+              name="phoneNumber"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Digite o seu número"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"phone-pad"}
+                  />
+                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                </>
+              )}
             />
           </View>
 
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Senha</Text>
-            <Input
-              placeholder={"Sua Senha"}
-              value={password}
-              onChangeText={handlePassword}
+            <Controller
+              control={control}
+              name="password"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Digite a sua senha"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"default"}
+                  />
+                  {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
+                </>
+              )}
             />
           </View>
         </View>
@@ -84,7 +111,7 @@ export default function Signup() {
           <Button
             text={"Criar"}
             style={styles.loginButton}
-            onPress={() => handleLogin("normal")}
+            onPress={() => handleSubmit(handleSignup("normal"))}
           />
         </View>
 
@@ -95,14 +122,14 @@ export default function Signup() {
             text={"Criar com Facebook"}
             icon={faFacebook}
             style={styles.optionLoginButton}
-            onPress={() => handleLogin("facebook")}
+            onPress={() => handleSubmit(handleSignup("facebook"))}
           />
 
           <Button
             text={"Criar com Google"}
             icon={faGoogle}
             style={styles.optionLoginButton}
-            onPress={() => handleLogin("google")}
+            onPress={() => handleSubmit(handleSignup("google"))}
           />
         </View>
       </View>
@@ -174,5 +201,9 @@ export const styles = StyleSheet.create({
   },
   optionLoginButton: {
     width: 300,
+  },
+  error: {
+    color: "#D9534F",
+    fontSize: 13
   },
 });
