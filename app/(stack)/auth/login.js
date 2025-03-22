@@ -1,16 +1,17 @@
 import React from "react";
 import { useForm, Controller } from "react-hook-form";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import { ScrollView, Text, StyleSheet, View, ActivityIndicator } from "react-native";
 import Input from "../../../components/input";
 import Button from "../../../components/Button";
 import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { loginSchema } from "../../../schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLogin } from "../../../hooks/useAuth"
+import {BASE_URL} from "@env"
 
 export default function Login() {
   const router = useRouter();
-
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
@@ -19,15 +20,18 @@ export default function Login() {
       password: "",
     }
   })
+  const { mutate, isLoading, error } = useLogin()
 
-  function handleLogin(type) {
-    {
-      /* should be replaced with API auth endpoint */
-    }
-
-    if (type == "normal" || type == "facebook" || type == "google") {
-      router.push("/routes");
-    }
+  function handleLogin(data) {
+    mutate(data, {
+      onSuccess: (response) => {
+        console.log(response)
+        router.push("/routes");
+      },
+      onError: (err) => {
+        console.error("Login failed:", err);
+      },
+    });
   }
 
   return (
@@ -91,11 +95,13 @@ export default function Login() {
 
         <View style={styles.buttonContainer}>
           <Button
-            text={"Entrar"}
+            text={isLoading ? "Entrando..." : "Entrar"}
             style={styles.loginButton}
-            onPress={() => handleSubmit(handleLogin("normal"))}
+            onPress={handleSubmit(handleLogin)}
           />
         </View>
+
+        {isLoading && <ActivityIndicator size="large" color="red" style={styles.loader} />}
 
         <View style={styles.footerButtons}>
           <Text>Ou</Text>
@@ -104,14 +110,14 @@ export default function Login() {
             text={"Entrar com Facebook"}
             icon={faFacebook}
             style={styles.optionLoginButton}
-            onPress={() => handleSubmit(handleLogin("facebook"))}
+            onPress={() => router.push("https://facebook.com/oauth")}
           />
 
           <Button
             text={"Entrar com Google"}
             icon={faGoogle}
             style={styles.optionLoginButton}
-            onPress={() => handleSubmit(handleLogin("google"))}
+            onPress={() => router.push("https://google.com/oauth")}
           />
         </View>
       </View>
@@ -193,5 +199,8 @@ export const styles = StyleSheet.create({
   error: {
     color: "#D9534F", // A softer red color
     fontSize: 13
+  },
+  loader: {
+    marginTop: 10
   },
 });
