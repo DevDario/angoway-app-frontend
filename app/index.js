@@ -8,6 +8,7 @@ import {
   watchPositionAsync,
   LocationAccuracy
 } from "expo-location";
+import QueryProvider from "../providers/QueryProvider";
 
 export default function Index() {
   const router = useRouter();
@@ -54,5 +55,9 @@ export default function Index() {
     clearTimeout(timeout);
   }, []);
 
-  return <Login />;
+  return (
+    <QueryProvider>
+      <Login />
+    </QueryProvider>
+  );
 }
