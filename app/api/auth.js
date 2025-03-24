@@ -1,17 +1,17 @@
 import { api } from "./axiosInstance"
 
-export const loginUseCase = async ({ phoneNumber, password }) => {
+export const loginUseCase = async ({ number, password }) => {
     const response = await api.post("/auth/login", {
-        phoneNumber,
+        number,
         password
     })
     return response.data
 }
 
-export const signupUseCase = async ({ email, phoneNumber, password }) => {
+export const signupUseCase = async ({ email, number, password }) => {
     const response = await api.post("/auth/signup", {
         email,
-        phoneNumber,
+        number,
         password
     })
     return response

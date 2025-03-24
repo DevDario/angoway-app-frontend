@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const loginSchema = z.object({
-    phoneNumber: z
+    number: z
         .string()
         .nonempty("O número de telefone é obrigatório")
         .min(9, "O número deve ter pelo menos 9 dígitos")
