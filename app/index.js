@@ -1,5 +1,4 @@
 import React from "react";
-import Login from "./(stack)/auth/login";
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import {
@@ -9,10 +8,13 @@ import {
   LocationAccuracy
 } from "expo-location";
 import QueryProvider from "../providers/QueryProvider";
+import { useAuth } from "../hooks/useAuth";
+import { ActivityIndicator, View } from "react-native";
 
 export default function Index() {
-  const router = useRouter();
   const [location, setLocation] = useState(null);
+  const router = useRouter();
+  const { authToken, isCheckingAuth } = useAuth()
 
   async function getLocationPermission() {
     const { granted } = await requestForegroundPermissionsAsync();
@@ -40,24 +42,24 @@ export default function Index() {
   }, [])
 
 
-  //check if the user is authenticated (mock)
+  //check if the user is authenticated
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      const isLogged = false;
-
-      if (isLogged) {
-        router.navigate("/routes");
+    if (!isCheckingAuth) {
+      if (authToken) {
+        router.replace("/routes");
       } else {
-        router.navigate("auth/login");
+        router.replace("/auth/login");
       }
-    }, 1000);
+    }
+  }, [authToken, isCheckingAuth]);
 
-    clearTimeout(timeout);
-  }, []);
+  if (isCheckingAuth) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#007bff" />
+      </View>
+    );
+  }
 
-  return (
-    <QueryProvider>
-      <Login />
-    </QueryProvider>
-  );
+  return <QueryProvider />
 }
