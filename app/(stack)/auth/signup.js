@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, Text, StyleSheet, View } from "react-native";
+import { ScrollView, Text, StyleSheet, View, ActivityIndicator } from "react-native";
 import Input from "../../../components/input";
 import Button from "../../../components/Button";
 import { useForm, Controller } from "react-hook-form";
@@ -9,29 +9,27 @@ import { signupSchema } from "../../../schemas/signupSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import CheckBox from "../../../components/CheckBox"
 import Select from "../../../components/Select"
+import { useAuth } from "../../../hooks/useAuth"
 
 export default function Signup() {
   const router = useRouter();
   const [hasDisability, setHasDisability] = useState(false);
+  const { useSignup, isCheckingAuth } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(signupSchema),
     mode: "onChange",
     defaultValues: {
+      name: "",
       email: "",
-      phoneNumber: "",
+      number: "",
       password: "",
       disability: "",
     }
   })
 
-  function handleSignup(type) {
-    {
-      /* should be replaced with API auth endpoints */
-    }
-    if (type == "normal" || type == "facebook" || type == "google") {
-      router.push("/routes");
-    }
+  function handleSignup(data) {
+    useSignup.mutate(data)
   }
 
   return (
@@ -53,6 +51,26 @@ export default function Signup() {
 
       <View style={styles.content}>
         <View style={styles.inputContainer}>
+          <View style={styles.inputLabelContainer}>
+            <Text style={styles.inputLabel}>Seu Nome</Text>
+            <Controller
+              control={control}
+              name="name"
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Input
+                    placeholder={"Digite o seu Nome"}
+                    value={value}
+                    onChangeText={onChange}
+                    keyboardType={"default"}
+                  />
+                  {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
+                </>
+              )}
+            />
+          </View>
+
+
           <View style={styles.inputLabelContainer}>
             <Text style={styles.inputLabel}>Seu Email</Text>
             <Controller
@@ -76,7 +94,7 @@ export default function Signup() {
             <Text style={styles.inputLabel}>Seu Número</Text>
             <Controller
               control={control}
-              name="phoneNumber"
+              name="number"
               render={({ field: { onChange, value } }) => (
                 <>
                   <Input
@@ -85,7 +103,7 @@ export default function Signup() {
                     onChangeText={onChange}
                     keyboardType={"phone-pad"}
                   />
-                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                  {errors.number && <Text style={styles.error}>{errors.number.message}</Text>}
                 </>
               )}
             />
@@ -130,6 +148,7 @@ export default function Signup() {
                         text={"Selecione sua deficiência"}
                         data={["Visual", "Auditiva", "Motora", "Intelectual"]}
                       />
+                      {errors.disability && <Text style={styles.error}>{errors.disability.message}</Text>}
                     </>
                   )}
                 />
@@ -138,11 +157,16 @@ export default function Signup() {
           </View>
         </View>
 
+        {isCheckingAuth && <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingVertical: 15 }}>
+          <ActivityIndicator size="large" color="#007bff" />
+        </View>
+        }
+
         <View style={styles.buttonContainer}>
           <Button
-            text={"Criar"}
+            text={isCheckingAuth ? "Criando..." : "Criar"}
             style={styles.loginButton}
-            onPress={() => handleSubmit(handleSignup("normal"))}
+            onPress={handleSubmit(handleSignup)}
           />
         </View>
 
@@ -153,14 +177,14 @@ export default function Signup() {
             text={"Criar com Facebook"}
             icon={faFacebook}
             style={styles.optionLoginButton}
-            onPress={() => handleSubmit(handleSignup("facebook"))}
+            onPress={() => router.push("https://facebook.com/oauth")}
           />
 
           <Button
             text={"Criar com Google"}
             icon={faGoogle}
             style={styles.optionLoginButton}
-            onPress={() => handleSubmit(handleSignup("google"))}
+            onPress={() => router.push("https://google.com/oauth")}
           />
         </View>
       </View>
