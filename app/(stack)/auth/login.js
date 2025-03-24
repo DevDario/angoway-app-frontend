@@ -7,8 +7,7 @@ import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { loginSchema } from "../../../schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLogin } from "../../../hooks/useAuth"
-import {BASE_URL} from "@env"
+import { useAuth } from "../../../hooks/useAuth";
 
 export default function Login() {
   const router = useRouter();
@@ -16,22 +15,14 @@ export default function Login() {
     resolver: zodResolver(loginSchema),
     mode: "onChange",
     defaultValues: {
-      phoneNumber: "",
+      number: "",
       password: "",
     }
   })
-  const { mutate, isLoading, error } = useLogin()
+  const { useLogin, isCheckingAuth } = useAuth()
 
   function handleLogin(data) {
-    mutate(data, {
-      onSuccess: (response) => {
-        console.log(response)
-        router.push("/routes");
-      },
-      onError: (err) => {
-        console.error("Login failed:", err);
-      },
-    });
+    useLogin.mutate(data)
   }
 
   return (
@@ -57,7 +48,7 @@ export default function Login() {
             <Text style={styles.inputLabel}>Seu Número</Text>
             <Controller
               control={control}
-              name="phoneNumber"
+              name="number"
               render={({ field: { onChange, value } }) => (
                 <>
                   <Input
@@ -66,7 +57,7 @@ export default function Login() {
                     onChangeText={onChange}
                     keyboardType={"phone-pad"}
                   />
-                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                  {errors.number && <Text style={styles.error}>{errors.number.message}</Text>}
                 </>
               )}
 
@@ -95,13 +86,16 @@ export default function Login() {
 
         <View style={styles.buttonContainer}>
           <Button
-            text={isLoading ? "Entrando..." : "Entrar"}
+            text={isCheckingAuth ? "Entrando..." : "Entrar"}
             style={styles.loginButton}
             onPress={handleSubmit(handleLogin)}
           />
         </View>
 
-        {isLoading && <ActivityIndicator size="large" color="red" style={styles.loader} />}
+        {isCheckingAuth && <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingVertical: 15 }}>
+          <ActivityIndicator size="large" color="#007bff" />
+        </View>
+        }
 
         <View style={styles.footerButtons}>
           <Text>Ou</Text>
