@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, Text, StyleSheet, View } from "react-native";
 import Input from "../../../components/input";
 import Button from "../../../components/Button";
@@ -7,9 +7,12 @@ import { Link, useRouter } from "expo-router";
 import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { signupSchema } from "../../../schemas/signupSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
+import CheckBox from "../../../components/CheckBox"
+import Select from "../../../components/Select"
 
 export default function Signup() {
   const router = useRouter();
+  const [hasDisability, setHasDisability] = useState(false);
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(signupSchema),
@@ -18,6 +21,7 @@ export default function Signup() {
       email: "",
       phoneNumber: "",
       password: "",
+      disability: "",
     }
   })
 
@@ -104,6 +108,33 @@ export default function Signup() {
                 </>
               )}
             />
+          </View>
+
+          <View style={styles.inputLabelContainer}>
+            <View>
+              <CheckBox
+                isChecked={hasDisability}
+                onToggle={() => setHasDisability(!hasDisability)}
+                text={"Sou portador de deficiência"}
+              />
+              {hasDisability &&
+                <Controller
+                  control={control}
+                  name="disability"
+                  render={({ field: { onChange, value } }) => (
+                    <>
+                      <Select
+                        style={styles.select}
+                        selected={value}
+                        onSelect={onChange}
+                        text={"Selecione sua deficiência"}
+                        data={["Visual", "Auditiva", "Motora", "Intelectual"]}
+                      />
+                    </>
+                  )}
+                />
+              }
+            </View>
           </View>
         </View>
 
@@ -206,4 +237,8 @@ export const styles = StyleSheet.create({
     color: "#D9534F",
     fontSize: 13
   },
+  select: {
+    paddingTop: 20,
+    width: "100%"
+  }
 });
