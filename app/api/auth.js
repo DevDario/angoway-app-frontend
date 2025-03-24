@@ -8,11 +8,13 @@ export const loginUseCase = async ({ number, password }) => {
     return response.data
 }
 
-export const signupUseCase = async ({ email, number, password }) => {
-    const response = await api.post("/auth/signup", {
+export const signupUseCase = async ({ name, email, number, password, disability }) => {
+    const response = await api.post("/user", {
+        name,
         email,
         number,
-        password
+        password,
+        disability
     })
     return response
 }
