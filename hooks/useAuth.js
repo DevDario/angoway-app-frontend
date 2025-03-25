@@ -25,11 +25,11 @@ export function useAuth() {
         mutationFn: loginUseCase,
         onMutate: () => {
             setIsCheckingAuth(true)
+            setAuthError(null)
         },
         onSuccess: async (data) => {
             saveToken(data.access_token)
             setAuthToken(data.access_token)
-            setAuthError(null)
             router.replace("/routes")
             queryClient.invalidateQueries(["user"])
         },
@@ -45,9 +45,9 @@ export function useAuth() {
         mutationFn: signupUseCase,
         onMutate: () => {
             setIsCheckingAuth(true)
+            setAuthError(null)
         },
         onSuccess: async () => {
-            setAuthError(null)
             router.replace("/auth/login")
             queryClient.invalidateQueries(["user"])
         },
@@ -61,7 +61,6 @@ export function useAuth() {
 
     const logout = async () => {
         removeToken();
-        setAuthToken(null);
         router.replace("/auth/login")
         queryClient.clear();
     }
