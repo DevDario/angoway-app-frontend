@@ -158,11 +158,10 @@ export default function Signup() {
           </View>
         </View>
 
-        {authError && <View>
+        {authError !== null && <View>
           <AlertModal
             text={authError}
             type={"warning"}
-            modalVisible={authError !== null}
           />
         </View>}
 
