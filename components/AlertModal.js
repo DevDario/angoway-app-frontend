@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from "react-native";
 import { faWarning, faClose, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-export default function AlertModal({ text, type, modalVisible }) {
-    const [isVisible, setIsVisible] = useState(modalVisible)
+export default function AlertModal({ text, type }) {
+    const [isVisible, setIsVisible] = useState(true)
 
     return (
         <Modal visible={isVisible} transparent animationType="fade">
@@ -23,7 +23,7 @@ export default function AlertModal({ text, type, modalVisible }) {
                     <Text style={styles.modalText}>
                         {text}
                     </Text>
-                    <TouchableOpacity style={styles.closeButton} onPress={() => setIsVisible(!isVisible)}>
+                    <TouchableOpacity style={styles.closeButton} onPress={() => setIsVisible(false)}>
                         <Text style={styles.buttonText}>Fechar</Text>
                     </TouchableOpacity>
                 </View>
@@ -35,7 +35,6 @@ export default function AlertModal({ text, type, modalVisible }) {
 AlertModal.propTypes = {
     text: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    modalVisible: PropTypes.bool.isRequired
 }
 
 const styles = StyleSheet.create({
