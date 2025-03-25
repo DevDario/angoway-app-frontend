@@ -5,7 +5,7 @@ export const updateCredentialsSchema = z.object({
         .string()
         .nonempty("Insira o novo e-mail para atualizar")
         .email("E-mail inválido"),
-    phoneNumber: z
+    number: z
         .string()
         .nonempty("Insira o novo número para atualizar")
         .min(9, "O número deve ter pelo menos 9 dígitos")
