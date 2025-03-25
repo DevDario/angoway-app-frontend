@@ -93,11 +93,10 @@ export default function Login() {
           />
         </View>
 
-        {authError && <View>
+        {authError !== null && <View>
           <AlertModal
             text={authError}
             type={"error"}
-            modalVisible={authError !== null}
           />
         </View>}
 
