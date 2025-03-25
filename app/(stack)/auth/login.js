@@ -8,6 +8,7 @@ import { faGoogle, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { loginSchema } from "../../../schemas/loginSchema"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../../hooks/useAuth";
+import AlertModal from "../../../components/AlertModal";
 
 export default function Login() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function Login() {
       password: "",
     }
   })
-  const { useLogin, isCheckingAuth } = useAuth()
+  const { useLogin, isCheckingAuth, authError } = useAuth()
 
   function handleLogin(data) {
     useLogin.mutate(data)
@@ -91,6 +92,14 @@ export default function Login() {
             onPress={handleSubmit(handleLogin)}
           />
         </View>
+
+        {authError && <View>
+          <AlertModal
+            text={authError}
+            type={"error"}
+            modalVisible={authError !== null}
+          />
+        </View>}
 
         {isCheckingAuth && <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingVertical: 15 }}>
           <ActivityIndicator size="large" color="#007bff" />
