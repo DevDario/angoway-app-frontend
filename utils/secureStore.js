@@ -1,6 +1,7 @@
 import { MMKV } from "react-native-mmkv"
 
 const TOKEN_KEY = process.env.EXPO_PUBLIC_TOKEN_KEY || "access_token"
+const PROFILE_DATA_KEY = process.env.EXPO_PUBLIC_PROFILE_DATA_KEY
 
 export const storage = new MMKV({
     id: "secureStore",
@@ -28,5 +29,29 @@ export function removeToken() {
         localStorage.removeItem(TOKEN_KEY);
     } else {
         storage.delete(TOKEN_KEY);
+    }
+}
+
+export function saveProfileData(data) {
+    if (typeof window !== "undefined") {
+        localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(data));
+    } else {
+        storage.set(TOKEN_KEY, JSON.stringify(data));
+    }
+}
+
+export function getProfileData() {
+    if (typeof window !== "undefined") {
+        localStorage.getItem(PROFILE_DATA_KEY);
+    } else {
+        storage.get(TOKEN_KEY);
+    }
+}
+
+export function removeProfileData() {
+    if (typeof window !== "undefined") {
+        localStorage.removeItem(PROFILE_DATA_KEY);
+    } else {
+        storage.delete(PROFILE_DATA_KEY);
     }
 }
