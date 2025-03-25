@@ -10,11 +10,13 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateCredentialsSchema } from "../../schemas/updateCredentialsSchema";
 import BottomLineButton from "../../components/BottomLineButton";
-import { useAuth } from "../../hooks/useAuth";
+import { useProfile } from "../../hooks/useProfile";
+import { useAuth } from "../../hooks/useAuth"
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { logout, useUpdateCredentials, authError } = useAuth()
+  const { authError, useUpdateCredentials } = useProfile()
+  const { logout } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(updateCredentialsSchema),
