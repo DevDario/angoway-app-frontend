@@ -10,11 +10,12 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import CheckBox from "../../../components/CheckBox"
 import Select from "../../../components/Select"
 import { useAuth } from "../../../hooks/useAuth"
+import AlertModal from "../../../components/AlertModal";
 
 export default function Signup() {
   const router = useRouter();
   const [hasDisability, setHasDisability] = useState(false);
-  const { useSignup, isCheckingAuth } = useAuth()
+  const { useSignup, isCheckingAuth, authError } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(signupSchema),
@@ -156,6 +157,14 @@ export default function Signup() {
             </View>
           </View>
         </View>
+
+        {authError && <View>
+          <AlertModal
+            text={authError}
+            type={"warning"}
+            modalVisible={authError !== null}
+          />
+        </View>}
 
         {isCheckingAuth && <View style={{ flex: 1, justifyContent: "center", alignItems: "center", paddingVertical: 15 }}>
           <ActivityIndicator size="large" color="#007bff" />
