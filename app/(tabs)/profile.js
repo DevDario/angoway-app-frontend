@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Alert, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ReturnButton from "../../components/ReturnButton";
 import { useRouter } from "expo-router";
 import ProfileAvatar from "../../components/ProfileAvatar";
 import Input from "../../components/input";
 import Button from "../../components/Button"
+import AlertModal from "../../components/AlertModal"
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateCredentialsSchema } from "../../schemas/updateCredentialsSchema";
@@ -13,19 +14,19 @@ import { useAuth } from "../../hooks/useAuth";
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { logout } = useAuth()
+  const { logout, useUpdateCredentials, authError } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(updateCredentialsSchema),
     mode: "onChange",
     defaultValues: {
       email: "",
-      phoneNumber: "",
+      number: "",
     },
   })
 
-  function handleCredentialsUpdate() {
-    Alert.alert("Alterações Confirmadas", "As suas alterações foram guardadas !")
+  function handleCredentialsUpdate(data) {
+    useUpdateCredentials.mutate(data)
   }
 
   return (
@@ -54,7 +55,7 @@ export default function ProfilePage() {
             </Text>
             <Controller
               control={control}
-              name="phoneNumber"
+              name="number"
               render={({ field: { onChange, value } }) => (
                 <>
                   <Input
@@ -63,7 +64,7 @@ export default function ProfilePage() {
                     onChangeText={onChange}
                     keyboardType={"phone-pad"}
                   />
-                  {errors.phoneNumber && <Text style={styles.error}>{errors.phoneNumber.message}</Text>}
+                  {errors.number && <Text style={styles.error}>{errors.number.message}</Text>}
                 </>
               )}
 
@@ -90,6 +91,13 @@ export default function ProfilePage() {
               )}
             />
           </View>
+
+          {authError !== null && <View>
+            <AlertModal
+              text={authError}
+              type={"warning"}
+            />
+          </View>}
 
           <Button
             text="Salvar Alterações"
