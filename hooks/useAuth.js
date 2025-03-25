@@ -9,6 +9,7 @@ export function useAuth() {
     const router = useRouter()
     const [authToken, setAuthToken] = useState(null)
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+    const [authError, setAuthError] = useState(null);
 
 
     useEffect(() => {
@@ -28,8 +29,12 @@ export function useAuth() {
         onSuccess: async (data) => {
             saveToken(data.access_token)
             setAuthToken(data.access_token)
+            setAuthError(null)
             router.replace("/routes")
             queryClient.invalidateQueries(["user"])
+        },
+        onError: async (req) => {
+            setAuthError(req.response.data.message)
         },
         onSettled: () => {
             setIsCheckingAuth(false)
@@ -44,8 +49,12 @@ export function useAuth() {
         onSuccess: async (data) => {
             saveToken(data.access_token)
             setAuthToken(data.access_token)
+            setAuthError(null)
             router.replace("/routes")
             queryClient.invalidateQueries(["user"])
+        },
+        onError: async (req) => {
+            setAuthError(req.response.data.message)
         },
         onSettled: () => {
             setIsCheckingAuth(false)
@@ -64,6 +73,7 @@ export function useAuth() {
         useSignup,
         logout,
         authToken,
-        isCheckingAuth
+        isCheckingAuth,
+        authError
     }
 }
