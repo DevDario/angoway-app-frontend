@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUseCase, signupUseCase } from "../app/api/auth";
+import { loginUseCase, signupUseCase, updateCredentialsUseCase } from "../app/api/auth";
 import { useEffect, useState } from "react";
 import { getToken, saveToken, removeToken } from "../utils/secureStore";
 import { useRouter } from "expo-router";
@@ -59,6 +59,25 @@ export function useAuth() {
         },
     })
 
+    const useUpdateCredentials = useMutation({
+        mutationFn: updateCredentialsUseCase,
+        onMutate: () => {
+            setIsCheckingAuth(true)
+            setAuthError(null)
+        },
+        onSuccess: async () => {
+            setIsCheckingAuth(true)
+            setAuthError(null)
+            router.reload()
+        },
+        onError: async (req) => {
+            setAuthError(req.response.data.message)
+        },
+        onSettled: () => {
+            setIsCheckingAuth(false)
+        },
+    })
+
     const logout = async () => {
         removeToken();
         router.replace("/auth/login")
@@ -68,6 +87,7 @@ export function useAuth() {
     return {
         useLogin,
         useSignup,
+        useUpdateCredentials,
         logout,
         authToken,
         isCheckingAuth,
