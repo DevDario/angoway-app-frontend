@@ -46,11 +46,9 @@ export function useAuth() {
         onMutate: () => {
             setIsCheckingAuth(true)
         },
-        onSuccess: async (data) => {
-            saveToken(data.access_token)
-            setAuthToken(data.access_token)
+        onSuccess: async () => {
             setAuthError(null)
-            router.replace("/routes")
+            router.replace("/auth/login")
             queryClient.invalidateQueries(["user"])
         },
         onError: async (req) => {
