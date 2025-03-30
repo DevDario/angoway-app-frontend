@@ -59,25 +59,6 @@ export function useAuth() {
         },
     })
 
-    const useUpdateCredentials = useMutation({
-        mutationFn: updateCredentialsUseCase,
-        onMutate: () => {
-            setIsCheckingAuth(true)
-            setAuthError(null)
-        },
-        onSuccess: async () => {
-            setIsCheckingAuth(true)
-            setAuthError(null)
-            router.reload()
-        },
-        onError: async (req) => {
-            setAuthError(req.response.data.message)
-        },
-        onSettled: () => {
-            setIsCheckingAuth(false)
-        },
-    })
-
     const logout = async () => {
         removeToken();
         router.replace("/auth/login")
