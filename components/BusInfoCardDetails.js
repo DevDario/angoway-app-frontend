@@ -21,7 +21,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
         flexDirection:"row",
-        justifyContent:"space-between"
+        justifyContent:"space-between",
+        alignContent:"center",
+        alignItems:"center"
     },
     iconBox:{
         width: 45,
@@ -35,10 +37,10 @@ const styles = StyleSheet.create({
     },
     content:{
         flexDirection:"column",
-        gap:4,
+        gap:0,
         alignContent:"center",
         alignItems:"flex-start",
-        justifyContent:"space-between"
+        paddingHorizontal:10
     },
     title:{
         fontSize:16,
