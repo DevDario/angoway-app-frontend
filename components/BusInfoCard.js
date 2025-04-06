@@ -40,7 +40,10 @@ export default function BusInfoCard({ busDetails }) {
                             icon={faHandHoldingDollar}
                         />
                     </View>
+
                     <View style={styles.body}>
+
+                        <View style={styles.contentContainer}>
                           <BusInfoCardDetails 
                             title="Rotas"
                             data={mockBusDetails.routes}
@@ -49,7 +52,7 @@ export default function BusInfoCard({ busDetails }) {
                           />
                           <BusInfoCardDetails 
                             title="Lugares"
-                            data={mockBusDetails.seats}
+                            data={mockBusDetails.seats + " lugares"}
                             icon={faSignsPost}
                           />
                           <BusInfoCardDetails 
@@ -57,6 +60,10 @@ export default function BusInfoCard({ busDetails }) {
                             data={mockBusDetails.ATA + " Minutos"}
                             icon={faSignsPost}
                           />
+                          </View>
+
+                          <View style={styles.contentContainer}>
+
                           <BusInfoCardDetails 
                             title="Motorista"
                             data={mockBusDetails.driverData}
@@ -67,6 +74,8 @@ export default function BusInfoCard({ busDetails }) {
                             data={mockBusDetails.stops.map(s=> s.id + "." + s.name + "\n")}
                             icon={faSignsPost}
                           />
+                          </View>
+
                     </View>
                 </View>
             </View>
@@ -82,7 +91,7 @@ export const styles = StyleSheet.create({
         paddingTop: 30,
     },
     card: {
-        width: 360,
+        width: 385,
         height: "auto",
         borderRadius: 13,
         backgroundColor: "#F4F6FC",
@@ -139,8 +148,15 @@ export const styles = StyleSheet.create({
     },
     body: {
         margin: 15,
-        alignItems:"center",
+        flexDirection:"row",
         justifyContent:"space-between",
-
+        alignContent:"flex-start",
+        alignItems:"flex-start"
+    },
+    contentContainer:{
+        flexDirection:"column",
+        gap:5,
+        alignCenter:"center",
+        alignItems:"flex-start"
     }
 });
