@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUseCase, signupUseCase, updateCredentialsUseCase } from "../app/api/auth";
+import { loginUseCase, signupUseCase } from "../app/api/auth";
 import { useEffect, useState } from "react";
 import { getToken, saveToken, removeToken } from "../utils/secureStore";
 import { useRouter } from "expo-router";
@@ -68,7 +68,6 @@ export function useAuth() {
     return {
         useLogin,
         useSignup,
-        useUpdateCredentials,
         logout,
         authToken,
         isCheckingAuth,
