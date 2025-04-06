@@ -114,8 +114,13 @@ export const styles = StyleSheet.create({
         gap: 5,
     },
     routeText: {
-        fontSize: 19,
+        fontSize: 17,
         fontWeight: 700,
+    },
+    infoRoute:{
+       flexDirection:"row",
+       alignItems:"center",
+       gap:3
     },
     routeDetails: {
         flexDirection: "row",
