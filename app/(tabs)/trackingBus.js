@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import RouteCard from '../../components/RouteCard';
 import { useState } from 'react';
+import BusInfoCard from '../../components/BusInfoCard';
 
 export default function TrackingBus() {
     const [showBusInfo, setShowBusInfo] = useState(false)
 
     const route = require("../../mockdata.json").trackingRoutes[0]
+    const mockDetails = require("../../mockdata.json").busDetails
 
     return (
         <View style={styles.container}>
@@ -19,7 +21,7 @@ export default function TrackingBus() {
                     <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
                 </View>
 
-                <MapView
+               <MapView
                     style={styles.map}
                     initialRegion={{
                         latitude: -8.8956,
@@ -33,17 +35,19 @@ export default function TrackingBus() {
                     showsCompass={false}
                 />
 
+            <View style={styles.trackingContainer}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     showsHorizontalScrollIndicator={false}
                     keyboardShouldPersistTaps={"handled"}
                     style={styles.scrollView}
+                    horizontal={true}
                 >
-                    <View style={styles.trackingInfoContent}>
                         <RouteCard
                             key={route.id}
                             routeDetails={route}
                         />
+
 
                         <View style={styles.busInfoContainer}>
                             {showBusInfo ? (
@@ -54,16 +58,14 @@ export default function TrackingBus() {
                                 </>
                             ) : (
                                 <>
-                                    <FontAwesomeIcon icon={faInfoCircle} size={15} color='#4444' /><Text style={styles.hintText}>
-                                        info do autocarro
-                                    </Text>
+                                    <BusInfoCard
+                                     busDetails={mockDetails}
+                                    />
                                 </>
                             )}
                         </View>
-
-                    </View>
-
                 </ScrollView>
+            </View>
         </View>
     )
 }
@@ -92,23 +94,26 @@ export const styles = StyleSheet.create({
         width: "100%",
         height: "60%",
     },
-    scrollView: {
-        position: "absolute",//FIX: results in loosing the hability to scroll the view
-        top: "63%",
-        height: "100%"
+    trackingContainer: {
+        position: "absolute",
+        left:0,
+        right:0,
+        bottom:25,
+        alignItems:"center"
     },
-    trackingInfoContent: {
+    scrollView: {
         width: "100%",
         height: "100%",
-        alignContent: "flex-start",
+        alignContent: "center",
+        paddingHorizontal:30,
         gap: 20,
     },
     busInfoContainer: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        gap: 5,
-        paddingBottom: 20
+        paddingHorizontal:20,
+        paddingBottom: 10
     },
     hintText: {
         color: "#4444",
