@@ -1,11 +1,40 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import SearchBar from "../../components/SearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MapView from "react-native-maps";
+import requestLocationPermission from "../../utils/requestLocationPermission";
+import { watchPositionAsync, LocationAccuracy } from "expo-location";
 
 export default function Index() {
   const [locationQuery, setLocationQuery] = useState("");
+  const [permissionGranted, setPermissionGranted] = useState(false);
+
+  useEffect(() => {
+    const requestPermissionForLocation = async () => {
+      const granted = await requestLocationPermission();
+      setPermissionGranted(granted);
+    };
+    requestPermissionForLocation();
+  }, []);
+
+  useEffect(() => {
+    watchPositionAsync({
+      accuracy: LocationAccuracy.Highest,
+      timeInterval: 5000,
+      distanceInterval: 10,
+    }, (response) => {
+      console.log(response)
+    })
+  }, [])
+
+  if (!permissionGranted) {
+    return (
+        <View style={styles.loadingContainer}>
+             <ActivityIndicator style={{justifyContent:"center", alignItems:"center", backgroundColor:"#FCFCB"}} size="large" color="#0C6BFF" />
+             <Text style={styles.permissionText}>Aguardando Permissão</Text>
+        </View>
+   );
+  }
 
   function handleLocationSearch(query) {
     setLocationQuery(query);
@@ -13,6 +42,7 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
+      
       <MapView
         style={styles.map}
         initialRegion={{
@@ -35,11 +65,24 @@ export default function Index() {
           value={locationQuery}
         />
       </View>
+      
     </View>
   );
 }
 
 export const styles = StyleSheet.create({
+  loadingContainer:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"column",
+    gap:10
+},
+permissionText:{
+  fontSize:14,
+  fontWeight:"bold",
+  color:"#0C6BFF"
+},
   container: {
     flex: 1,
   },
