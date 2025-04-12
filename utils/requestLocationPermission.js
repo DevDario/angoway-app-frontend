@@ -1,17 +1,15 @@
-import { Alert } from "react-native";
 import {
-    requestForegroundPermissionsAsync,
-    getCurrentPositionAsync
+    requestForegroundPermissionsAsync
 } from "expo-location"
 
 export default async function requestLocationPermission(){
-    const { granted } = await requestForegroundPermissionsAsync();
+  const { status } = await requestForegroundPermissionsAsync();
 
-    if (granted) {
-      const location = await getCurrentPositionAsync();
-
-    } else {
-      Alert.alert("Precisamos de permissão para acessar sua localização");
-    }
+  if (status !== "granted") {
+    console.warn("Permission to access location was denied");
+    return false;
+  }
+  
+  return true
 
 }
