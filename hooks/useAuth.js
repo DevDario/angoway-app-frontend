@@ -33,8 +33,8 @@ export function useAuth() {
             router.replace("/routes")
             queryClient.invalidateQueries(["user"])
         },
-        onError: async (req) => {
-            setAuthError(req.response.data.message)
+        onError: (error) => {
+            setAuthError(error.message)
         },
         onSettled: () => {
             setIsCheckingAuth(false)
