@@ -130,7 +130,7 @@ export default function Login() {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 45,
     paddingBottom: 30,
     marginRight: 10,
   },
