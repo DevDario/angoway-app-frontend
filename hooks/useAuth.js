@@ -14,7 +14,7 @@ export function useAuth() {
 
     useEffect(() => {
         async function checkToken() {
-            const token = getToken();
+            const token = await getToken();
             setAuthToken(token);
             setIsCheckingAuth(false)
         }
