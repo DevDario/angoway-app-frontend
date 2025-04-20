@@ -2,12 +2,15 @@ import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { useState, useEffect } from "react";
 import MapView from "react-native-maps";
+import { Marker } from "react-native-maps";
 import requestLocationPermission from "../../utils/requestLocationPermission";
 import { watchPositionAsync, LocationAccuracy } from "expo-location";
+import { useBusesLocation } from "../../hooks/useBusesLocation";
 
 export default function Index() {
   const [locationQuery, setLocationQuery] = useState("");
   const [permissionGranted, setPermissionGranted] = useState(false);
+  const { buses } = useBusesLocation()
 
   useEffect(() => {
     const requestPermissionForLocation = async () => {
@@ -42,21 +45,32 @@ export default function Index() {
 
   return (
     <View style={styles.container}>
-      
+
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: -8.8956,
-          longitude: 13.2272,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
+          latitude: -8.8390,
+          longitude: 13.2894,
+          latitudeDelta: 0.05,
+          longitudeDelta: 0.05,
         }}
         showsMyLocationButton={true}
         showsUserLocation={true}
         showsTraffic={true}
         zoomEnabled={true}
         zoomControlEnabled={true}
-      />
+      >
+        {buses.map((bus) => (
+          <Marker
+            key={bus.busId}
+            coordinate={{ 
+              latitude: bus.lat, 
+              longitude: bus.lng 
+            }}
+          />
+        ))}
+      </MapView>
+
       <View style={styles.header}>
         <SearchBar
           placeholder={"onde vamos hoje?"}
