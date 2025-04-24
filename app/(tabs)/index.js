@@ -32,11 +32,11 @@ export default function Index() {
 
   if (!permissionGranted) {
     return (
-        <View style={styles.loadingContainer}>
-             <ActivityIndicator style={{justifyContent:"center", alignItems:"center", backgroundColor:"#FCFCB"}} size="large" color="#0C6BFF" />
-             <Text style={styles.permissionText}>Aguardando Permissão</Text>
-        </View>
-   );
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator style={{ justifyContent: "center", alignItems: "center", backgroundColor: "#FCFCB" }} size="large" color="#0C6BFF" />
+        <Text style={styles.permissionText}>Aguardando Permissão</Text>
+      </View>
+    );
   }
 
   function handleLocationSearch(query) {
@@ -63,10 +63,12 @@ export default function Index() {
         {buses.map((bus) => (
           <Marker
             key={bus.busId}
-            coordinate={{ 
-              latitude: bus.lat, 
-              longitude: bus.lng 
+            coordinate={{
+              latitude: bus.lat,
+              longitude: bus.lng
             }}
+            description={bus.route}
+            image={require("../../assets/marker.png")}
           />
         ))}
       </MapView>
@@ -79,24 +81,24 @@ export default function Index() {
           value={locationQuery}
         />
       </View>
-      
+
     </View>
   );
 }
 
 export const styles = StyleSheet.create({
-  loadingContainer:{
-    flex:1,
-    justifyContent:"center",
-    alignItems:"center",
-    flexDirection:"column",
-    gap:10
-},
-permissionText:{
-  fontSize:14,
-  fontWeight:"bold",
-  color:"#0C6BFF"
-},
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    gap: 10
+  },
+  permissionText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#0C6BFF"
+  },
   container: {
     flex: 1,
   },
