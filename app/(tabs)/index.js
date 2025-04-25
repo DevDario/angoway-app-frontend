@@ -6,6 +6,7 @@ import { Marker } from "react-native-maps";
 import requestLocationPermission from "../../utils/requestLocationPermission";
 import { watchPositionAsync, LocationAccuracy } from "expo-location";
 import { useBusesLocation } from "../../hooks/useBusesLocation";
+import busMarker from "../../assets/marker.png"
 
 export default function Index() {
   const [locationQuery, setLocationQuery] = useState("");
@@ -57,8 +58,6 @@ export default function Index() {
         showsMyLocationButton={true}
         showsUserLocation={true}
         showsTraffic={true}
-        zoomEnabled={true}
-        zoomControlEnabled={true}
       >
         {buses.map((bus) => (
           <Marker
@@ -67,8 +66,12 @@ export default function Index() {
               latitude: bus.lat,
               longitude: bus.lng
             }}
-            description={bus.route}
-            image={require("../../assets/marker.png")}
+            description={
+              "Rota:" + bus.route +
+              "\n Chega em(est):" + bus.estimatedTime +
+              "\n Motorista" + bus.driverName
+            }
+            image={busMarker}
           />
         ))}
       </MapView>
