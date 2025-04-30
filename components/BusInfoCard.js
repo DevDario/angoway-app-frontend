@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import BubbleInfo from "../components/BubbleInfo";
 import BusInfoCardDetails from "../components/BusInfoCardDetails";
-import { faHandHoldingDollar, faSignsPost } from "@fortawesome/free-solid-svg-icons";
+import { faHandHoldingDollar, faSignsPost, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faClock } from "@fortawesome/free-regular-svg-icons";
 
 
 const mockBusDetails = require("../mockdata.json").busDetails
@@ -15,7 +16,7 @@ export default function BusInfoCard({ busDetails }) {
                     <View style={styles.header}>
                         <View style={styles.info}>
                             <View style={styles.infoRoute}>
-                                <Text style={styles.routeText}>Autocarro {busDetails.number}</Text>
+                                <Text style={styles.routeText}>{busDetails.number}</Text>
                                 <View style={styles.separator}></View>
                                 <Text style={styles.routeText}>{busDetails.driverName}</Text>
                             </View>
@@ -44,37 +45,37 @@ export default function BusInfoCard({ busDetails }) {
                     <View style={styles.body}>
 
                         <View style={styles.contentContainer}>
-                          <BusInfoCardDetails 
-                            title="Rotas"
-                            data={mockBusDetails.routes}
-                            icon={faSignsPost}
+                            <BusInfoCardDetails
+                                title="Rotas"
+                                data={mockBusDetails.routes.map(r => r + "\n")}
+                                icon={faSignsPost}
 
-                          />
-                          <BusInfoCardDetails 
-                            title="Lugares"
-                            data={mockBusDetails.seats + " lugares"}
-                            icon={faSignsPost}
-                          />
-                          <BusInfoCardDetails 
-                            title="Tempo de Chegada"
-                            data={mockBusDetails.ATA + " Minutos"}
-                            icon={faSignsPost}
-                          />
-                          </View>
+                            />
+                            <BusInfoCardDetails
+                                title="Lugares"
+                                data={mockBusDetails.seats + " lugares"}
+                                icon={faUser}
+                            />
+                            <BusInfoCardDetails
+                                title="Tempo de Chegada"
+                                data={mockBusDetails.ATA + " Minutos"}
+                                icon={faClock}
+                            />
+                        </View>
 
-                          <View style={styles.contentContainer}>
+                        <View style={styles.contentContainer}>
 
-                          <BusInfoCardDetails 
-                            title="Motorista"
-                            data={mockBusDetails.driverData}
-                            icon={faSignsPost}
-                          />
-                          <BusInfoCardDetails 
-                            title="Paragens"
-                            data={mockBusDetails.stops.map(s=> s.id + "." + s.name + "\n")}
-                            icon={faSignsPost}
-                          />
-                          </View>
+                            <BusInfoCardDetails
+                                title="Motorista"
+                                data={mockBusDetails.driverData}
+                                icon={faUser}
+                            />
+                            <BusInfoCardDetails
+                                title="Paragens"
+                                data={mockBusDetails.stops.map(s => s.id + "." + s.name + "\n")}
+                                icon={faLocationDot}
+                            />
+                        </View>
 
                     </View>
                 </View>
@@ -91,8 +92,8 @@ export const styles = StyleSheet.create({
         paddingTop: 30,
     },
     card: {
-        width: 385,
-        height: 318,
+        width: 485,
+        height: 327,
         borderRadius: 13,
         backgroundColor: "#F4F6FC",
         borderWidth: 1,
@@ -126,10 +127,10 @@ export const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: 700,
     },
-    infoRoute:{
-       flexDirection:"row",
-       alignItems:"center",
-       gap:3
+    infoRoute: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 3
     },
     routeDetails: {
         flexDirection: "row",
@@ -147,16 +148,16 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
     body: {
-        margin: 15,
-        flexDirection:"row",
-        justifyContent:"space-between",
-        alignContent:"flex-start",
-        alignItems:"flex-start"
+        paddingVertical: 25,
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignContent: "flex-start",
+        alignItems: "flex-start"
     },
-    contentContainer:{
-        flexDirection:"column",
-        gap:5,
-        alignCenter:"center",
-        alignItems:"flex-start"
+    contentContainer: {
+        flexDirection: "column",
+        gap: 10,
+        alignCenter: "center",
+        alignItems: "flex-start"
     }
 });
