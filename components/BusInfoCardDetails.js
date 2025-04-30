@@ -22,8 +22,8 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:"row",
         justifyContent:"space-between",
-        alignContent:"center",
-        alignItems:"center"
+        alignContent:"flex-start",
+        alignItems:"flex-start"
     },
     iconBox:{
         width: 45,
