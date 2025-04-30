@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateCredentialsUseCase } from "../app/api/profile";
+import { updateCredentialsUseCase, updateAccessibilityUseCase } from "../app/api/profile";
 import { useEffect, useState } from "react";
 import { getToken } from "../utils/secureStore";
 import { useRouter } from "expo-router";
@@ -40,8 +40,28 @@ export function useProfile() {
         },
     })
 
+    const useUpdateAccessibility = useMutation({
+        mutationFn: updateAccessibilityUseCase,
+        onMutate: () => {
+            setIsCheckingAuth(true)
+            setAuthError(null)
+        },
+        onSuccess: () => {
+            setIsCheckingAuth(true)
+            setAuthError(null)
+            router.reload()
+        },
+        onError: (req) => {
+            setAuthError(req.response.data.message)
+        },
+        onSettled: () => {
+            setIsCheckingAuth(false)
+        },
+    })
+
     return {
         useUpdateCredentials,
+        useUpdateAccessibility,
         authToken,
         isCheckingAuth,
         authError
