@@ -29,10 +29,6 @@ export default function TrackingBus() {
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
-                    showsMyLocationButton={true}
-                    showsUserLocation={true}
-                    showsTraffic={true}
-                    showsCompass={false}
                 />
 
             <View style={styles.trackingContainer}>
