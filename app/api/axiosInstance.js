@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: "http://172.20.10.14:3000",
+    baseURL: process.env.EXPO_PUBLIC_API_BASE_URL,
     headers: {
         "Content-Type": "application/json"
     },
