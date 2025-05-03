@@ -1,15 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateCredentialsUseCase, updateAccessibilityUseCase } from "../app/api/profile";
+import { updateCredentialsUseCase, updateAccessibilityUseCase, updatePasswordUseCase } from "../app/api/profile";
 import { useEffect, useState } from "react";
 import { getToken } from "../utils/secureStore";
-import { useRouter } from "expo-router";
 
 export function useProfile() {
     const queryClient = useQueryClient()
-    const router = useRouter()
     const [authToken, setAuthToken] = useState(null)
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
-    const [authError, setAuthError] = useState(null);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
 
     useEffect(() => {
@@ -25,15 +24,33 @@ export function useProfile() {
         mutationFn: updateCredentialsUseCase,
         onMutate: () => {
             setIsCheckingAuth(true)
-            setAuthError(null)
+            setError(null)
         },
         onSuccess: async () => {
             setIsCheckingAuth(true)
-            setAuthError(null)
-            router.reload()
+            setError(null)
         },
         onError: async (req) => {
-            setAuthError(req.response.data.message)
+            setError(req.message)
+        },
+        onSettled: () => {
+            setIsCheckingAuth(false)
+        },
+    })
+
+    const useUpdatePassword = useMutation({
+        mutationFn: updatePasswordUseCase,
+        onMutate: () => {
+            setIsCheckingAuth(true)
+            setError(null)
+        },
+        onSuccess: async (req) => {
+            setIsCheckingAuth(true)
+            setError(null)
+            setSuccess(req.message)
+        },
+        onError: async (req) => {
+            setError(req.message)
         },
         onSettled: () => {
             setIsCheckingAuth(false)
@@ -44,15 +61,14 @@ export function useProfile() {
         mutationFn: updateAccessibilityUseCase,
         onMutate: () => {
             setIsCheckingAuth(true)
-            setAuthError(null)
+            setError(null)
         },
         onSuccess: () => {
             setIsCheckingAuth(true)
-            setAuthError(null)
-            router.reload()
+            setError(null)
         },
         onError: (req) => {
-            setAuthError(req.response.data.message)
+            setError(req.message)
         },
         onSettled: () => {
             setIsCheckingAuth(false)
@@ -61,9 +77,11 @@ export function useProfile() {
 
     return {
         useUpdateCredentials,
+        useUpdatePassword,
         useUpdateAccessibility,
         authToken,
         isCheckingAuth,
-        authError
+        error,
+        success
     }
 }
