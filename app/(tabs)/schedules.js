@@ -42,6 +42,7 @@ export default function SchedulesPage() {
           style={styles.searchBar}
           value={routeQuery}
           onChangeText={handleRouteSearch}
+          maxLength={30}
         />
         <View style={styles.suggestionsContainer}>
           <Text style={styles.suggestionsLabel}>Sugestões</Text>

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import Input from "../components/input";
 import PropTypes from "prop-types";
 
-export default function SearchBar({ placeholder, style, onChangeText, value }) {
+export default function SearchBar({ placeholder, style, onChangeText, value, maxLength }) {
   return (
     <View style={[styles.searchContainer, style]}>
       <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -14,6 +14,7 @@ export default function SearchBar({ placeholder, style, onChangeText, value }) {
         styles={styles.searchInput}
         onChangeText={onChangeText}
         value={value}
+        maxLength={maxLength}
       />
     </View>
   );
@@ -24,6 +25,7 @@ SearchBar.propTypes = {
   style: PropTypes.object,
   onChangeText: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  maxLength: PropTypes.number
 };
 
 export const styles = StyleSheet.create({
