@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "expo-router";
 import QueryProvider from "../providers/QueryProvider";
 import { useAuth } from "../hooks/useAuth";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, Text } from "react-native";
 
 export default function Index() {
   const router = useRouter();
@@ -21,8 +21,19 @@ export default function Index() {
 
   if (isCheckingAuth) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#007bff" />
+      <View style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        gap: 10
+      }}>
+        <ActivityIndicator style={{ justifyContent: "center", alignItems: "center", backgroundColor: "#FCFCB" }} size="large" color="#0C6BFF" />
+        <Text style={{
+          fontSize: 14,
+          fontWeight: "bold",
+          color: "#0C6BFF"
+        }}>Carregando</Text>
       </View>
     );
   }
