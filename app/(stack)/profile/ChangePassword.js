@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import ReturnButton from "../../../components/ReturnButton";
 import React, { useState } from "react";
 import Button from "../../../components/Button";
@@ -8,10 +8,13 @@ import AlertModal from "../../../components/AlertModal";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updatePasswordSchema } from "../../../schemas/updatePasswordSchema";
+import { useProfile } from "../../../hooks/useProfile";
 
 export default function ChangePassword() {
     const router = useRouter()
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const { useUpdatePassword, success } = useProfile()
+    const { isPending } = useUpdatePassword
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(updatePasswordSchema),
@@ -23,10 +26,30 @@ export default function ChangePassword() {
     })
 
     function handlePasswordUpdate() {
-        // hook call here
+        useUpdatePassword.mutateAsync({ password: control._formValues["password"] })
+            .then(() => {
+                setIsModalVisible(true)
+            })
 
-        // on success
-        setIsModalVisible(true)
+    }
+
+    if (isPending) {
+        return (
+            <View style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: 10
+            }}>
+                <ActivityIndicator style={{ justifyContent: "center", alignItems: "center", backgroundColor: "#FCFCB" }} size="large" color="#0C6BFF" />
+                <Text style={{
+                    fontSize: 14,
+                    fontWeight: "bold",
+                    color: "#0C6BFF"
+                }}>Guardando Alterações</Text>
+            </View>
+        );
     }
 
     return (
@@ -83,7 +106,7 @@ export default function ChangePassword() {
                     isModalVisible && (
                         <AlertModal
                             type={"success"}
-                            text={`Senha alterada com Sucesso !`}
+                            text={`${success}`}
                         />
                     )
                 }
