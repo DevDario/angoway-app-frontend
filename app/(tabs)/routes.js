@@ -9,27 +9,27 @@ import {
 import SearchBar from "../../components/SearchBar";
 import { useState } from "react";
 import RouteSuggestionChip from "../../components/RouteSuggestionChip";
+import AlertModal from "../../components/AlertModal";
 import Button from "../../components/Button";
 import { useRouter } from "expo-router";
 
 export default function RoutesPage() {
-  const [searchBarValue, setSearchBarValue] = useState("");
+  const [query, setQuery] = useState("");
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter()
 
-  function handleRouteSearch() {
-    if (searchBarValue.length < 1) {
-      Alert.alert(
-        "🔎 Por favor, insira um destino válido",
-        "Pesquise por destinos ou selecione uma das Sugestões",
-      );
-      return;
+  function handleRouteSearch(text) {
+    // hook call here
+
+    if (text.length < 1) {
+      setIsModalVisible(!isModalVisible)
     } else {
       router.push("/trackingBus")
     }
   }
 
   function handleSuggestionSelect(selectedItem) {
-    setSearchBarValue(selectedItem);
+    setQuery(selectedItem);
   }
 
   const suggestions = require("../../mockdata.json").routeSuggestions
@@ -44,8 +44,8 @@ export default function RoutesPage() {
         <SearchBar
           placeholder={"Zap Cinemas, Rua do Kikagil"}
           style={styles.searchBar}
-          value={searchBarValue}
-          onChangeText={setSearchBarValue}
+          value={query}
+          onChangeText={setQuery}
         />
       </View>
 
@@ -70,9 +70,18 @@ export default function RoutesPage() {
         </View>
       </View>
 
+      {
+        isModalVisible && (
+          <AlertModal
+            type="error"
+            text={`Você precisa pesquisar \npor um destino`}
+          />
+        )
+      }
+
       <Button
         text="Procurar"
-        onPress={handleRouteSearch}
+        onPress={() => handleRouteSearch(query)}
         style={styles.searchButton}
         textColor={"#FFF"}
       />
