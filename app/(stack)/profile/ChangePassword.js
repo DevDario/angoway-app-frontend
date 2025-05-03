@@ -1,18 +1,17 @@
 import { useRouter } from "expo-router";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import ReturnButton from "../../../components/ReturnButton";
-import { useState } from "react";
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/input";
+import AlertModal from "../../../components/AlertModal";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCircleInfo, faWarning } from "@fortawesome/free-solid-svg-icons";
 import { updatePasswordSchema } from "../../../schemas/updatePasswordSchema";
 
 export default function ChangePassword() {
     const router = useRouter()
+    const [isModalVisible, setIsModalVisible] = useState(false)
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(updatePasswordSchema),
@@ -24,8 +23,10 @@ export default function ChangePassword() {
     })
 
     function handlePasswordUpdate() {
-        Alert.alert("As suas alterações foram guardadas !")
-        router.navigate("/profile")
+        // hook call here
+
+        // on success
+        setIsModalVisible(true)
     }
 
     return (
@@ -78,6 +79,15 @@ export default function ChangePassword() {
                     />
                 </View>
 
+                {
+                    isModalVisible && (
+                        <AlertModal
+                            type={"success"}
+                            text={`Senha alterada com Sucesso !`}
+                        />
+                    )
+                }
+
                 <Button
                     text="Salvar Alterações"
                     onPress={handleSubmit(handlePasswordUpdate)}
@@ -123,7 +133,7 @@ export const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
         backgroundColor: "#0C6DFF",
-        marginTop:25,
+        marginTop: 25,
     },
     infoContent: {
         flexDirection: "row",
