@@ -18,7 +18,7 @@ export default function TrackingBus() {
     const mockDetails = require("../../mockdata.json").busDetails
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} onTouchStart={()=> setShowBusInfo(false)}>
             <View style={styles.pageHeader}>
                 <ReturnButton onPress={() => router.navigate("/routes")} />
                 <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
