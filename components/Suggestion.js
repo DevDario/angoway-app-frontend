@@ -35,10 +35,10 @@ Suggestion.propTypes = {
 
 export const styles = StyleSheet.create({
   button: {
-    width: 150,
+    width: 120,
     height: 53,
     gap: 10,
-    borderRadius: 30,
+    borderRadius: 90,
     backgroundColor: "#C7D4FB",
     alignItems: "center",
     justifyContent: "center",
@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
   suggestionText: {
     color: "#0C6DFF",
     fontWeight: 200,
+    fontSize:15
   },
   selectedButton: {
     backgroundColor: "#0C6DFF",
