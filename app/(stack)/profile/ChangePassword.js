@@ -27,10 +27,10 @@ export default function ChangePassword() {
 
     function handlePasswordUpdate() {
         useUpdatePassword.mutateAsync({ password: control._formValues["password"] })
-            .then(() => {
-                setIsModalVisible(true)
-            })
 
+        if (success !== null) {
+            setIsModalVisible(true)
+        }
     }
 
     if (isPending) {
