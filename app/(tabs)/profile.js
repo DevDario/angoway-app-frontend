@@ -15,7 +15,7 @@ import { useAuth } from "../../hooks/useAuth"
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { authError, useUpdateCredentials } = useProfile()
+  const { error, useUpdateCredentials } = useProfile()
   const { logout } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -94,12 +94,14 @@ export default function ProfilePage() {
             />
           </View>
 
-          {authError !== null && <View>
-            <AlertModal
-              text={authError}
-              type={"warning"}
-            />
-          </View>}
+          {error !== null && (
+            <View>
+              <AlertModal
+                text={error}
+                type={"warning"}
+              />
+            </View>
+          )}
 
           <Button
             text="Salvar Alterações"
