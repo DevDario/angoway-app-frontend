@@ -1,48 +1,45 @@
-import { getToken } from "../../utils/secureStore";
+import { getToken, getUserId } from "../../utils/secureStore";
 import { api } from "./axiosInstance";
 
 export const updateCredentialsUseCase = async ({ email, number }) => {
     const token = await getToken()
-    const config = {
-        headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
+    const response = await api.patch("/profile/", {
         email: email,
         number: number
-    }
-    const response = await api.patch("/profile/", config)
+    }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
 
     return response.data
 }
 
 export const updateAccessibilityUseCase = async ({ option }) => {
     const token = await getToken()
-    const config = {
+    const response = await api.patch("/user/", { option }, {
         headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        option: option
-    }
-    const response = await api.patch("/user/", config)
+            Authorization: `Bearer ${token}`
+        }
+    })
 
     return response.data
 }
 
 export const updatePasswordUseCase = async ({ password }) => {
+
     const token = await getToken()
-    const config = {
+    const userId = await getUserId();
+
+    if (!userId) throw new Error("User ID not found in token");
+
+    const response = await api.put(`/user/profile/${userId}`, {
+        password
+    }, {
         headers: {
-            Accept: '*/*',
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        password: password
-    }
-    const response = await api.put("/user/profile/", config)
+            Authorization: `Bearer ${token}`
+        }
+    })
 
     return response.data
 }
