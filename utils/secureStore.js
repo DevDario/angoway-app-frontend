@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { jwtDecode } from "jwt-decode";
 
 const TOKEN_KEY = process.env.EXPO_PUBLIC_TOKEN_KEY || 'access_token'
 const PROFILE_DATA_KEY = process.env.EXPO_PUBLIC_PROFILE_DATA_KEY || 'profile_data'
@@ -53,4 +54,21 @@ export async function removeProfileData() {
     } catch (error) {
         console.error('Error removing profile data:', error)
     }
+}
+
+export function decodeToken(token) {
+    try {
+        return jwtDecode(token);
+    } catch (error) {
+        console.error("Error decoding token:", error);
+        return null;
+    }
+}
+
+export async function getUserId() {
+    const token = await getToken();
+    if (!token) return null;
+    const decoded = decodeToken(token);
+    if (!decoded) throw new Error("Unable to decode: Invalid Token")
+    return decoded?.sub || null;
 }
