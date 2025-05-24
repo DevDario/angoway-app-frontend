@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/angoway-adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dariosilva.angowayapp"
     },
     "web": {
       "favicon": "./assets/favicon-100x100.png"
