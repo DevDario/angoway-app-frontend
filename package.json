@@ -16,7 +16,8 @@
     "build:preview:android": "eas build --profile preview --platform android",
     "build:preview:ios": "eas build --profile preview --platform ios",
     "build:prod:android": "eas build --profile production --platform android",
-    "build:prod:ios": "eas build --profile production --platform ios"
+    "build:prod:ios": "eas build --profile production --platform ios",
+    "bda:local": "eas build --profile development --platform android --local"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.7.2",
