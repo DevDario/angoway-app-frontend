@@ -24,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon-100x100.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c14a322a-44cc-4173-a39f-a17d9095819a"
+      }
+    },
+    "owner": "dariosilva"
   }
 }
