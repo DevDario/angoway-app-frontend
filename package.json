@@ -40,7 +40,8 @@
     "react-native-svg": "15.11.2",
     "react-native-web": "0.20.0",
     "socket.io-client": "4.8.1",
-    "zod": "3.24.2"
+    "zod": "3.24.2",
+    "expo-dev-client": "~5.1.8"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
