@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "angoway-app-frontend",
+    "name": "Angoway",
     "slug": "angoway-app-frontend",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/splash-screen.png",
+        "foregroundImage": "./assets/angoway-adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
