@@ -31,6 +31,9 @@
         "projectId": "c14a322a-44cc-4173-a39f-a17d9095819a"
       }
     },
-    "owner": "dariosilva"
+    "owner": "dariosilva",
+    "plugins": [
+      "expo-web-browser"
+    ]
   }
 }
