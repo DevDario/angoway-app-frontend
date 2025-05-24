@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Angoway",
-    "slug": "angoway-app-frontend",
+    "slug": "angoway-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/angoway-logo.png",
