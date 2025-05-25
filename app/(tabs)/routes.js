@@ -3,8 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Alert,
   FlatList,
+  TouchableOpacity
 } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { useState } from "react";
@@ -12,23 +12,32 @@ import RouteSuggestionChip from "../../components/RouteSuggestionChip";
 import AlertModal from "../../components/AlertModal";
 import Button from "../../components/Button";
 import { useRouter } from "expo-router";
-import { useGetRoutes } from "../../hooks/useRouteQuerys";
+import { useGetRoutes, useQueryRoutes } from "../../hooks/useRouteQuerys";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function RoutesPage() {
   const [query, setQuery] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isRouteNotFoundModalVisible, setIsRouteNotFoundModalVisible] = useState(false);
+
   const router = useRouter()
-
   const { data: routes } = useGetRoutes()
+  const { data: queryResults = [] } = useQueryRoutes(query)
 
-  const routesSuggestionsList = Array.isArray(routes) ? routes.slice(0,3) : []
-  const routesCount = routesSuggestionsList.length ?? 0
+  const routesSuggestionsList = Array.isArray(routes) ? routes.slice(0, 3) : []
 
   function handleRouteSearch(text) {
 
     if (text.length < 1) {
       setIsModalVisible(!isModalVisible)
     } else {
+      setQuery(text)
+      if (queryResults.length === 0) {
+        setIsRouteNotFoundModalVisible(!isModalVisible)
+        return
+      }
+      setIsRouteNotFoundModalVisible(false)
       router.push("/trackingBus")
     }
   }
@@ -44,7 +53,6 @@ export default function RoutesPage() {
       </View>
 
       <View style={styles.searchBarContent}>
-        <Text>{ routesCount + ""}</Text>
         <SearchBar
           placeholder={"Zap Cinemas, Rua do Kikagil"}
           style={styles.searchBar}
@@ -55,21 +63,44 @@ export default function RoutesPage() {
 
       <View style={styles.content}>
         <View style={styles.suggestionsContainer}>
-          <Text style={styles.suggestionsLabel}>Sugestões</Text>
+          <Text style={styles.suggestionsLabel}>{queryResults.length === 0 ? "Sugestões" : ""}</Text>
           <View style={styles.suggestions}>
-            <FlatList
-              data={routesSuggestionsList}
-              renderItem={({ item }) => (
-                <RouteSuggestionChip
-                  suggestion={item.name}
-                  key={item.id}
-                  onPress={() => handleSuggestionSelect(item.name)}
-                  style={styles.suggestionChip}
-                />
-              )}
-              keyExtractor={(item) => item.id}
-              bounces={true}
-            />
+            {queryResults.length === 0 ? (
+              <FlatList
+                data={routesSuggestionsList}
+                renderItem={({ item }) => (
+                  <RouteSuggestionChip
+                    suggestion={item.name}
+                    key={item.id}
+                    onPress={() => handleSuggestionSelect(item.name)}
+                    style={styles.suggestionChip}
+                  />
+                )}
+                keyExtractor={(item) => item.id}
+                bounces={true}
+              />
+            ) : (
+              <FlatList
+                data={queryResults}
+                renderItem={({ item }) => (
+                  <TouchableOpacity style={styles.resultsContainer} key={item.id} onPress={() => setQuery(item.name)}>
+                    <FontAwesomeIcon icon={faArrowRight} color="#0C6BFF" />
+                    <Text style={styles.resultsText}>{item.name}</Text>
+                  </TouchableOpacity>
+                )}
+                keyExtractor={(item) => item.id}
+                  bounces={true}
+                  ListHeaderComponent={() => (
+                    <Text
+                      style={{
+                        fontSize: 17,
+                        fontWeight: "700"
+                        
+                      }}
+                    >Resultados:</Text>
+                  )}
+              />
+            )}
           </View>
         </View>
       </View>
@@ -79,6 +110,15 @@ export default function RoutesPage() {
           <AlertModal
             type="error"
             text={`Você precisa pesquisar \npor um destino`}
+          />
+        )
+      }
+
+      {
+        isRouteNotFoundModalVisible && (
+          <AlertModal
+            type="error"
+            text={`Não encontramos nenhuma rota com esse nome`}
           />
         )
       }
@@ -159,4 +199,19 @@ export const styles = StyleSheet.create({
   text: {
     color: "#FFF"
   },
+  resultsContainer: {
+    marginTop: 5,
+    width: "100%",
+    height: 50,
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    paddingHorizontal: 10,
+  },
+  resultsText: {
+    color: "#0C6BFF",
+    fontWeight: "bold",
+    fontSize: 20
+  }
 });
