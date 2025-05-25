@@ -24,3 +24,14 @@ export const getRoutesCount = async () => {
 
     return response.data;
 };
+
+export const queryByOriginOrDestination = async (query) => {
+    const token = await getToken();
+    const response = await api.get(`/routes/findByOriginOrDestination/${query}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+};
