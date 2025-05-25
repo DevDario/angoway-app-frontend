@@ -12,14 +12,19 @@ import RouteSuggestionChip from "../../components/RouteSuggestionChip";
 import AlertModal from "../../components/AlertModal";
 import Button from "../../components/Button";
 import { useRouter } from "expo-router";
+import { useGetRoutes } from "../../hooks/useRouteQuerys";
 
 export default function RoutesPage() {
   const [query, setQuery] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter()
 
+  const { data: routes } = useGetRoutes()
+
+  const routesSuggestionsList = Array.isArray(routes) ? routes.slice(0,3) : []
+  const routesCount = routesSuggestionsList.length ?? 0
+
   function handleRouteSearch(text) {
-    // hook call here
 
     if (text.length < 1) {
       setIsModalVisible(!isModalVisible)
@@ -32,8 +37,6 @@ export default function RoutesPage() {
     setQuery(selectedItem);
   }
 
-  const suggestions = require("../../mockdata.json").routeSuggestions
-
   return (
     <View style={[styles.container]}>
       <View style={styles.header}>
@@ -41,6 +44,7 @@ export default function RoutesPage() {
       </View>
 
       <View style={styles.searchBarContent}>
+        <Text>{ routesCount + ""}</Text>
         <SearchBar
           placeholder={"Zap Cinemas, Rua do Kikagil"}
           style={styles.searchBar}
@@ -54,12 +58,12 @@ export default function RoutesPage() {
           <Text style={styles.suggestionsLabel}>Sugestões</Text>
           <View style={styles.suggestions}>
             <FlatList
-              data={suggestions}
+              data={routesSuggestionsList}
               renderItem={({ item }) => (
                 <RouteSuggestionChip
-                  suggestion={item.route}
+                  suggestion={item.name}
                   key={item.id}
-                  onPress={() => handleSuggestionSelect(item.route)}
+                  onPress={() => handleSuggestionSelect(item.name)}
                   style={styles.suggestionChip}
                 />
               )}
