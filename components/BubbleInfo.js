@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View } from "react-native";
 
 const statusColors = [
-  { status: "active", backgroundColor: "#CCFFE4", color: "#12AA59" },
+  { status: "ativo", backgroundColor: "#CCFFE4", color: "#12AA59" },
   { status: "delayed", backgroundColor: "#FFCFAA", color: "#C26A26" },
   { status: "cancelled", backgroundColor: "#FFAAAA", color: "#974343" },
 ];
 
 export default function BubbleInfo({
-  text = "active",
+  text = "ativo",
   icon = null,
-  status = "active",
+  status = "ativo",
 }) {
   const statusDetails = statusColors.find((item) => item.status === status) || {
     status: "default",

@@ -37,7 +37,7 @@ export default function BusInfoCard({ busDetails }) {
                         <BubbleInfo
                             text={busDetails.price}
                             key={busDetails.id}
-                            status={"ativo"}
+                            status={"active"}
                             icon={faHandHoldingDollar}
                         />
                     </View>

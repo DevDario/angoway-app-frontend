@@ -37,9 +37,9 @@ export default function ScheduleCard({ routeDetails, empty }) {
               </View>
             </View>
             <BubbleInfo
-              text={routeDetails.status}
+              text={routeDetails.status === "active" ? "ativo": routeDetails.status}
               key={routeDetails.id}
-              status={routeDetails.status}
+              status={routeDetails.status === "active" ? "ativo": routeDetails.status}
             />
           </View>
           {empty ? (
