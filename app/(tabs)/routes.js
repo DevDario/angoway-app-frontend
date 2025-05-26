@@ -208,6 +208,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     paddingHorizontal: 10,
+    backgroundColor: "#FCFCFB",
+    borderRadius:25
   },
   resultsText: {
     color: "#0C6BFF",
