@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+    findSchedulesByRoute,
     getRoutes,
     getRoutesCount,
     queryByOriginOrDestination
@@ -28,3 +29,12 @@ export const useQueryRoutes = (query) =>
         gcTime: 1000 * 60 * 10,
         enabled: query.trim().length > 0,
     });
+
+export const useQuerySchedulesByRoutes = (query) =>
+    useQuery({
+        queryKey: ["routes", query],
+        queryFn: () => findSchedulesByRoute(query),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
+        enabled: query.trim().length > 0,
+        });

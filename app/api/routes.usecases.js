@@ -35,3 +35,14 @@ export const queryByOriginOrDestination = async (query) => {
 
     return response.data;
 };
+
+export const findSchedulesByRoute = async (query) => {
+    const token = await getToken();
+    const response = await api.get(`/routes/schedules/search/${query}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+};
