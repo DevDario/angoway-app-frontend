@@ -35,7 +35,7 @@ Suggestion.propTypes = {
 
 export const styles = StyleSheet.create({
   button: {
-    width: 120,
+    width: "max-content",
     height: 53,
     gap: 10,
     borderRadius: 90,
@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
+    paddingHorizontal:"4px"
   },
   suggestionText: {
     color: "#0C6DFF",
