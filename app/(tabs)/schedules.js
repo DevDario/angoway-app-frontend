@@ -4,17 +4,17 @@ import SearchBar from "../../components/SearchBar";
 import Suggestion from "../../components/Suggestion";
 import ScheduleCard from "../../components/ScheduleCard";
 import { useState } from "react";
+import { useGetRoutes, useQuerySchedulesByRoutes } from "../../hooks/useRouteQuerys";
 
 export default function SchedulesPage() {
   const [routeQuery, setRouteQuery] = useState("");
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
 
-  
-  {
-    /* should be replaced with API response data */
-  }
-  const suggestions = require("../../mockdata.json").schedulesSuggestions
-  const routes = require("../../mockdata.json").schedulesRoutes
+  const { data: routes } = useGetRoutes()
+  const { data: queryResult } = useQuerySchedulesByRoutes(routeQuery)
+
+  const suggestions = Array.isArray(routes) ? routes.slice(0, 3) : []
+  const fetchedRoutes = Array.isArray(queryResult) ? queryResult : []
 
   function handleRouteSearch(text) {
     setRouteQuery(text);
@@ -50,21 +50,41 @@ export default function SchedulesPage() {
             {suggestions.map((s) => (
               <Suggestion
                 key={s.id}
-                text={s.route}
-                onPress={() => handleSuggestionSelect(s.route)}
-                isSelected={s.route === selectedSuggestion}
+                text={s.name}
+                onPress={() => handleSuggestionSelect(s.name)}
+                isSelected={s.name === selectedSuggestion}
               />
             ))}
           </View>
         </View>
 
         <View style={styles.mainContent}>
-          {routes.map((route)=>(
-              <ScheduleCard  
-                key={route.id}
-                routeDetails={route}
-              />
-            ))}
+          {fetchedRoutes.length === 0 ? (
+            <View style={{
+              display: "flex", alignItems: "center", alignContent: "center", marginVertical: 80
+            }}>
+              <Text style={{ color: '#212121', fontSize: 19, fontWeight: "bold" }}>Nenhum Resultado</Text>
+            </View>
+          ) : (
+            fetchedRoutes.map((route) => (
+              <View key={route.id} style={{ width: '100%' }}>
+                {route.schedules && route.schedules.length > 0 ? (
+                  route.schedules.map((schedule) => (
+                    <ScheduleCard
+                      key={schedule.id}
+                      routeDetails={schedule}
+                    />
+                  ))
+                ) : (
+                    <ScheduleCard
+                      key={route.id}
+                      routeDetails={route}
+                      empty={true}
+                    />
+                )}
+              </View>
+            ))
+          )}
         </View>
       </View>
     </ScrollView>

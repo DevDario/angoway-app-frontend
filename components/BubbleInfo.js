@@ -1,18 +1,17 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { StyleSheet, Text, View } from "react-native";
-import PropTypes from "prop-types";
 
 const statusColors = [
-  { status: "ativo", backgroundColor: "#CCFFE4", color: "#12AA59" },
-  { status: "atrasado", backgroundColor: "#FFCFAA", color: "#C26A26" },
-  { status: "cancelado", backgroundColor: "#FFAAAA", color: "#974343" },
+  { status: "active", backgroundColor: "#CCFFE4", color: "#12AA59" },
+  { status: "delayed", backgroundColor: "#FFCFAA", color: "#C26A26" },
+  { status: "cancelled", backgroundColor: "#FFAAAA", color: "#974343" },
 ];
 
 export default function BubbleInfo({
-  text = "ativo",
+  text = "active",
   icon = null,
-  status = "ativo",
+  status = "active",
 }) {
   const statusDetails = statusColors.find((item) => item.status === status) || {
     status: "default",
@@ -35,11 +34,6 @@ export default function BubbleInfo({
   );
 }
 
-BubbleInfo.propTypes = {
-  text: PropTypes.string.isRequired,
-  icon: PropTypes.object,
-  status: PropTypes.string,
-};
 
 export const styles = StyleSheet.create({
   container: {
