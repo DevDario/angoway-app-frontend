@@ -5,20 +5,36 @@ import { router } from 'expo-router';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import RouteCard from '../../components/RouteCard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BusInfoCard from '../../components/BusInfoCard';
 import { useBusesLocation } from "../../hooks/useBusesLocation";
+import { useLocalSearchParams } from 'expo-router';
 import busMarker from "../../assets/marker.png"
+import { useGetRouteDetailsSuggestions } from '../../hooks/useRouteQuerys';
 
 export default function TrackingBus() {
     const [showBusInfo, setShowBusInfo] = useState(false)
+    const [busData, setBusData] = useState(null)
+    const [routeDetails, setRouteDetails] = useState([])
     const { buses } = useBusesLocation()
+    const { routeName } = useLocalSearchParams()
 
-    const route = require("../../mockdata.json").trackingRoutes[0]
-    const mockDetails = require("../../mockdata.json").busDetails
+    const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(routeName)
+
+    useEffect(() => {
+        if (suggestionsData !== undefined || !isError) {
+            const dataArr = Array.isArray(suggestionsData) ? suggestionsData : []
+            setRouteDetails(dataArr[0])
+        }
+    }, [])
+
+    async function handleShowBusInfo(data) {
+        setBusData(data)
+        setShowBusInfo(true)
+    }
 
     return (
-        <View style={styles.container} onTouchStart={()=> setShowBusInfo(false)}>
+        <View style={styles.container} onTouchStart={() => setShowBusInfo(false)}>
             <View style={styles.pageHeader}>
                 <ReturnButton onPress={() => router.navigate("/routes")} />
                 <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
@@ -41,7 +57,7 @@ export default function TrackingBus() {
                             longitude: bus.lng
                         }}
                         image={busMarker}
-                        onPress={() => setShowBusInfo(true)}
+                        onPress={() => handleShowBusInfo(bus)}
                     />
                 ))}
             </MapView>
@@ -55,8 +71,18 @@ export default function TrackingBus() {
                     horizontal={true}
                 >
                     <RouteCard
-                        key={route.id}
-                        routeDetails={route}
+                        destination={routeDetails.destination}
+                        destinationDescription={"Seu Destino"}
+                        distanceKM={""}
+                        estimatedMinutes={""}
+                        estimatedTime={""}
+                        id={routeDetails.id}
+                        origin={routeDetails.origin}
+                        originDescription={"Paragem mais próxima de sí"}
+                        price={"150 KZ"}
+                        suggestedRoute={routeDetails.name}
+                        suggestedRouteDescription={"Rota do autocarro à apanhar"}
+                        key={"route-details-card"}
                     />
 
 
@@ -77,7 +103,18 @@ export default function TrackingBus() {
                         ) : (
                             <>
                                 <BusInfoCard
-                                    busDetails={mockDetails}
+                                    busNIA={busData.busNia || ""}
+                                    distanceKM={""}
+                                    driverExperience={busData.driverExperience}
+                                    driverName={busData.driverName}
+                                    estimatedMinutes={""}
+                                    estimatedTime={""}
+                                    id={busData.busId}
+                                    price={"150 KZ"}
+                                    routes={busData.routes || []}
+                                    seats={busData.seats || 0}
+                                    stops={[{}]}
+                                    key={"bus-card"}
                                 />
                             </>
                         )}
