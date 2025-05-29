@@ -8,7 +8,7 @@ export default function RouteSuggestionChip({ suggestion, onPress, style }) {
   return (
     <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
       <View style={styles.iconBox}>
-        <FontAwesomeIcon icon={faLocationDot} size={12} color="#0C6DFF" />
+        <FontAwesomeIcon icon={faLocationDot} size={16} color="#212121" />
       </View>
       <View style={styles.content}>
         <View style={styles.routeDetails}>
@@ -28,14 +28,14 @@ RouteSuggestionChip.propTypes = {
 export const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 70,
+    height: 60,
     flexDirection: "row",
-    borderWidth: 1.2,
-    borderColor: "#1111",
+    borderWidth: 2,
+    borderColor: "#dae8ff",
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "flex-start",
-    paddingHorizontal: 10,
+    paddingHorizontal: 3,
   },
   iconBox: {
     width: 50,
@@ -43,8 +43,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 60,
-    borderWidth: 1.2,
-    borderColor: "#1111",
   },
   content: {
     flex: 1,
@@ -62,7 +60,7 @@ export const styles = StyleSheet.create({
   detailsTitle: {
     fontSize: 16,
     fontWeight: 400,
-    color: "#5555",
+    color: "#121212",
   },
   detailsDescription: {
     color: "#858585",
