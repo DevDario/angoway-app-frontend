@@ -16,7 +16,7 @@ import { useAuth } from "../../hooks/useAuth"
 export default function ProfilePage() {
   const router = useRouter()
   const { error, useUpdateCredentials } = useProfile()
-  const { logout } = useAuth()
+  const { logout, deleteAccount } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(updateCredentialsSchema),
@@ -150,7 +150,7 @@ export default function ProfilePage() {
 
           <BottomLineButton
             text={"Apagar Conta"}
-            onPress={() => router.navigate("/auth/signup")}
+            onPress={deleteAccount}
             style={styles.boldText}
           />
         </View>

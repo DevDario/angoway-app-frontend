@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { loginUseCase, signupUseCase } from "../app/api/auth";
+import { deleteAccountUseCase, loginUseCase, signupUseCase } from "../app/api/auth";
 import { useEffect, useState } from "react";
 import { getToken, saveToken, removeToken } from "../utils/secureStore";
 import { useRouter } from "expo-router";
@@ -65,10 +65,30 @@ export function useAuth() {
         queryClient.clear();
     }
 
+    const deleteAccount = useMutation({
+        mutationFn: deleteAccountUseCase,
+        onMutate: () => {
+            setIsCheckingAuth(true)
+            setAuthError(null)
+        },
+        onSuccess: async () => {
+            removeToken()
+            router.replace("/auth/login")
+            queryClient.invalidateQueries(["user"])
+        },
+        onError: async (req) => {
+            setAuthError(req.response.data.message)
+        },
+        onSettled: () => {
+            setIsCheckingAuth(false)
+        },
+    })
+
     return {
         useLogin,
         useSignup,
         logout,
+        deleteAccount,
         authToken,
         isCheckingAuth,
         authError
