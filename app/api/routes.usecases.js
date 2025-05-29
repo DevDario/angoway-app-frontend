@@ -46,3 +46,14 @@ export const findSchedulesByRoute = async (query) => {
 
     return response.data;
 };
+
+export const handleSuggestions = async(query) => {
+    const token = await getToken();
+    const response = await api.get(`/routes/suggestions/${query}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    return response.data;
+};

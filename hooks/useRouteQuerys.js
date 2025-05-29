@@ -3,6 +3,7 @@ import {
     findSchedulesByRoute,
     getRoutes,
     getRoutesCount,
+    handleSuggestions,
     queryByOriginOrDestination
 } from "../app/api/routes.usecases";
 
@@ -37,4 +38,13 @@ export const useQuerySchedulesByRoutes = (query) =>
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 10,
         enabled: query.trim().length > 0,
-        });
+    });
+
+export const useGetRouteDetailsSuggestions = (query) =>
+    useQuery({
+        queryKey: ["routes", query],
+        queryFn: () => handleSuggestions(query),
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 10,
+        enabled: query.trim().length > 0,
+    });
