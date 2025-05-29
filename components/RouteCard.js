@@ -1,12 +1,10 @@
-import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import BubbleInfo from "../components/BubbleInfo";
 import RouteChip from "../components/RouteChip";
 import CardSmallChip from "../components/CardSmallChip";
 import { faBusSimple, faHandHoldingDollar, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import PropTypes from "prop-types";
 
-export default function RouteCard({ routeDetails }) {
+export default function RouteCard({ id, destination, estimatedMinutes, estimatedTime, distanceKM, price, suggestedRoute, suggestedRouteDescription, destinationDescription, origin, originDescription }) {
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -14,50 +12,50 @@ export default function RouteCard({ routeDetails }) {
                     <View style={styles.header}>
                         <View style={styles.info}>
                             <View style={styles.infoRoute}>
-                                <Text style={styles.routeText}>{routeDetails.destiny}</Text>
+                                <Text style={styles.routeText}>{destination}</Text>
                             </View>
                             <View style={styles.routeDetails}>
-                                <Text style={styles.detailLabel}>{routeDetails.ATA} Min</Text>
+                                <Text style={styles.detailLabel}>{estimatedMinutes} Min</Text>
 
                                 <View style={styles.separator}></View>
 
                                 <Text style={styles.detailLabel}>
-                                    Chegada às {routeDetails.aproximatelyHour}
+                                    Chegada às {estimatedTime}
                                 </Text>
 
                                 <View style={styles.separator}></View>
 
-                                <Text style={styles.detailLabel}>{routeDetails.Km}</Text>
+                                <Text style={styles.detailLabel}>{distanceKM}</Text>
                             </View>
                         </View>
                         <BubbleInfo
-                            text={routeDetails.price}
-                            key={routeDetails.id}
+                            text={price}
+                            key={id}
                             status={"ativo"}
                             icon={faHandHoldingDollar}
                         />
                     </View>
                     <View style={styles.body}>
                         <RouteChip
-                            title={routeDetails.start}
-                            description={routeDetails.startDescription}
+                            title={origin}
+                            description={originDescription}
                             type="chip"
                         />
 
                         <View style={styles.suggestionContainer}>
                             <CardSmallChip
-                                key={routeDetails.id}
+                                key={id}
                                 icon={faBusSimple}
-                                title={routeDetails.suggestedRoute}
-                                description={routeDetails.suggestedRouteDescription}
+                                title={suggestedRoute}
+                                description={suggestedRouteDescription}
                             />
                         </View>
 
                         <CardSmallChip
-                            key={routeDetails.id}
+                            key={id}
                             icon={faLocationDot}
-                            title={routeDetails.destiny}
-                            description={routeDetails.destinyDescription}
+                            title={destination}
+                            description={destinationDescription}
                         />
                     </View>
                 </View>
@@ -65,10 +63,6 @@ export default function RouteCard({ routeDetails }) {
         </View>
     );
 }
-
-RouteCard.propTypes = {
-    routeDetails: PropTypes.object,
-};
 
 export const styles = StyleSheet.create({
     container: {

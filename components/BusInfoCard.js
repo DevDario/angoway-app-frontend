@@ -8,7 +8,7 @@ import { faUser, faClock } from "@fortawesome/free-regular-svg-icons";
 
 const mockBusDetails = require("../mockdata.json").busDetails
 
-export default function BusInfoCard({ busDetails }) {
+export default function BusInfoCard({ busNIA, driverName, estimatedMinutes, estimatedTime, distanceKM, price, id, routes, seats, driverExperience, stops }) {
     return (
         <View style={styles.container}>
             <View style={styles.card}>
@@ -16,27 +16,27 @@ export default function BusInfoCard({ busDetails }) {
                     <View style={styles.header}>
                         <View style={styles.info}>
                             <View style={styles.infoRoute}>
-                                <Text style={styles.routeText}>{busDetails.number}</Text>
+                                <Text style={styles.routeText}>{busNIA}</Text>
                                 <View style={styles.separator}></View>
-                                <Text style={styles.routeText}>{busDetails.driverName}</Text>
+                                <Text style={styles.routeText}>{driverName}</Text>
                             </View>
                             <View style={styles.routeDetails}>
-                                <Text style={styles.detailLabel}>{busDetails.ATA} Min</Text>
+                                <Text style={styles.detailLabel}>{estimatedMinutes} Min</Text>
 
                                 <View style={styles.separator}></View>
 
                                 <Text style={styles.detailLabel}>
-                                    Chegada às {busDetails.aproximatelyHour}
+                                    Chegada às {estimatedTime}
                                 </Text>
 
                                 <View style={styles.separator}></View>
 
-                                <Text style={styles.detailLabel}>{busDetails.Km} Km</Text>
+                                <Text style={styles.detailLabel}>{distanceKM} Km</Text>
                             </View>
                         </View>
                         <BubbleInfo
-                            text={busDetails.price}
-                            key={busDetails.id}
+                            text={price}
+                            key={id}
                             status={"active"}
                             icon={faHandHoldingDollar}
                         />
@@ -47,18 +47,18 @@ export default function BusInfoCard({ busDetails }) {
                         <View style={styles.contentContainer}>
                             <BusInfoCardDetails
                                 title="Rotas"
-                                data={mockBusDetails.routes.map(r => r + "\n")}
+                                data={routes.map(r => r + "\n") || mockBusDetails.routes.map(r => r + "\n")}
                                 icon={faSignsPost}
 
                             />
                             <BusInfoCardDetails
                                 title="Lugares"
-                                data={mockBusDetails.seats + " lugares"}
+                                data={seats + " lugares" || mockBusDetails.seats + " lugares"}
                                 icon={faUser}
                             />
                             <BusInfoCardDetails
                                 title="Tempo de Chegada"
-                                data={mockBusDetails.ATA + " Minutos"}
+                                data={estimatedMinutes + " Minutos" || mockBusDetails.ATA + " Minutos"}
                                 icon={faClock}
                             />
                         </View>
@@ -67,12 +67,12 @@ export default function BusInfoCard({ busDetails }) {
 
                             <BusInfoCardDetails
                                 title="Motorista"
-                                data={mockBusDetails.driverData}
+                                data={`${driverName + "\n" + driverExperience}` || mockBusDetails.driverData}
                                 icon={faUser}
                             />
                             <BusInfoCardDetails
                                 title="Paragens"
-                                data={mockBusDetails.stops.map(s => s.id + "." + s.name + "\n")}
+                                data={stops.map(s => s.id + "." + s.name + "\n") || mockBusDetails.stops.map(s => s.id + "." + s.name + "\n")}
                                 icon={faLocationDot}
                             />
                         </View>
