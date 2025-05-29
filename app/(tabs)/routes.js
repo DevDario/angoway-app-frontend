@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -38,7 +37,7 @@ export default function RoutesPage() {
         return
       }
       setIsRouteNotFoundModalVisible(false)
-      router.push("/trackingBus")
+      router.push({ pathname: "/trackingBus", params: { routeName: text } })
     }
   }
 
@@ -50,6 +49,12 @@ export default function RoutesPage() {
     <View style={[styles.container]}>
       <View style={styles.header}>
         <Text style={styles.logo}>Angoway®</Text>
+      </View>
+      <View style={styles.header}>
+        <Text style={{
+          fontSize: 22,
+          fontWeight:"bold"
+        }}>{`Onde você deseja \nir hoje ?`}</Text>
       </View>
 
       <View style={styles.searchBarContent}>
@@ -83,22 +88,22 @@ export default function RoutesPage() {
               <FlatList
                 data={queryResults}
                 renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.resultsContainer} key={item.id} onPress={() => setQuery(item.name)}>
+                  <TouchableOpacity style={styles.resultsContainer} key={item.id} onPress={() => handleRouteSearch(item.name)}>
                     <FontAwesomeIcon icon={faArrowRight} color="#0C6BFF" />
                     <Text style={styles.resultsText}>{item.name}</Text>
                   </TouchableOpacity>
                 )}
                 keyExtractor={(item) => item.id}
-                  bounces={true}
-                  ListHeaderComponent={() => (
-                    <Text
-                      style={{
-                        fontSize: 17,
-                        fontWeight: "700"
-                        
-                      }}
-                    >Resultados:</Text>
-                  )}
+                bounces={true}
+                ListHeaderComponent={() => (
+                  <Text
+                    style={{
+                      fontSize: 17,
+                      fontWeight: "700"
+
+                    }}
+                  >Resultados:</Text>
+                )}
               />
             )}
           </View>
@@ -209,7 +214,7 @@ export const styles = StyleSheet.create({
     justifyContent: "flex-start",
     paddingHorizontal: 10,
     backgroundColor: "#FCFCFB",
-    borderRadius:25
+    borderRadius: 25
   },
   resultsText: {
     color: "#0C6BFF",
