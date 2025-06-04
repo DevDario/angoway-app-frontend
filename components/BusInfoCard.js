@@ -47,18 +47,18 @@ export default function BusInfoCard({ busNIA, driverName, estimatedMinutes, esti
                         <View style={styles.contentContainer}>
                             <BusInfoCardDetails
                                 title="Rotas"
-                                data={routes.map(r => r + "\n") || mockBusDetails.routes.map(r => r + "\n")}
+                                data={routes || routes.map(r => r + "\n")}
                                 icon={faSignsPost}
 
                             />
                             <BusInfoCardDetails
                                 title="Lugares"
-                                data={seats + " lugares" || mockBusDetails.seats + " lugares"}
+                                data={seats + " lugares" || undefined + " lugares"}
                                 icon={faUser}
                             />
                             <BusInfoCardDetails
                                 title="Tempo de Chegada"
-                                data={estimatedMinutes + " Minutos" || mockBusDetails.ATA + " Minutos"}
+                                data={estimatedMinutes + " Minutos" || undefined + " Minutos"}
                                 icon={faClock}
                             />
                         </View>
@@ -67,12 +67,12 @@ export default function BusInfoCard({ busNIA, driverName, estimatedMinutes, esti
 
                             <BusInfoCardDetails
                                 title="Motorista"
-                                data={`${driverName + "\n" + driverExperience}` || mockBusDetails.driverData}
+                                data={`${driverName + "\n" + driverExperience}` || undefined }
                                 icon={faUser}
                             />
                             <BusInfoCardDetails
                                 title="Paragens"
-                                data={stops.map(s => s.id + "." + s.name + "\n") || mockBusDetails.stops.map(s => s.id + "." + s.name + "\n")}
+                                data={stops.map(s => `${s.id}. ${s.name}\n`) || undefined }
                                 icon={faLocationDot}
                             />
                         </View>

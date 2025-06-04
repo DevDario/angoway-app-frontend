@@ -103,7 +103,7 @@ export default function TrackingBus() {
                         ) : (
                             <>
                                 <BusInfoCard
-                                    busNIA={busData.busNia || ""}
+                                    busNIA={busData.busNia || "" }
                                     distanceKM={""}
                                     driverExperience={busData.driverExperience}
                                     driverName={busData.driverName}
@@ -111,9 +111,9 @@ export default function TrackingBus() {
                                     estimatedTime={""}
                                     id={busData.busId}
                                     price={"150 KZ"}
-                                    routes={busData.routes || []}
-                                    seats={busData.seats || 0}
-                                    stops={[{}]}
+                                    routes={busData.routes || [] }
+                                    seats={busData.seats }
+                                    stops={busData.stops || [] }
                                     key={"bus-card"}
                                 />
                             </>
