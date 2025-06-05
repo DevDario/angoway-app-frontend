@@ -104,24 +104,6 @@ export default function Login() {
           <ActivityIndicator size="large" color="#007bff" />
         </View>
         }
-
-        <View style={styles.footerButtons}>
-          <Text>Ou</Text>
-
-          <Button
-            text={"Entrar com Facebook"}
-            icon={faFacebook}
-            style={styles.optionLoginButton}
-            onPress={() => router.push("https://facebook.com/oauth")}
-          />
-
-          <Button
-            text={"Entrar com Google"}
-            icon={faGoogle}
-            style={styles.optionLoginButton}
-            onPress={() => router.push("https://google.com/oauth")}
-          />
-        </View>
       </View>
     </ScrollView>
   );

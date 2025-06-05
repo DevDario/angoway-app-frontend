@@ -177,24 +177,6 @@ export default function Signup() {
             onPress={handleSubmit(handleSignup)}
           />
         </View>
-
-        <View style={styles.footerButtons}>
-          <Text>Ou</Text>
-
-          <Button
-            text={"Criar com Facebook"}
-            icon={faFacebook}
-            style={styles.optionLoginButton}
-            onPress={() => router.push("https://facebook.com/oauth")}
-          />
-
-          <Button
-            text={"Criar com Google"}
-            icon={faGoogle}
-            style={styles.optionLoginButton}
-            onPress={() => router.push("https://google.com/oauth")}
-          />
-        </View>
       </View>
     </ScrollView>
   );
