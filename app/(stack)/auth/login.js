@@ -77,6 +77,7 @@ export default function Login() {
                     value={value}
                     onChangeText={onChange}
                     keyboardType={"default"}
+                    isSecureTextEntry={true}
                   />
                   {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
                 </>
