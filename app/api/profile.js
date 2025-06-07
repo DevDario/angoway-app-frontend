@@ -17,7 +17,8 @@ export const updateCredentialsUseCase = async ({ email, number }) => {
 
 export const updateAccessibilityUseCase = async ({ option }) => {
     const token = await getToken()
-    const response = await api.patch("/user/", { option }, {
+    const userId = await getUserId()
+    const response = await api.put(`/user/${userId}`, { option }, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -36,6 +37,17 @@ export const updatePasswordUseCase = async ({ password }) => {
     const response = await api.put(`/user/profile/${userId}`, {
         password
     }, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    return response.data
+}
+
+export const getProfileDetails = async () => {
+    const token = await getToken()
+    const response = await api.get("/user/me", {
         headers: {
             Authorization: `Bearer ${token}`
         }
