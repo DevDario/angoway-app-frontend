@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
 import PropTypes from "prop-types";
 
-export default function Button({ text = "click", onPress, icon, style }) {
+export default function Button({ text = "click", onPress, icon, style,textColor }) {
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       {icon && <FontAwesomeIcon icon={icon} style={{ color: "#0C6DFF" }} />}
-      <Text style={[styles.text]}>{text}</Text>
+      <Text style={{
+        fontWeight: "600",
+        color: textColor
+      }}>{text}</Text>
     </TouchableOpacity>
   );
 }
