@@ -14,10 +14,13 @@ import { useRouter } from "expo-router";
 import { useGetRoutes, useQueryRoutes } from "../../hooks/useRouteQuerys";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import MenuButton from "../../components/MenuButtom";
+import MenuComponent from "../../components/Menu";
 
 export default function RoutesPage() {
   const [query, setQuery] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [isRouteNotFoundModalVisible, setIsRouteNotFoundModalVisible] = useState(false);
 
   const router = useRouter()
@@ -47,13 +50,15 @@ export default function RoutesPage() {
 
   return (
     <View style={[styles.container]}>
+      {isMenuVisible && (<MenuComponent />)}
       <View style={styles.header}>
         <Text style={styles.logo}>Angoway®</Text>
+        <MenuButton onPress={() => setIsMenuVisible(!isMenuVisible)} />
       </View>
       <View style={styles.header}>
         <Text style={{
           fontSize: 22,
-          fontWeight:"bold"
+          fontWeight: "bold"
         }}>{`Onde você deseja \nir hoje ?`}</Text>
       </View>
 
