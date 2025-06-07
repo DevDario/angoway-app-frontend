@@ -7,11 +7,16 @@ import requestLocationPermission from "../../utils/requestLocationPermission";
 import { watchPositionAsync, LocationAccuracy } from "expo-location";
 import { useBusesLocation } from "../../hooks/useBusesLocation";
 import busMarker from "../../assets/marker.png"
+import busStopMarker from "../../assets/busstopicon.png"
+import { useGetStops } from "../../hooks/useStopsQuerys";
+import { useRouter } from "expo-router";
 
 export default function Index() {
+  const router = useRouter()
   const [locationQuery, setLocationQuery] = useState("");
   const [permissionGranted, setPermissionGranted] = useState(false);
   const { buses } = useBusesLocation()
+  const {stops} = useGetStops()
 
   useEffect(() => {
     const requestPermissionForLocation = async () => {
@@ -42,6 +47,7 @@ export default function Index() {
 
   function handleLocationSearch(query) {
     setLocationQuery(query);
+    router.push({ pathname: "/routes", params: {locationQuery: locationQuery}})
   }
 
   return (
@@ -69,9 +75,20 @@ export default function Index() {
             description={
               "Rota:" + bus.route +
               "\n Chega em(est):" + bus.estimatedTime +
-              "\n Motorista" + bus.driverName
+              "\n Motorista" + bus.driverName +" - "+bus.driverExperience
             }
             image={busMarker}
+          />
+        ))}
+        {stops.map((stop) => (
+          <Marker
+            key={stop.id}
+            coordinate={{
+              latitude: stop.lat,
+              longitude: stop.lng
+            }}
+            description={stop.name}
+            image={busStopMarker}
           />
         ))}
       </MapView>
