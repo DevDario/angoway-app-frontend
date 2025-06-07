@@ -3,9 +3,10 @@ import { api } from "./axiosInstance";
 
 export const updateCredentialsUseCase = async ({ email, number }) => {
     const token = await getToken()
-    const response = await api.patch("/profile/", {
-        email: email,
-        number: number
+    const userId = await getUserId()
+    const response = await api.patch(`/user/${userId}`, {
+        email,
+        number
     }, {
         headers: {
             Authorization: `Bearer ${token}`
@@ -15,10 +16,10 @@ export const updateCredentialsUseCase = async ({ email, number }) => {
     return response.data
 }
 
-export const updateAccessibilityUseCase = async ({ option }) => {
+export const updateAccessibilityUseCase = async (disability) => {
     const token = await getToken()
     const userId = await getUserId()
-    const response = await api.put(`/user/${userId}`, { option }, {
+    const response = await api.patch(`/user/${userId}`, { disability }, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -34,7 +35,7 @@ export const updatePasswordUseCase = async ({ password }) => {
 
     if (!userId) throw new Error("User ID not found in token");
 
-    const response = await api.put(`/user/profile/${userId}`, {
+    const response = await api.patch(`/user/profile/${userId}`, {
         password
     }, {
         headers: {
