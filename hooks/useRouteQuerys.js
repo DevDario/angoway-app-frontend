@@ -40,11 +40,11 @@ export const useQuerySchedulesByRoutes = (query) =>
         enabled: query.trim().length > 0,
     });
 
-export const useGetRouteDetailsSuggestions = (query) =>
+export const useGetRouteDetailsSuggestions = (lat,lng) =>
     useQuery({
-        queryKey: ["routes", query],
-        queryFn: () => handleSuggestions(query),
+        queryKey: ["routes", {lat:lat,lng:lng}],
+        queryFn: () => handleSuggestions(lat,lng),
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 10,
-        enabled: query.trim().length > 0,
+        enabled: lat!==undefined,
     });
