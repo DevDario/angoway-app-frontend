@@ -35,7 +35,7 @@ Suggestion.propTypes = {
 
 export const styles = StyleSheet.create({
   button: {
-    width: "max-content",
+    width: "12rem",
     height: 53,
     gap: 10,
     borderRadius: 90,
