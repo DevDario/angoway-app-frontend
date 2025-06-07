@@ -2,9 +2,9 @@ import { TouchableOpacity, StyleSheet } from "react-native"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import { faAlignJustify } from "@fortawesome/free-solid-svg-icons"
 
-export default function MenuButton({ onPress }) {
+export default function MenuButton({ onPress,customStyle }) {
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <TouchableOpacity style={[styles.container,customStyle]} onPress={onPress}>
             <FontAwesomeIcon icon={faAlignJustify} size={17} color="#212121" />
         </TouchableOpacity>
     )
