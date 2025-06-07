@@ -47,9 +47,9 @@ export const findSchedulesByRoute = async (query) => {
     return response.data;
 };
 
-export const handleSuggestions = async(query) => {
+export const handleSuggestions = async(lat,lng) => {
     const token = await getToken();
-    const response = await api.get(`/routes/suggestions/${query}`, {
+    const response = await api.get(`/routes/suggestions?lat=${lat}&lng=${lng}`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
