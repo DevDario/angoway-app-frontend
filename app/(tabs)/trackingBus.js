@@ -11,7 +11,9 @@ import AlertModal from '../../components/AlertModal';
 import { useBusesLocation } from "../../hooks/useBusesLocation";
 import { useLocalSearchParams } from 'expo-router';
 import busMarker from "../../assets/marker.png"
+import busStopMarker from "../../assets/busstopicon.png"
 import { useGetRouteDetailsSuggestions } from '../../hooks/useRouteQuerys';
+import { useGetStops } from '../../hooks/useStopsQuerys';
 
 export default function TrackingBus() {
     const [showBusInfo, setShowBusInfo] = useState(false)
@@ -19,6 +21,7 @@ export default function TrackingBus() {
     const [response, setResponnse] = useState(null)
     const [routeDetails, setRouteDetails] = useState([])
     const { buses } = useBusesLocation()
+    const { stops } = useGetStops()
     const { routeName } = useLocalSearchParams()
 
     const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(-8.8371, 13.2333)
@@ -64,6 +67,17 @@ export default function TrackingBus() {
                         onPress={() => handleShowBusInfo(bus)}
                     />
                 ))}
+                {stops.map((stop) => (
+                    <Marker
+                        key={stop.id}
+                        coordinate={{
+                            latitude: stop.lat,
+                            longitude: stop.lng
+                        }}
+                        description={stop.name}
+                        image={busStopMarker}
+                    />
+                ))}
             </MapView>
 
             <View style={styles.trackingContainer}>
@@ -75,7 +89,7 @@ export default function TrackingBus() {
                     horizontal={true}
                 >
                     {response !== null ? (
-                        <AlertModal 
+                        <AlertModal
                             text={response}
                             type={"warning"}
                         />
