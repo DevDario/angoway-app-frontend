@@ -187,9 +187,9 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   suggestionsLabel: {
-    color: "#3333",
+    color: "#4444",
     fontSize: 15,
-    fontWeight: 300,
+    fontWeight: 400,
   },
   content: {
     width: "100%",

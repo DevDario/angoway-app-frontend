@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   },
   suggestionText: {
     color: "#0C6DFF",
-    fontWeight: 200,
+    fontWeight: 400,
     fontSize:15
   },
   selectedButton: {

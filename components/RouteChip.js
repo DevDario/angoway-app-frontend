@@ -85,10 +85,11 @@ export const styles = StyleSheet.create({
   },
   detailsTitle: {
     fontSize: 16,
-    fontWeight: 500,
+    fontWeight: 400,
   },
   detailsDescription: {
     color: "#858585",
+    fontWeight:"100"
   },
   timeDetails: {
     flexDirection: "row",
@@ -98,7 +99,7 @@ export const styles = StyleSheet.create({
     paddingRight: 2,
   },
   time: {
-    fontSize: 11,
-    fontWeight: 500,
+    fontSize: 13,
+    fontWeight: 300,
   },
 });

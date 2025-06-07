@@ -25,13 +25,13 @@ export default function ScheduleCard({ routeDetails, routeStops, empty }) {
 
                     <View style={styles.separator}></View>
 
-                    <Text style={styles.detailLabel}>
+                    <Text style={styles.lighterDetailLabel}>
                       Chegada às {formatDate(routeDetails.arrivalTime)}
                     </Text>
 
                     <View style={styles.separator}></View>
 
-                    <Text style={styles.detailLabel}>{routeDetails.distanceKM} Km</Text>
+                    <Text style={styles.lighterDetailLabel}>{routeDetails.distanceKM} Km</Text>
                   </>
                 )}
               </View>
@@ -134,7 +134,8 @@ export const styles = StyleSheet.create({
   },
   routeText: {
     fontSize: 19,
-    fontWeight: 700,
+    fontWeight: 200,
+    flexWrap: "wrap",
   },
   routeDetails: {
     flexDirection: "row",
@@ -142,7 +143,11 @@ export const styles = StyleSheet.create({
     gap: 5,
   },
   detailLabel: {
-    fontWeight: 300,
+    fontWeight: 400,
+  },
+  lighterDetailLabel: {
+    color: "#858585",
+    fontWeight:"200"
   },
   separator: {
     height: 2,

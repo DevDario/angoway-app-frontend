@@ -134,9 +134,9 @@ export const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   suggestionsLabel: {
-    color: "#3333",
+    color: "#4444",
     fontSize: 15,
-    fontWeight: 300,
+    fontWeight: 400,
   },
   mainContent: {
     width: "100%",
