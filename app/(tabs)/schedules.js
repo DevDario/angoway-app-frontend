@@ -5,10 +5,13 @@ import Suggestion from "../../components/Suggestion";
 import ScheduleCard from "../../components/ScheduleCard";
 import { useState } from "react";
 import { useGetRoutes, useQuerySchedulesByRoutes } from "../../hooks/useRouteQuerys";
+import MenuButton from "../../components/MenuButtom";
+import MenuComponent from "../../components/Menu";
 
 export default function SchedulesPage() {
   const [routeQuery, setRouteQuery] = useState("");
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
+  const [isMenuVisible, setIsMenuVisible] = useState(false)
 
   const { data: routes } = useGetRoutes()
   const { data: queryResult } = useQuerySchedulesByRoutes(routeQuery)
@@ -32,8 +35,10 @@ export default function SchedulesPage() {
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
     >
+      {isMenuVisible && (<MenuComponent />)}
       <View style={styles.header}>
         <Text style={styles.logo}>Angoway® </Text>
+        <MenuButton onPress={() => setIsMenuVisible(!isMenuVisible)} />
       </View>
 
       <View style={styles.content}>
