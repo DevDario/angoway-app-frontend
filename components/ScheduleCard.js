@@ -8,7 +8,7 @@ import { formatDate } from "../utils/datetime-formatter"
 
 
 
-export default function ScheduleCard({ routeDetails, empty }) {
+export default function ScheduleCard({ routeDetails, routeStops, empty }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
@@ -37,9 +37,9 @@ export default function ScheduleCard({ routeDetails, empty }) {
               </View>
             </View>
             <BubbleInfo
-              text={routeDetails.status === "active" ? "ativo": routeDetails.status}
+              text={routeDetails.status === "active" ? "ativo" : routeDetails.status}
               key={routeDetails.id}
-              status={routeDetails.status === "active" ? "ativo": routeDetails.status}
+              status={routeDetails.status === "active" ? "ativo" : routeDetails.status}
             />
           </View>
           {empty ? (
@@ -57,18 +57,18 @@ export default function ScheduleCard({ routeDetails, empty }) {
               />
 
               <View style={styles.stopsContainer}>
+                <Text style={styles.stopsText}>Paragens Secundárias</Text>
                 {
-                  Array.isArray(routeDetails.stops) && routeDetails.stops.length > 0 ? (
+                  Array.isArray(routeStops) && routeStops.length > 0 ? (
 
-                    routeDetails.stops.map((stop, index) => (
-                      <>
-                        <Text style={styles.stopsText}>Paragens Secundárias</Text>
+                    routeStops.map((routeStop, index) => (
+                      <View>
                         <CardSmallChip
                           key={index}
                           icon={faBusSimple}
-                          title={stop.name}
+                          title={routeStop.stop.name}
                         />
-                      </>
+                      </View>
                     ))
 
                   ) : (

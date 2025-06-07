@@ -73,6 +73,7 @@ export default function SchedulesPage() {
                     <ScheduleCard
                       key={schedule.id}
                       routeDetails={schedule}
+                      routeStops={schedule.route.routeStops}
                     />
                   ))
                 ) : (
