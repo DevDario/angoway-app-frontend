@@ -67,7 +67,7 @@ export default function SchedulesPage() {
             </View>
           ) : (
             fetchedRoutes.map((route) => (
-              <View key={route.id} style={{ width: '100%' }}>
+              <View key={route.id} style={{ width: '100%', display: "flex", alignItems: "center", alignContent: "center" }}>
                 {route.schedules && route.schedules.length > 0 ? (
                   route.schedules.map((schedule) => (
                     <ScheduleCard
