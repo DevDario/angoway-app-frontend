@@ -47,6 +47,7 @@ export default function About() {
                     text="Voltar"
                     onPress={() => router.navigate("/profile")}
                     style={styles.button}
+                    textColor={"#FFF"}
                 />
             </View>
         </View>

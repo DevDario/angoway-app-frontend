@@ -107,6 +107,7 @@ export default function ProfilePage() {
             text="Salvar Alterações"
             onPress={handleSubmit(handleCredentialsUpdate)}
             style={styles.button}
+            textColor={"#FFF"}
           />
         </View>
 

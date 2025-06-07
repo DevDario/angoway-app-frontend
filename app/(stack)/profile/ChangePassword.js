@@ -115,6 +115,7 @@ export default function ChangePassword() {
                     text="Salvar Alterações"
                     onPress={handleSubmit(handlePasswordUpdate)}
                     style={styles.button}
+                    textColor={"#FFF"}
                 />
             </View>
         </View>

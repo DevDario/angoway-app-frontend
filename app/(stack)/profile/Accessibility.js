@@ -72,6 +72,7 @@ export default function Accessibility() {
                     text="Salvar Alterações"
                     onPress={handleSaveModifications}
                     style={styles.button}
+                    textColor={"#FFF"}
                 />
             </View>
         </View>
