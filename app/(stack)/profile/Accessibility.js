@@ -2,10 +2,10 @@ import { useRouter } from "expo-router";
 import { View, Text, StyleSheet } from "react-native";
 import ReturnButton from "../../../components/ReturnButton";
 import Button from "../../../components/Button";
-import React, { useState } from "react";
+import { useState } from "react";
 import AccessibilityItem from "../../../components/AccessibilityItem";
 import AlertModal from "../../../components/AlertModal";
-import { useProfile } from "../../../hooks/useProfile";
+import { useUpdateAccessibility } from "../../../hooks/useProfile"
 
 const options = [
     {
@@ -33,14 +33,10 @@ const options = [
 export default function Accessibility() {
     const router = useRouter()
     const [selectedOption, setSelectedOption] = useState(null)
-    const { useUpdateAccessibility, authError } = useProfile()
+    const { mutateAsync: update, successMessage, errorMessage } = useUpdateAccessibility()
 
-    function handleOptionSelection(item) {
-        setSelectedOption(item)
-    }
-
-    function handleSaveModifications(data) {
-        useUpdateAccessibility.mutate(data)
+    async function handleSaveModifications(disability) {
+        await update(disability)
     }
 
     return (
@@ -55,22 +51,29 @@ export default function Accessibility() {
                         <AccessibilityItem
                             text={option.name}
                             isSelected={option.name === selectedOption}
-                            onPress={() => handleOptionSelection(option.name)}
+                            onPress={() => setSelectedOption(option.name)}
                             key={option.id}
                         />
                     ))}
                 </View>
 
-                {authError !== null && <View>
+                {errorMessage && (
                     <AlertModal
-                        text={authError}
+                        text={errorMessage}
                         type={"error"}
                     />
-                </View>}
+                )}
+
+                {successMessage && (
+                    <AlertModal
+                        text={successMessage}
+                        type={"success"}
+                    />
+                )}
 
                 <Button
                     text="Salvar Alterações"
-                    onPress={handleSaveModifications}
+                    onPress={() => handleSaveModifications(selectedOption)}
                     style={styles.button}
                     textColor={"#FFF"}
                 />

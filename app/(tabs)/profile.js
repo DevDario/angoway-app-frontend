@@ -10,12 +10,12 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updateCredentialsSchema } from "../../schemas/updateCredentialsSchema";
 import BottomLineButton from "../../components/BottomLineButton";
-import { useProfile } from "../../hooks/useProfile";
+import { useUpdateCredentials } from "../../hooks/useProfile";
 import { useAuth } from "../../hooks/useAuth"
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { error, useUpdateCredentials } = useProfile()
+  const { mutateAsync: update, successMessage, errorMessage } = useUpdateCredentials()
   const { logout, deleteAccount } = useAuth()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -27,8 +27,8 @@ export default function ProfilePage() {
     },
   })
 
-  function handleCredentialsUpdate(data) {
-    useUpdateCredentials.mutate(data)
+  async function handleCredentialsUpdate(data) {
+    await update(data)
   }
 
   return (
@@ -94,13 +94,18 @@ export default function ProfilePage() {
             />
           </View>
 
-          {error !== null && (
-            <View>
+          {successMessage && (
               <AlertModal
-                text={error}
-                type={"warning"}
+                text={successMessage}
+                type={"success"}
               />
-            </View>
+          )}
+
+          {errorMessage && (
+            <AlertModal
+              text={errorMessage}
+              type={"error"}
+            />
           )}
 
           <Button

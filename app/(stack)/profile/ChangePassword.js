@@ -1,20 +1,18 @@
 import { useRouter } from "expo-router";
 import { View, Text, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import ReturnButton from "../../../components/ReturnButton";
-import React, { useState } from "react";
 import Button from "../../../components/Button";
 import Input from "../../../components/input";
+import React from "react";
 import AlertModal from "../../../components/AlertModal";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { updatePasswordSchema } from "../../../schemas/updatePasswordSchema";
-import { useProfile } from "../../../hooks/useProfile";
+import { useUpdatePassword } from "../../../hooks/useProfile";
 
 export default function ChangePassword() {
     const router = useRouter()
-    const [isModalVisible, setIsModalVisible] = useState(false)
-    const { useUpdatePassword, success } = useProfile()
-    const { isPending } = useUpdatePassword
+    const { mutateAsync: update, successMessage, errorMessage,isPending } = useUpdatePassword()
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(updatePasswordSchema),
@@ -25,10 +23,10 @@ export default function ChangePassword() {
         },
     })
 
-    function handlePasswordUpdate() {
-        useUpdatePassword.mutateAsync({ password: control._formValues["password"] })
+    async function handlePasswordUpdate() {
+        await update({ password: control._formValues["password"] })
 
-        if (success !== null) {
+        if (successMessage) {
             setIsModalVisible(true)
         }
     }
@@ -103,10 +101,19 @@ export default function ChangePassword() {
                 </View>
 
                 {
-                    isModalVisible && (
+                    successMessage && (
                         <AlertModal
                             type={"success"}
-                            text={`${success}`}
+                            text={`${successMessage}`}
+                        />
+                    )
+                }
+
+                {
+                    errorMessage && (
+                        <AlertModal
+                            type={"error"}
+                            text={`${errorMessage}`}
                         />
                     )
                 }
