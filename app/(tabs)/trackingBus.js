@@ -7,6 +7,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import RouteCard from '../../components/RouteCard';
 import { useEffect, useState } from 'react';
 import BusInfoCard from '../../components/BusInfoCard';
+import AlertModal from '../../components/AlertModal';
 import { useBusesLocation } from "../../hooks/useBusesLocation";
 import { useLocalSearchParams } from 'expo-router';
 import busMarker from "../../assets/marker.png"
@@ -15,17 +16,20 @@ import { useGetRouteDetailsSuggestions } from '../../hooks/useRouteQuerys';
 export default function TrackingBus() {
     const [showBusInfo, setShowBusInfo] = useState(false)
     const [busData, setBusData] = useState(null)
+    const [response, setResponnse] = useState(null)
     const [routeDetails, setRouteDetails] = useState([])
     const { buses } = useBusesLocation()
     const { routeName } = useLocalSearchParams()
 
-    const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(routeName)
+    const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(-8.8371, 13.2333)
 
     useEffect(() => {
         if (suggestionsData !== undefined || !isError) {
             const dataArr = Array.isArray(suggestionsData) ? suggestionsData : []
             setRouteDetails(dataArr[0])
         }
+
+        setResponnse(`Sem sugestões no momento.Verifique os horários.`)
     }, [])
 
     async function handleShowBusInfo(data) {
@@ -34,7 +38,7 @@ export default function TrackingBus() {
     }
 
     return (
-        <View style={styles.container} onTouchStart={() => setShowBusInfo(false)}>
+        <View style={styles.container}>
             <View style={styles.pageHeader}>
                 <ReturnButton onPress={() => router.navigate("/routes")} />
                 <Text style={styles.pageHeaderText}>Rota do Autocarro</Text>
@@ -70,21 +74,27 @@ export default function TrackingBus() {
                     style={styles.scrollView}
                     horizontal={true}
                 >
-                    <RouteCard
-                        destination={routeDetails.destination}
-                        destinationDescription={"Seu Destino"}
-                        distanceKM={""}
-                        estimatedMinutes={""}
-                        estimatedTime={""}
-                        id={routeDetails.id}
-                        origin={routeDetails.origin}
-                        originDescription={"Paragem mais próxima de sí"}
-                        price={"150 KZ"}
-                        suggestedRoute={routeDetails.name}
-                        suggestedRouteDescription={"Rota do autocarro à apanhar"}
-                        key={"route-details-card"}
-                    />
-
+                    {response !== null ? (
+                        <AlertModal 
+                            text={response}
+                            type={"warning"}
+                        />
+                    ) : (
+                        <RouteCard
+                            destination={routeDetails.destination}
+                            destinationDescription={"Seu Destino"}
+                            distanceKM={""}
+                            estimatedMinutes={""}
+                            estimatedTime={""}
+                            id={routeDetails.id}
+                            origin={routeDetails.origin}
+                            originDescription={"Paragem mais próxima de sí"}
+                            price={"150 KZ"}
+                            suggestedRoute={routeDetails.name}
+                            suggestedRouteDescription={"Rota do autocarro à apanhar"}
+                            key={"route-details-card"}
+                        />
+                    )}
 
                     <View style={styles.busInfoContainer}>
                         {showBusInfo !== true ? (
@@ -103,7 +113,7 @@ export default function TrackingBus() {
                         ) : (
                             <>
                                 <BusInfoCard
-                                    busNIA={busData.busNia || "" }
+                                    busNIA={busData.busNia || ""}
                                     distanceKM={""}
                                     driverExperience={busData.driverExperience}
                                     driverName={busData.driverName}
@@ -111,9 +121,9 @@ export default function TrackingBus() {
                                     estimatedTime={""}
                                     id={busData.busId}
                                     price={"150 KZ"}
-                                    routes={busData.routes || [] }
-                                    seats={busData.seats }
-                                    stops={busData.stops || [] }
+                                    routes={busData.routes || []}
+                                    seats={busData.seats}
+                                    stops={busData.stops || []}
                                     key={"bus-card"}
                                 />
                             </>
