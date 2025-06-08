@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, StyleSheet, View, ScrollView } from "react-native";
+import { Text, StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import Suggestion from "../../components/Suggestion";
 import ScheduleCard from "../../components/ScheduleCard";
@@ -12,6 +12,7 @@ export default function SchedulesPage() {
   const [routeQuery, setRouteQuery] = useState("");
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [isMenuVisible, setIsMenuVisible] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const { data: routes } = useGetRoutes()
   const { data: queryResult } = useQuerySchedulesByRoutes(routeQuery)
@@ -21,6 +22,7 @@ export default function SchedulesPage() {
 
   function handleRouteSearch(text) {
     setRouteQuery(text);
+    setIsLoading(!isLoading)
   }
 
   function handleSuggestionSelect(selectedItem) {
@@ -64,7 +66,7 @@ export default function SchedulesPage() {
         </View>
 
         <View style={styles.mainContent}>
-          {fetchedRoutes.length === 0 ? (
+          {fetchedRoutes.length === 0 && isLoading === false ? (
             <View style={{
               display: "flex", alignItems: "center", alignContent: "center", marginVertical: 80
             }}>
@@ -82,14 +84,21 @@ export default function SchedulesPage() {
                     />
                   ))
                 ) : (
-                    <ScheduleCard
-                      key={route.id}
-                      routeDetails={route}
-                      empty={true}
-                    />
+                  <ScheduleCard
+                    key={route.id}
+                    routeDetails={route}
+                    empty={true}
+                  />
                 )}
               </View>
             ))
+          )}
+
+          {isLoading && (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator style={{ justifyContent: "center", alignItems: "center", backgroundColor: "#FCFCB" }} size="large" color="#0C6BFF" />
+              <Text style={styles.permissionText}>Carregando</Text>
+            </View>
           )}
         </View>
       </View>
@@ -148,5 +157,18 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "column",
     gap: 2,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    gap: 10,
+    marginTop:120
+  },
+  permissionText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#0C6BFF"
   },
 });
