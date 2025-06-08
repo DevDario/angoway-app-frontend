@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MenuButton from "../../components/MenuButtom";
 import MenuComponent from "../../components/Menu";
+import QueryResultChip from "../../components/QueryResultChip";
 
 export default function RoutesPage() {
   const [query, setQuery] = useState("");
@@ -93,9 +94,8 @@ export default function RoutesPage() {
               <FlatList
                 data={queryResults}
                 renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.resultsContainer} key={item.id} onPress={() => handleRouteSearch(item.name)}>
-                    <FontAwesomeIcon icon={faArrowRight} color="#0C6BFF" />
-                    <Text style={styles.resultsText}>{item.name}</Text>
+                  <TouchableOpacity key={item.id} onPress={() => handleRouteSearch(item.name)}>
+                    <QueryResultChip result={item.name} key={item.id} status={item.status} numBuses={item.buses.length} numStops={item.routeStops.length} />
                   </TouchableOpacity>
                 )}
                 keyExtractor={(item) => item.id}
