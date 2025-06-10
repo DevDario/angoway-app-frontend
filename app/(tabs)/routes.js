@@ -6,7 +6,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import SearchBar from "../../components/SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RouteSuggestionChip from "../../components/RouteSuggestionChip";
 import AlertModal from "../../components/AlertModal";
 import Button from "../../components/Button";
@@ -17,6 +17,8 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MenuButton from "../../components/MenuButtom";
 import MenuComponent from "../../components/Menu";
 import QueryResultChip from "../../components/QueryResultChip";
+import { useGetProfileDetails } from "../../hooks/useProfileQuerys";
+import { saveProfileData } from "../../utils/secureStore";
 
 export default function RoutesPage() {
   const [query, setQuery] = useState("");
@@ -27,8 +29,17 @@ export default function RoutesPage() {
   const router = useRouter()
   const { data: routes } = useGetRoutes()
   const { data: queryResults = [] } = useQueryRoutes(query)
+  const { data: profileDetails } = useGetProfileDetails()
 
   const routesSuggestionsList = Array.isArray(routes) ? routes.slice(0, 3) : []
+
+  useEffect(() => {
+    async function storeProfileData() {
+      return await saveProfileData(profileDetails)
+    }
+
+    storeProfileData()
+  },[profileDetails])
 
   function handleRouteSearch(text) {
 
