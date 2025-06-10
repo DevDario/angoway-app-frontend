@@ -95,10 +95,10 @@ export default function ProfilePage() {
           </View>
 
           {successMessage && (
-              <AlertModal
-                text={successMessage}
-                type={"success"}
-              />
+            <AlertModal
+              text={successMessage}
+              type={"success"}
+            />
           )}
 
           {errorMessage && (
