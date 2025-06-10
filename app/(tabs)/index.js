@@ -49,8 +49,14 @@ export default function Index() {
   }
 
   function handleLocationSearch(query) {
-    setLocationQuery(query);
+    setLocationQuery(query)
 
+  }
+
+  function handleKeyPress(event) {
+    if (event.nativeEvent.key === "Enter" && locationQuery.trim() !== "") {
+      router.push({ pathname: "/routes", params: { locationQuery: locationQuery } });
+    }
   }
 
   return (
@@ -104,6 +110,7 @@ export default function Index() {
             style={styles.searchBar}
             onChangeText={handleLocationSearch}
             value={locationQuery}
+            onKeyPress={handleKeyPress}
           />
           <MenuButton onPress={() => setIsMenuVisible(!isMenuVisible)} customStyle={{
             marginLeft: "-18rem", marginTop: ".7rem"

@@ -10,10 +10,8 @@ import { useEffect, useState } from "react";
 import RouteSuggestionChip from "../../components/RouteSuggestionChip";
 import AlertModal from "../../components/AlertModal";
 import Button from "../../components/Button";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useGetRoutes, useQueryRoutes } from "../../hooks/useRouteQuerys";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MenuButton from "../../components/MenuButtom";
 import MenuComponent from "../../components/Menu";
 import QueryResultChip from "../../components/QueryResultChip";
@@ -30,6 +28,7 @@ export default function RoutesPage() {
   const { data: routes } = useGetRoutes()
   const { data: queryResults = [] } = useQueryRoutes(query)
   const { data: profileDetails } = useGetProfileDetails()
+  const { locationQuery } = useLocalSearchParams()
 
   const routesSuggestionsList = Array.isArray(routes) ? routes.slice(0, 3) : []
 
@@ -39,7 +38,13 @@ export default function RoutesPage() {
     }
 
     storeProfileData()
-  },[profileDetails])
+  }, [profileDetails])
+
+  useEffect(() => {
+    if (locationQuery) {
+      setQuery(locationQuery);
+    }
+  }, [locationQuery]);
 
   function handleRouteSearch(text) {
 
