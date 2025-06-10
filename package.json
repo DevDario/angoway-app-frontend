@@ -50,7 +50,8 @@
     "zod": "3.24.2",
     "expo-dev-client": "~5.1.8",
     "expo-auth-session": "~6.1.5",
-    "expo-web-browser": "~14.1.6"
+    "expo-web-browser": "~14.1.6",
+    "expo-font": "~13.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
