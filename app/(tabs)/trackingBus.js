@@ -138,7 +138,7 @@ export default function TrackingBus() {
                                     routes={busData.routes || []}
                                     seats={busData.seats}
                                     stops={busData.stops || []}
-                                    key={"bus-card"}
+                                    key={`bus-${busData.busNia}-card`}
                                 />
                             </>
                         )}
