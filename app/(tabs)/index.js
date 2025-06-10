@@ -1,8 +1,7 @@
 import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { useState, useEffect } from "react";
-import MapView from "react-native-maps";
-import { Marker } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import requestLocationPermission from "../../utils/requestLocationPermission";
 import { watchPositionAsync, LocationAccuracy } from "expo-location";
 import { useBusesLocation } from "../../hooks/useBusesLocation";
@@ -10,13 +9,17 @@ import busMarker from "../../assets/marker.png"
 import busStopMarker from "../../assets/busstopicon.png"
 import { useGetStops } from "../../hooks/useStopsQuerys";
 import { useRouter } from "expo-router";
+import MenuButton from "../../components/MenuButtom";
+import React from "react";
+import MenuComponent from "../../components/Menu";
 
 export default function Index() {
   const router = useRouter()
   const [locationQuery, setLocationQuery] = useState("");
   const [permissionGranted, setPermissionGranted] = useState(false);
+  const [isMenuVisible, setIsMenuVisible] = useState(false)
   const { buses } = useBusesLocation()
-  const {stops} = useGetStops()
+  const { stops } = useGetStops()
 
   useEffect(() => {
     const requestPermissionForLocation = async () => {
@@ -47,7 +50,7 @@ export default function Index() {
 
   function handleLocationSearch(query) {
     setLocationQuery(query);
-    router.push({ pathname: "/routes", params: {locationQuery: locationQuery}})
+
   }
 
   return (
@@ -75,7 +78,7 @@ export default function Index() {
             description={
               "Rota:" + bus.route +
               "\n Chega em(est):" + bus.estimatedTime +
-              "\n Motorista" + bus.driverName +" - "+bus.driverExperience
+              "\n Motorista" + bus.driverName + " - " + bus.driverExperience
             }
             image={busMarker}
           />
@@ -93,13 +96,19 @@ export default function Index() {
         ))}
       </MapView>
 
+      {isMenuVisible && (<MenuComponent />)}
       <View style={styles.header}>
-        <SearchBar
-          placeholder={"onde vamos hoje?"}
-          style={styles.searchBar}
-          onChangeText={handleLocationSearch}
-          value={locationQuery}
-        />
+        <View style={styles.headerContainer}>
+          <SearchBar
+            placeholder={"onde vamos hoje?"}
+            style={styles.searchBar}
+            onChangeText={handleLocationSearch}
+            value={locationQuery}
+          />
+          <MenuButton onPress={() => setIsMenuVisible(!isMenuVisible)} customStyle={{
+            marginLeft: "-18rem", marginTop: ".7rem"
+          }} />
+        </View>
       </View>
 
     </View>
@@ -126,8 +135,15 @@ export const styles = StyleSheet.create({
     position: "absolute",
     top: 30,
     width: "100%",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column",
+  },
+  headerContainer: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
   },
   searchBar: {
     width: "90%",
