@@ -181,8 +181,9 @@ export const styles = StyleSheet.create({
   },
   pageHeaderText: {
     fontSize: 16,
-    fontWeight: "700",
-    paddingLeft: 85
+    fontFamily: "Inter-Bold",
+    paddingLeft: 85,
+    color: "#212121",
   },
   detailsHeader: {
     width: "100%",
@@ -196,7 +197,8 @@ export const styles = StyleSheet.create({
   },
   username: {
     fontSize: 22,
-    fontWeight: "700",
+    fontFamily: "Inter-Bold",
+    color: "#212121",
   },
   credentialsContent: {
     width: "100%",
@@ -209,11 +211,12 @@ export const styles = StyleSheet.create({
   },
   inputLabel: {
     color: "#212121",
-    fontWeight: 500
+    fontWeight: 500,
+    fontFamily: "Inter-Regular",
   },
   sectionLabel: {
     color: "#444",
-    fontWeight: 400
+    fontFamily: "Inter-Bold",
   },
   button: {
     width: "100%",

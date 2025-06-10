@@ -7,7 +7,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 export default function BottomLineButton({ onPress, style, text }) {
     return (
         <TouchableOpacity style={[styles.container,style]} onPress={onPress}>
-            <Text style={[style]}>{text}</Text>
+            <Text style={[style,{fontFamily: "Inter-Regular"}]}>{text}</Text>
             <FontAwesomeIcon icon={faChevronRight} size={15} color="#212121"/>
         </TouchableOpacity>
     );

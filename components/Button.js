@@ -9,7 +9,8 @@ export default function Button({ text = "click", onPress, icon, style,textColor 
       {icon && <FontAwesomeIcon icon={icon} style={{ color: "#0C6DFF" }} />}
       <Text style={{
         fontWeight: "600",
-        color: textColor
+        color: textColor,
+        fontFamily: "Inter-Regular",
       }}>{text}</Text>
     </TouchableOpacity>
   );

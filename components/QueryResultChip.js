@@ -81,7 +81,7 @@ export const styles = StyleSheet.create({
     },
     routeText: {
         fontSize: 19,
-        fontWeight: 700,
+        fontFamily: "Inter-Bold",
     },
     routeDetails: {
         flexDirection: "row",
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
         gap: 5,
     },
     detailLabel: {
-        fontWeight: 400,
+        fontFamily: "Inter-Light",
     },
     separator: {
         height: 2,

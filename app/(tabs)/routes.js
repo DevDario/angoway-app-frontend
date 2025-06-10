@@ -69,8 +69,8 @@ export default function RoutesPage() {
       </View>
       <View style={styles.header}>
         <Text style={{
-          fontSize: 22,
-          fontWeight: "bold"
+          fontSize: 24,
+          fontFamily: "Inter-Bold",
         }}>{`Onde você deseja \nir hoje ?`}</Text>
       </View>
 
@@ -115,8 +115,7 @@ export default function RoutesPage() {
                   <Text
                     style={{
                       fontSize: 17,
-                      fontWeight: "700"
-
+                      fontFamily: "Inter-Light",
                     }}
                   >Resultados:</Text>
                 )}
@@ -173,6 +172,7 @@ export const styles = StyleSheet.create({
     color: "#0C6DFF",
     fontSize: 20,
     fontWeight: 700,
+    fontFamily: "Inter-Bold",
   },
   searchBarContent: {
     width: "100%",
@@ -206,6 +206,7 @@ export const styles = StyleSheet.create({
     color: "#4444",
     fontSize: 15,
     fontWeight: 400,
+    fontFamily: "Inter-Light",
   },
   content: {
     width: "100%",
@@ -232,9 +233,4 @@ export const styles = StyleSheet.create({
     backgroundColor: "#FCFCFB",
     borderRadius: 25
   },
-  resultsText: {
-    color: "#0C6BFF",
-    fontWeight: "bold",
-    fontSize: 20
-  }
 });

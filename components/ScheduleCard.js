@@ -133,8 +133,9 @@ export const styles = StyleSheet.create({
     gap: 5,
   },
   routeText: {
+    color: "#212121",
     fontSize: 19,
-    fontWeight: 200,
+    fontFamily: "Inter-Bold",
     flexWrap: "wrap",
   },
   routeDetails: {
@@ -143,11 +144,11 @@ export const styles = StyleSheet.create({
     gap: 5,
   },
   detailLabel: {
-    fontWeight: 400,
+    fontFamily: "Inter-Light",
   },
   lighterDetailLabel: {
     color: "#858585",
-    fontWeight:"200"
+    fontFamily: "Inter-Light",
   },
   separator: {
     height: 2,
@@ -167,7 +168,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10,
     color: "#858585",
-    fontWeight: 300,
+    fontFamily: "Inter-Regular",
     fontSize: 14,
   },
 });

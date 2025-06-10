@@ -80,9 +80,11 @@ export const styles = StyleSheet.create({
   },
   detailsTitle: {
     fontSize: 14,
-    fontWeight: 400,
+    fontFamily: "Inter-Regular",
+    color: "#212121",
   },
   detailsDescription: {
     color: "#858585",
+    fontFamily: "Inter-Light",
   },
 });

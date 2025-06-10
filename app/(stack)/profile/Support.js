@@ -15,7 +15,7 @@ export default function Support() {
             </View>
 
             <View style={styles.pageTitle}>
-                <Text style={[styles.logo]}>Apoio ao Cliente</Text>
+                <Text style={[styles.logo,{fontFamily:"Inter-Medium"}]}>Apoio ao Cliente</Text>
             </View>
 
             <View style={styles.aboutContent}>
@@ -65,7 +65,7 @@ export const styles = StyleSheet.create({
     logo: {
         color: "#0C6DFF",
         fontSize: 20,
-        fontWeight: 700,
+        fontFamily: "Inter-Bold",
     },
     separator: {
         height: 2,
@@ -77,11 +77,12 @@ export const styles = StyleSheet.create({
     description: {
         fontSize: 15,
         color: "#232323",
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: "Inter-Regular",
     },
     pageHeaderText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: "Inter-Bold",
         paddingLeft: 85
     },
     aboutContent: {

@@ -70,7 +70,7 @@ export default function SchedulesPage() {
             <View style={{
               display: "flex", alignItems: "center", alignContent: "center", marginVertical: 80
             }}>
-              <Text style={{ color: '#212121', fontSize: 19, fontWeight: "bold" }}>Nenhum Resultado</Text>
+              <Text style={{ color: '#212121', fontSize: 19, fontFamily: "Inter-Regular" }}>Nenhum Resultado</Text>
             </View>
           ) : (
             fetchedRoutes.map((route) => (
@@ -123,7 +123,7 @@ export const styles = StyleSheet.create({
   logo: {
     color: "#0C6DFF",
     fontSize: 20,
-    fontWeight: 700,
+    fontFamily: "Inter-Bold",
   },
   content: {
     width: "100%",
@@ -150,7 +150,7 @@ export const styles = StyleSheet.create({
   suggestionsLabel: {
     color: "#4444",
     fontSize: 15,
-    fontWeight: 400,
+    fontFamily: "Inter-Light",
   },
   mainContent: {
     width: "100%",
@@ -168,7 +168,7 @@ export const styles = StyleSheet.create({
   },
   permissionText: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontFamily: "Inter-Medium",
     color: "#0C6BFF"
   },
 });

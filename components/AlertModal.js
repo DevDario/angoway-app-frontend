@@ -66,10 +66,12 @@ const styles = StyleSheet.create({
         color: "#212121",
         fontWeight: "800",
         fontSize: 19,
+        fontFamily: "Inter-Regular",
     },
     buttonText: {
         textAlign: "center",
         fontWeight: "700",
         color: "#fff",
+        fontFamily: "Inter-Regular",
     }
 })

@@ -43,7 +43,7 @@ export default function ChangePassword() {
                 <ActivityIndicator style={{ justifyContent: "center", alignItems: "center", backgroundColor: "#FCFCB" }} size="large" color="#0C6BFF" />
                 <Text style={{
                     fontSize: 14,
-                    fontWeight: "bold",
+                    fontFamily: "Inter-Medium",
                     color: "#0C6BFF"
                 }}>Guardando Alterações</Text>
             </View>
@@ -143,7 +143,7 @@ export const styles = StyleSheet.create({
     },
     pageHeaderText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: "Inter-Bold",
         paddingLeft: 85
     },
     credentialsContent: {
@@ -158,7 +158,7 @@ export const styles = StyleSheet.create({
     },
     inputLabel: {
         color: "#212121",
-        fontWeight: 500
+        fontFamily: "Inter-Medium"
     },
     button: {
         width: "100%",
@@ -174,6 +174,7 @@ export const styles = StyleSheet.create({
     },
     error: {
         color: "#D9534F",
-        fontSize: 13
+        fontSize: 13,
+        fontFamily: "Inter-Regular",
     },
 })

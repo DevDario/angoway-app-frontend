@@ -29,7 +29,7 @@ export default function About() {
                 </Text>
                 <View style={{ flexDirection: "column", gap: 5 }}>
                     <Text style={[styles.description]}>Mais informações</Text>
-                    <Link style={{ fontWeight: 700, fontSize: 17 }}
+                    <Link style={{ fontFamily: "Inter-Bold", fontSize: 17 }}
                         href={"https://google.com/?q=urban+transport+app"}
                     >www.angoway.co.ao
                     </Link>
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
     logo: {
         color: "#0C6DFF",
         fontSize: 20,
-        fontWeight: 700,
+        fontFamily: "Inter-Bold",
     },
     separator: {
         height: 2,
@@ -86,11 +86,12 @@ export const styles = StyleSheet.create({
     description: {
         fontSize: 15,
         color: "#232323",
-        textAlign: "center"
+        textAlign: "center",
+        fontFamily: "Inter-Regular",
     },
     pageHeaderText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: "Inter-Bold",
         paddingLeft: 85
     },
     aboutContent: {

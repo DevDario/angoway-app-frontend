@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     },
     pageHeaderText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: "Inter-Bold",
         paddingLeft: 85
     },
     content: {

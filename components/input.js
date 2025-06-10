@@ -35,5 +35,6 @@ export const style = StyleSheet.create({
     paddingBottom: 13,
     color: "#212121",
     textAlign: "left",
+    fontFamily: "Inter-Regular",
   },
 });

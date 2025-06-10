@@ -85,11 +85,11 @@ export const styles = StyleSheet.create({
   },
   detailsTitle: {
     fontSize: 16,
-    fontWeight: 400,
+    fontFamily: "Inter-Regular",
   },
   detailsDescription: {
     color: "#858585",
-    fontWeight:"100"
+    fontFamily: "Inter-Light",
   },
   timeDetails: {
     flexDirection: "row",
@@ -100,6 +100,6 @@ export const styles = StyleSheet.create({
   },
   time: {
     fontSize: 13,
-    fontWeight: 300,
+    fontFamily: "Inter-Regular",
   },
 });

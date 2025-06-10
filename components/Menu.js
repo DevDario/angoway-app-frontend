@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
         color: "#0C6DFF",
         fontSize: 20,
         fontWeight: 700,
+        fontFamily: "Inter-Bold"
     },
     optionButton: {
         width: "100%",
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     },
     optionButtonText: {
         fontSize: "22px",
-        fontWeight: "700"
+        fontWeight: "700",
+        fontFamily: "Inter-Bold"
     },
     content: {
         marginTop: 40,

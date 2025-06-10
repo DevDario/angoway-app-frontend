@@ -41,6 +41,7 @@ export const styles = StyleSheet.create({
     itemText: {
         color: "#0C6DFF",
         fontWeight: 600,
+        fontFamily: "Inter-Medium",
     },
     selectedOption: {
     },

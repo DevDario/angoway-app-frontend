@@ -61,6 +61,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 400,
     color: "#121212",
+    fontFamily: "Inter-Regular",
   },
   detailsDescription: {
     color: "#858585",

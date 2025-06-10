@@ -126,11 +126,13 @@ export const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 25,
     fontWeight: "700",
+    fontFamily: "Inter-Bold",
   },
   headerDescription: {
     fontSize: 16,
     fontWeight: "200",
     paddingTop: 15,
+    fontFamily: "Inter-Regular",
   },
   content: {
     width: "100%",
@@ -146,6 +148,7 @@ export const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 15,
     color: "#ACACAC",
+    fontFamily: "Inter-Light",
   },
   phoneInputContainer: {
     width: "90%",
@@ -182,8 +185,9 @@ export const styles = StyleSheet.create({
     width: 300,
   },
   error: {
-    color: "#D9534F", // A softer red color
-    fontSize: 13
+    color: "#D9534F",
+    fontSize: 13,
+    fontFamily: "Inter-Regular",
   },
   loader: {
     marginTop: 10

@@ -34,7 +34,7 @@ export default function Select({ selected, onSelect, style, data, text }) {
                                         setModalVisible(false);
                                     }}
                                 >
-                                    <Text>{item}</Text>
+                                    <Text style={{ fontFamily: "Inter-Regular" }}>{item}</Text>
                                 </TouchableOpacity>
                             )}
                         />
