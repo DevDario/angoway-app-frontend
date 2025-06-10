@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import ReturnButton from '../../components/ReturnButton';
-import MapView, { Marker } from 'react-native-maps';
+// import MapView, { Marker } from 'react-native-maps';
 import { router } from 'expo-router';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
@@ -14,26 +14,29 @@ import busMarker from "../../assets/marker.png"
 import busStopMarker from "../../assets/busstopicon.png"
 import { useGetRouteDetailsSuggestions } from '../../hooks/useRouteQuerys';
 import { useGetStops } from '../../hooks/useStopsQuerys';
+import { useUserLocation } from '../../hooks/useUserLocation';
 
 export default function TrackingBus() {
     const [showBusInfo, setShowBusInfo] = useState(false)
     const [busData, setBusData] = useState(null)
-    const [response, setResponnse] = useState(null)
+    const [response, setResponse] = useState(null)
     const [routeDetails, setRouteDetails] = useState([])
+    const [coords, setCoords] = useState({})
     const { buses } = useBusesLocation()
     const { stops } = useGetStops()
     const { routeName } = useLocalSearchParams()
+    const { location } = useUserLocation()
 
-    const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(-8.8371, 13.2333)
+    const { data: suggestionsData, isError } = useGetRouteDetailsSuggestions(routeName, location?.lat || 0, location?.lng || 0, { enabled: !!location });
 
     useEffect(() => {
-        if (suggestionsData !== undefined || !isError) {
-            const dataArr = Array.isArray(suggestionsData) ? suggestionsData : []
-            setRouteDetails(dataArr[0])
+        if (suggestionsData !== undefined && !isError) {
+            const dataArr = Array.isArray(suggestionsData) ? suggestionsData : [];
+            setRouteDetails(dataArr[0]);
+        } else {
+            setResponse(`Sem sugestões no momento.Verifique os horários.`);
         }
-
-        setResponnse(`Sem sugestões no momento.Verifique os horários.`)
-    }, [])
+    }, [suggestionsData, isError]);
 
     async function handleShowBusInfo(data) {
         setBusData(data)
@@ -166,7 +169,7 @@ export const styles = StyleSheet.create({
     },
     pageHeaderText: {
         fontSize: 16,
-        fontWeight: "700",
+        fontFamily: "Inter-Bold",
         paddingLeft: 60
     },
     map: {
@@ -196,6 +199,6 @@ export const styles = StyleSheet.create({
     },
     hintText: {
         color: "#4444",
-        fontWeight: 300
+        fontFamily: "Inter-Regular"
     }
 })
